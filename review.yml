@@ -1,0 +1,54 @@
+---
+name: Newcastle University
+description: Newcastle University public developer/API footprint review for APIs.json cataloging.
+url: https://raw.githubusercontent.com/api-evangelist/newcastle/refs/heads/main/review.yml
+created: '2026-06-03'
+modified: '2026-06-03'
+reviews:
+  - date: '2026-06-03'
+    rating: 3
+    summary: >-
+      Newcastle University has no single central developer portal, but several
+      real public APIs were verified live: the Urban Observatory REST API (with
+      a reachable OpenAPI spec at /openapi.json), the Digitised Objects
+      Repository Search and Data API, and the ECPPEC electoral research API. The
+      Figshare-powered data.ncl research repository and EPrints repositories
+      (eprints/theses) are live and expose standard programmatic access. A
+      verified GitHub org exists (domain-verified to ncl.ac.uk). No endpoints
+      were fabricated; the apex api-ecppec host returned 400 so only the
+      documented humanURL form was cataloged.
+    endpoints:
+      - url: https://api.usb.urbanobservatory.ac.uk/
+        status: 200
+        note: Urban Observatory API reference, live.
+      - url: https://api.usb.urbanobservatory.ac.uk/openapi.json
+        status: 200
+        note: OpenAPI specification, reachable.
+      - url: https://api-dor.ncl.ac.uk/
+        status: 200
+        note: Digitised Objects Repository Search and Data API, live.
+      - url: https://ecppec.ncl.ac.uk/api/
+        status: 200
+        note: ECPPEC API documentation page, live.
+      - url: http://api-ecppec.ncl.ac.uk/
+        status: 400
+        note: ECPPEC API apex host returns 400; not cataloged as a baseURL.
+      - url: https://data.ncl.ac.uk/
+        status: 202
+        note: data.ncl Figshare research data repository, live (Cloudflare 202).
+      - url: https://eprints.ncl.ac.uk/
+        status: 200
+        note: EPrints institutional repository, live (OAI-PMH capable).
+      - url: https://theses.ncl.ac.uk/
+        status: 200
+        note: EPrints electronic theses repository, live.
+      - url: https://github.com/newcastleuniversity
+        status: 200
+        note: Verified official GitHub org (domain ncl.ac.uk), ~20 repos.
+      - url: https://www.ncl.ac.uk/
+        status: 200
+        note: Official institutional website.
+      - url: https://www.linkedin.com/school/newcastle-university
+        status: 200
+        note: Official LinkedIn school page.
+---

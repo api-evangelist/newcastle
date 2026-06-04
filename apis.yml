@@ -1,0 +1,118 @@
+---
+aid: newcastle
+name: Newcastle University
+description: >-
+  Newcastle University is a public research university in Newcastle upon Tyne,
+  United Kingdom, ranked #129 in the QS World University Rankings 2025. Its
+  public developer and API footprint centers on research and open-data
+  initiatives rather than a single central developer portal. Confirmed public
+  APIs include the Newcastle Urban Observatory REST API (one of the UK's largest
+  open urban-sensing platforms, with an OpenAPI specification), the Digitised
+  Objects Repository Search and Data API, and the ECPPEC electoral history
+  research API. The university also operates a verified GitHub organization and
+  a Figshare-powered research data repository (data.ncl), and runs EPrints-based
+  institutional and thesis repositories that expose OAI-PMH.
+type: Index
+position: Consumer
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://raw.githubusercontent.com/api-evangelist/newcastle/refs/heads/main/apis.yml
+tags:
+  - Education
+  - Higher Education
+  - University
+  - United Kingdom
+  - Open Data
+  - Research Data
+  - Smart Cities
+  - Digital Library
+created: '2026-06-03'
+modified: '2026-06-03'
+specificationVersion: '0.19'
+apis:
+  - aid: newcastle:urban-observatory
+    name: Newcastle Urban Observatory API
+    description: >-
+      REST API providing programmatic access to urban-sensing data from the
+      Urban Sciences Building and data sources across Newcastle. Exposes
+      entities, feeds and timeseries (temperature, occupancy, energy and
+      environmental readings) in JSON and CSV, with an OpenAPI specification.
+    humanURL: https://api.usb.urbanobservatory.ac.uk/
+    baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+    tags: [ Open Data, Smart Cities, Sensors, IoT, Environment ]
+    properties:
+      - type: Documentation
+        url: https://api.usb.urbanobservatory.ac.uk/
+      - type: OpenAPI
+        url: https://api.usb.urbanobservatory.ac.uk/openapi.json
+      - type: Website
+        url: https://urbanobservatory.ac.uk/
+  - aid: newcastle:digitised-objects
+    name: Digitised Objects Repository Search and Data API
+    description: >-
+      Search and Data API for Newcastle University's Digitised Objects
+      Repository, providing programmatic access to metadata and digitised
+      materials from the university's collections.
+    humanURL: https://api-dor.ncl.ac.uk/
+    tags: [ Digital Library, Collections, Cultural Heritage, Search ]
+    properties:
+      - type: Documentation
+        url: https://api-dor.ncl.ac.uk/
+  - aid: newcastle:ecppec
+    name: ECPPEC Electoral Data API
+    description: >-
+      API for the Eighteenth-Century Political Participation and Electoral
+      Culture (ECPPEC) research project, providing access to historical British
+      electoral datasets including pollbook records and election directory data.
+    humanURL: https://ecppec.ncl.ac.uk/api/
+    tags: [ Research Data, History, Open Data ]
+    properties:
+      - type: Documentation
+        url: https://ecppec.ncl.ac.uk/api/
+  - aid: newcastle:data-ncl
+    name: data.ncl Research Data Repository (Figshare)
+    description: >-
+      Newcastle University's institutional research data repository, powered by
+      Figshare, for documenting, archiving and publishing datasets and code.
+      Programmatic access is available through the underlying Figshare API.
+    humanURL: https://data.ncl.ac.uk/
+    tags: [ Research Data, Open Data, Repository ]
+    properties:
+      - type: Documentation
+        url: https://www.ncl.ac.uk/library/academics-and-researchers/lrs/rdm/sharing/datancl/
+      - type: Website
+        url: https://data.ncl.ac.uk/
+  - aid: newcastle:eprints
+    name: EPrints Institutional Repository (OAI-PMH)
+    description: >-
+      Newcastle University's EPrints-based repositories (institutional outputs at
+      eprints.ncl.ac.uk and electronic theses at theses.ncl.ac.uk) expose
+      metadata harvesting via the standard EPrints OAI-PMH interface.
+    humanURL: https://eprints.ncl.ac.uk/
+    tags: [ Repository, OAI-PMH, Research Outputs, Theses ]
+    properties:
+      - type: Documentation
+        url: https://eprints.ncl.ac.uk/
+      - type: Website
+        url: https://theses.ncl.ac.uk/
+common:
+  - type: Website
+    url: https://www.ncl.ac.uk/
+  - type: GitHub
+    url: https://github.com/newcastleuniversity
+  - type: LinkedIn
+    url: https://www.linkedin.com/school/newcastle-university
+  - type: Twitter
+    url: https://x.com/UniofNewcastle
+  - type: Plans
+    url: plans/newcastle-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/newcastle-rate-limits.yml
+  - type: FinOps
+    url: finops/newcastle-finops.yml
+  - type: Review
+    url: review.yml
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
+---
