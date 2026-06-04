@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-entity-structure.json",
+  "name": "Entity",
+  "type": "object",
+  "description": "Urban Observatory Entity object.",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "description": "A unique identifier associated with this entity."
+    },
+    "name": {
+      "type": "string",
+      "description": "Friendly name associated with the entity, not used internally."
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata associated with the entity, such as room numbers or building name."
+    },
+    "position": {
+      "type": "array"
+    },
+    "feed": {
+      "type": "array"
+    }
+  }
+}

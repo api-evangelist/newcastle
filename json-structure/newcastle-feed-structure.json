@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-feed-structure.json",
+  "name": "Feed",
+  "type": "object",
+  "description": "Urban Observatory Feed object.",
+  "properties": {
+    "feedId": {
+      "type": "string",
+      "description": "A unique identifier associated with this feed.",
+      "format": "uuid"
+    },
+    "metric": {
+      "type": "string",
+      "description": "A short description for the metric represented, e.g. Room temperature."
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata associated with the feed, such as the room number or floor."
+    },
+    "provider": {
+      "type": "object",
+      "description": "A description of the organisation or person providing the data, and the licence under which it is provided."
+    },
+    "technology": {
+      "type": "object",
+      "description": "Placeholder for future information."
+    },
+    "hardware": {
+      "type": "object",
+      "description": "Placeholder for future information."
+    },
+    "service": {
+      "type": "array",
+      "description": "Placeholder for future information."
+    },
+    "timeseries": {
+      "type": "array"
+    }
+  }
+}

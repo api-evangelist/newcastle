@@ -1,0 +1,94 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "ncl": "https://api-evangelist.com/newcastle/vocab#",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+
+    "name": "schema:name",
+    "url": "schema:url",
+    "description": "schema:description",
+
+    "Institution": {
+      "@id": "schema:CollegeOrUniversity",
+      "@context": {
+        "name": "schema:name",
+        "url": "schema:url",
+        "github": { "@id": "schema:sameAs", "@type": "@id" }
+      }
+    },
+
+    "Entity": {
+      "@id": "ncl:Entity",
+      "@context": {
+        "entityId": { "@id": "ncl:entityId" },
+        "name": "schema:name",
+        "meta": { "@id": "ncl:meta", "@container": "@index" },
+        "position": { "@id": "schema:geo" },
+        "feed": { "@id": "ncl:hasFeed", "@type": "@id" }
+      }
+    },
+
+    "Feed": {
+      "@id": "ncl:Feed",
+      "@context": {
+        "feedId": { "@id": "ncl:feedId" },
+        "metric": { "@id": "ncl:metric" },
+        "meta": { "@id": "ncl:meta", "@container": "@index" },
+        "provider": { "@id": "ncl:provider", "@type": "@id" }
+      }
+    },
+
+    "Timeseries": {
+      "@id": "ncl:Timeseries",
+      "@context": {
+        "timeseriesId": { "@id": "ncl:timeseriesId" },
+        "unit": { "@id": "ncl:unit", "@type": "@id" },
+        "storage": { "@id": "ncl:storage", "@type": "@id" },
+        "latest": { "@id": "ncl:latest", "@type": "@id" }
+      }
+    },
+
+    "TimeseriesEntry": {
+      "@id": "ncl:TimeseriesEntry",
+      "@context": {
+        "time": { "@id": "ncl:time", "@type": "xsd:dateTime" },
+        "duration": { "@id": "ncl:duration", "@type": "xsd:double" },
+        "value": { "@id": "schema:value" },
+        "error": { "@id": "ncl:error", "@type": "xsd:boolean" },
+        "message": { "@id": "schema:description" }
+      }
+    },
+
+    "Organisation": {
+      "@id": "schema:Organization",
+      "@context": {
+        "organisationId": { "@id": "ncl:organisationId" },
+        "name": "schema:name",
+        "url": "schema:url"
+      }
+    },
+
+    "Licence": {
+      "@id": "ncl:Licence",
+      "@context": {
+        "licenceId": { "@id": "ncl:licenceId" },
+        "name": "schema:name",
+        "url": "schema:url"
+      }
+    },
+
+    "Unit": {
+      "@id": "schema:unitText",
+      "@context": {
+        "unitId": { "@id": "ncl:unitId" },
+        "name": "schema:name"
+      }
+    }
+  },
+
+  "@type": "Institution",
+  "name": "Newcastle University",
+  "url": "https://www.ncl.ac.uk/",
+  "github": "https://github.com/newcastleuniversity"
+}

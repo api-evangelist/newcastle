@@ -1,0 +1,131 @@
+{
+  "pagination": {
+    "pageNumber": 1,
+    "pageSize": 5,
+    "pageCount": 83,
+    "total": 415
+  },
+  "items": [
+    {
+      "entityId": "d8271b8d-70f0-4a00-a0b5-c61560e0dfa7",
+      "name": "Urban Sciences Building: Floor 1 Ambient Kitchen",
+      "meta": {
+        "building": "Urban Sciences Building",
+        "buildingFloor": "1"
+      },
+      "position": [],
+      "feed": [
+        {
+          "feedId": "f351bd93-d549-45ed-9af3-25be5c14b6e6",
+          "metric": "Room Temperature",
+          "hardwareId": null,
+          "meta": {},
+          "hardware": null,
+          "technology": null,
+          "provider": {
+            "providerId": "d8bdbef0-d499-448c-9106-ac9916fd7ee9",
+            "organisation": {
+              "organisationId": "2567c616-43f3-4b6b-930b-126ba9ad51c8",
+              "name": "Urban Observatory",
+              "url": "http://www.urbanobservatory.ac.uk/",
+              "privateSector": false
+            },
+            "contact": {
+              "contactId": "19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0",
+              "name": "Urban Observatory",
+              "email": "urbanobservatory@ncl.ac.uk",
+              "phone": "0191 208 8599"
+            },
+            "licence": {
+              "licenceId": "124d6e24-62b2-40cc-b85d-69cc0fa9471a",
+              "name": "Urban Observatory: Open data",
+              "url": "http://www.urbanobservatory.ac.uk/",
+              "description": {
+                "open": true
+              }
+            }
+          },
+          "brokerage": [
+            {
+              "brokerageId": "d469d949-05ff-4ae4-b8ef-a86234bcdb3b",
+              "sourceId": "117_AmbientKitchen_1.018_RoomT",
+              "meta": {
+                "building": "Urban Sciences Building",
+                "protocol": "BACNET",
+                "buildingFloor": "1"
+              },
+              "broker": {
+                "brokerId": "4ccce05f-6d27-4fef-a51e-4c435011578f",
+                "name": "BMS-USB-1-BACNET",
+                "active": false,
+                "meta": null
+              }
+            }
+          ],
+          "timeseries": [
+            {
+              "timeseriesId": "76a0b94e-b721-41a7-b8ff-f53a7f2dc517",
+              "storage": {
+                "storageId": 3,
+                "name": "Real",
+                "suffix": "real"
+              },
+              "unit": {
+                "unitId": "02ac7c2b-8b55-4891-be52-0e1bbc6ad447",
+                "name": "degrees celsius"
+              },
+              "aggregation": [],
+              "derivatives": [],
+              "assessments": [],
+              "latest": {
+                "time": "2026-06-04T02:53:58.002Z",
+                "duration": -5.174,
+                "value": 23.84
+              },
+              "links": [
+                {
+                  "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/timeseries/76a0b94e-b721-41a7-b8ff-f53a7f2dc517",
+                  "rel": "self"
+                },
+                {
+                  "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/timeseries/76a0b94e-b721-41a7-b8ff-f53a7f2dc517/historic",
+                  "rel": "archives"
+                },
+                {
+                  "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/timeseries/floor-1-ambient-kitchen/room-temperature/raw",
+                  "rel": "self.friendly"
+                },
+                {
+                  "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/timeseries/floor-1-ambient-kitchen/room-temperature/raw/historic",
+                  "rel": "archives.friendly"
+                }
+              ]
+            }
+          ],
+          "service": [],
+          "isRestricted": false,
+          "links": [
+            {
+              "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/feed/f351bd93-d549-45ed-9af3-25be5c14b6e6",
+              "rel": "self"
+            },
+            {
+              "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/feed/floor-1-ambient-kitchen/room-temperature",
+              "rel": "self.friendly"
+            }
+          ]
+        }
+      ],
+      "links": [
+        {
+          "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/entity/d8271b8d-70f0-4a00-a0b5-c61560e0dfa7",
+          "rel": "self"
+        },
+        {
+          "href": "https://api.usb.urbanobservatory.ac.uk/api/v2/sensors/entity/floor-1-ambient-kitchen",
+          "rel": "self.friendly"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+[
+  {
+    "entityId": "970d26c6-37c3-49e4-b2f8-00db042ac3eb",
+    "name": "Urban Sciences Building: Floor 1",
+    "feed": {
+      "2be41fad-1de5-459a-98a0-0c109eba08a7": "Return Temperature",
+      "1bc4f0a9-85b2-4e92-bb91-4073bc4ad8f3": "Energy"
+    }
+  }
+]

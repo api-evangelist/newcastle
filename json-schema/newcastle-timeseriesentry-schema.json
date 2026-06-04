@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "TimeseriesEntry",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-timeseriesentry-schema.json",
+  "type": "object",
+  "description": "A historic entry associated with a timeseries and a time.",
+  "properties": {
+    "time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date and time associated with the historic value"
+    },
+    "duration": {
+      "type": "number",
+      "description": "The duration this value applies to, or if negative, the window of error in which the value change could have occurred."
+    },
+    "value": {
+      "description": "The value associated with the time in the timeseries, unless the timeseries does not contain values (i.e. event only)."
+    },
+    "error": {
+      "type": "boolean",
+      "description": "Indication that an error occurred, and data could not be supplied."
+    },
+    "message": {
+      "type": "string",
+      "description": "Short description of why data could not be supplied."
+    },
+    "description": {
+      "type": "string",
+      "description": "Verbose description of why an error occurred and data could not be supplied."
+    }
+  }
+}

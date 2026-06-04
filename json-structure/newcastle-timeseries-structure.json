@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-structure.org/meta/core/v0/#",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-timeseries-structure.json",
+  "name": "Timeseries",
+  "type": "object",
+  "description": "Urban Observatory Timeseries object.",
+  "properties": {
+    "timeseriesId": {
+      "type": "string",
+      "description": "A unique identifier associated with this timeseries.",
+      "format": "uuid"
+    },
+    "unit": {
+      "type": "Unit"
+    },
+    "storage": {
+      "type": "Storage"
+    },
+    "derivatives": {
+      "type": "array",
+      "description": "Placeholder for future use."
+    },
+    "aggregation": {
+      "type": "array",
+      "description": "Placeholder for future use."
+    },
+    "assessments": {
+      "type": "array",
+      "description": "Placeholder for future use."
+    },
+    "latest": {
+      "type": "TimeseriesEntry",
+      "description": "The most recent timeseries entry, only shown if within the last week, and a historic range has not been requested. Code must be resilient if `latest` is omitted from a timeseries."
+    },
+    "links": {
+      "type": "array"
+    }
+  }
+}

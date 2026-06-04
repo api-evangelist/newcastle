@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Feed",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-feed-schema.json",
+  "type": "object",
+  "properties": {
+    "feedId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A unique identifier associated with this feed."
+    },
+    "metric": {
+      "type": "string",
+      "description": "A short description for the metric represented, e.g. Room temperature."
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata associated with the feed, such as the room number or floor."
+    },
+    "provider": {
+      "type": "object",
+      "description": "A description of the organisation or person providing the data, and the licence under which it is provided.",
+      "properties": {
+        "providerId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "A unique identifier associated with this provider, licence, organisation and contact data."
+        },
+        "organisation": {
+          "$ref": "newcastle-organisation-schema.json"
+        },
+        "contact": {
+          "$ref": "newcastle-contact-schema.json"
+        },
+        "licence": {
+          "$ref": "newcastle-licence-schema.json"
+        }
+      }
+    },
+    "technology": {
+      "type": "object",
+      "description": "Placeholder for future information."
+    },
+    "hardware": {
+      "type": "object",
+      "description": "Placeholder for future information."
+    },
+    "service": {
+      "type": "array",
+      "description": "Placeholder for future information."
+    },
+    "timeseries": {
+      "type": "array",
+      "items": {
+        "$ref": "newcastle-timeseries-schema.json"
+      }
+    }
+  }
+}

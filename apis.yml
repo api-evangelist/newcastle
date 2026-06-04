@@ -45,6 +45,16 @@ apis:
         url: https://api.usb.urbanobservatory.ac.uk/
       - type: OpenAPI
         url: https://api.usb.urbanobservatory.ac.uk/openapi.json
+      - type: OpenAPI
+        url: openapi/newcastle-urban-observatory.yaml
+      - type: JSONSchema
+        url: json-schema/newcastle-entity-schema.json
+      - type: x-vocabulary
+        url: vocabulary/newcastle-vocabulary.yml
+      - type: x-rules
+        url: rules/newcastle-rules.yml
+      - type: x-json-ld
+        url: json-ld/newcastle-context.jsonld
       - type: Website
         url: https://urbanobservatory.ac.uk/
   - aid: newcastle:digitised-objects

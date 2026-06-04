@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "EntitySummary",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-entitysummary-schema.json",
+  "type": "object",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "description": "A unique identifier associated with this entity."
+    },
+    "name": {
+      "type": "string",
+      "description": "Friendly name associated with the entity, not used internally."
+    },
+    "feed": {
+      "type": "object",
+      "description": "A direct mapping of feed IDs to their respective metrics, with all other data omitted."
+    }
+  }
+}

@@ -1,0 +1,72 @@
+vocabulary:
+  name: Newcastle Urban Observatory Vocabulary
+  description: >-
+    Controlled vocabulary for the core concepts exposed by the Newcastle
+    University Urban Observatory API (Urban Sciences Building, v2.0a). Terms
+    are derived from the published OpenAPI definitions for entities, feeds and
+    timeseries of urban-sensing data.
+  version: 2.0a
+  terms:
+    - term: Entity
+      definition: >-
+        A spatial location such as a room in a building or a pole in the street;
+        may also be a mobile piece of equipment, in which case its location is
+        provided as a timeseries. Entities carry one or more feeds.
+      tags: [ location, core ]
+    - term: Feed
+      definition: >-
+        A representation of a measurement or parametrisation, usually a metric
+        such as observed room temperature, attached to an entity.
+      tags: [ measurement, core ]
+    - term: Timeseries
+      definition: >-
+        A series of values over time associated with a feed; a feed may have
+        more than one timeseries (for example raw and aggregated values).
+      tags: [ time, core ]
+    - term: TimeseriesEntry
+      definition: >-
+        A single historic value associated with a timeseries and a point in
+        time, including the value, its duration or error window, and any error
+        status.
+      tags: [ time, observation ]
+    - term: EntitySummary
+      definition: >-
+        A lightweight representation of an entity giving its identifier, name
+        and a direct mapping of feed IDs to their metrics, with all other data
+        omitted.
+      tags: [ location, summary ]
+    - term: Provider
+      definition: >-
+        The organisation or person providing the data for a feed, together with
+        the contact and licence under which it is supplied.
+      tags: [ provenance ]
+    - term: Organisation
+      definition: >-
+        The body responsible for providing data, such as the Urban Observatory,
+        with a name, URL and private-sector indicator.
+      tags: [ provenance ]
+    - term: Licence
+      definition: >-
+        The terms under which feed data is published, including an open-data
+        indicator.
+      tags: [ provenance, licensing ]
+    - term: Unit
+      definition: >-
+        The unit of measurement associated with a timeseries, such as amperes
+        or degrees Celsius.
+      tags: [ measurement, units ]
+    - term: Storage
+      definition: >-
+        The storage representation of a timeseries value, such as Real, Integer
+        or Boolean.
+      tags: [ data-type ]
+    - term: Brokerage
+      definition: >-
+        The mapping of a feed to its source identifier at the originating
+        controller or broker, such as a BACNET ID within a building.
+      tags: [ integration, source ]
+    - term: Pagination
+      definition: >-
+        Metadata describing the page number, page size, total page count and
+        total item count returned for a collection request.
+      tags: [ collection ]

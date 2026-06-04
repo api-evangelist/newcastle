@@ -1,0 +1,63 @@
+formats:
+  - oas3
+rules:
+
+  newcastle-info-contact:
+    description: API info object should provide a contact for the Urban Observatory.
+    given: $.info
+    severity: warn
+    then:
+      field: contact
+      function: truthy
+
+  newcastle-info-description:
+    description: API info object should have a description.
+    given: $.info
+    severity: warn
+    then:
+      field: description
+      function: truthy
+
+  newcastle-servers-https:
+    description: Urban Observatory servers must be served over HTTPS.
+    given: $.servers[*].url
+    severity: error
+    then:
+      function: pattern
+      functionOptions:
+        match: '^https://'
+
+  newcastle-operation-operationid:
+    description: Every operation should declare an operationId (controller.method pattern).
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: warn
+    then:
+      field: operationId
+      function: truthy
+
+  newcastle-operation-tags:
+    description: Operations should be tagged with one of Entity, Feed, Timeseries.
+    given: $.paths[*][get,post,put,delete,patch]
+    severity: warn
+    then:
+      field: tags
+      function: truthy
+
+  newcastle-pagination-params:
+    description: Collection endpoints should accept page and pageSize query parameters.
+    given: $.paths[/api/v2.0a/sensors/entity].get.parameters[*].name
+    severity: info
+    then:
+      function: pattern
+      functionOptions:
+        match: '^(page|pageSize|metric|brokerage:sourceId=\{value\}|meta:\{key\}=\{value\})$'
+
+  newcastle-id-format-uuid:
+    description: Identifier fields ending in Id should be typed as string (UUID).
+    given: $.components.schemas[*].properties[?(@property.match(/Id$/))]
+    severity: info
+    then:
+      field: type
+      function: pattern
+      functionOptions:
+        match: '^(string|number|integer)$'

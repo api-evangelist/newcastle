@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Entity",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-entity-schema.json",
+  "type": "object",
+  "properties": {
+    "entityId": {
+      "type": "string",
+      "description": "A unique identifier associated with this entity."
+    },
+    "name": {
+      "type": "string",
+      "description": "Friendly name associated with the entity, not used internally."
+    },
+    "meta": {
+      "type": "object",
+      "description": "Metadata associated with the entity, such as room numbers or building name."
+    },
+    "position": {
+      "type": "array"
+    },
+    "feed": {
+      "type": "array",
+      "items": {
+        "$ref": "newcastle-feed-schema.json"
+      }
+    }
+  }
+}

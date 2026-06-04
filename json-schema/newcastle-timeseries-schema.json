@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Timeseries",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-timeseries-schema.json",
+  "type": "object",
+  "properties": {
+    "timeseriesId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "A unique identifier associated with this timeseries."
+    },
+    "unit": {
+      "$ref": "newcastle-unit-schema.json"
+    },
+    "storage": {
+      "$ref": "newcastle-storage-schema.json"
+    },
+    "derivatives": {
+      "type": "array",
+      "description": "Placeholder for future use."
+    },
+    "aggregation": {
+      "type": "array",
+      "description": "Placeholder for future use."
+    },
+    "assessments": {
+      "type": "array",
+      "description": "Placeholder for future use."
+    },
+    "latest": {
+      "description": "The most recent timeseries entry, only shown if within the last week, and a historic range has not been requested. Code must be resilient if `latest` is omitted from a timeseries.",
+      "$ref": "newcastle-timeseriesentry-schema.json"
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "$ref": "newcastle-link-schema.json"
+      }
+    }
+  }
+}
