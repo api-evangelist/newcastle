@@ -106,6 +106,8 @@ apis:
       - type: Website
         url: https://theses.ncl.ac.uk/
 common:
+  - type: DomainSecurity
+    url: security/newcastle-domain-security.yml
   - type: Website
     url: https://www.ncl.ac.uk/
   - type: GitHub
