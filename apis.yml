@@ -106,6 +106,8 @@ apis:
       - type: Website
         url: https://theses.ncl.ac.uk/
 common:
+  - type: AgenticAccess
+    url: agentic-access/newcastle-agentic-access.yml
   - type: DomainSecurity
     url: security/newcastle-domain-security.yml
   - type: Website
