@@ -1,0 +1,297 @@
+openapi: 3.0.0
+info:
+  title: 'Urban Observatory API: Urban Sciences Building Entity Timeseries API'
+  version: 2.0a
+  description: "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format."
+  contact:
+    name: Luke Smith
+    email: luke.smith@ncl.ac.uk
+    url: http://www.urbanobservatory.ac.uk/
+servers:
+- url: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+  description: Urban Sciences Building production API
+tags:
+- name: Timeseries
+  description: There may be more than one timeseries associated with a feed, provided for convenience. Ordinarily there will be a plain timeseries, representing raw data from the device. In some cases, there may then be additional timeseries representing converted values (e.g. scaled), corrected, or aggregated temporally.
+paths:
+  /api/v2.0a/sensors/timeseries/{id}:
+    get:
+      operationId: TimeseriesController.getOne
+      summary: Request a single timeseries by its unique ID
+      description: A single timeseries and its current value will be returned, if recent, provided a valid ID is supplied and permissions permit.
+      tags:
+      - Timeseries
+      parameters:
+      - in: path
+        name: id
+        description: Timeseries ID to retrieve description and latest observed value for.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Timeseries'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+  /api/v2.0a/sensors/timeseries/{id}/historic:
+    get:
+      operationId: TimeseriesController.getHistoric
+      summary: Request historic data from a timeseries by its unique ID and a date range
+      description: A date range may be specified to obtain historic readings from a timeseries, or the last 24 hours will be provided by default.
+      tags:
+      - Timeseries
+      parameters:
+      - in: path
+        name: id
+        description: Timeseries ID to retrieve historic data for.
+        required: true
+        schema:
+          type: string
+      - in: query
+        name: startTime
+        description: Start period for the historic data to be retrieved, inclusive.
+        required: false
+        schema:
+          type: string
+          default: 24 hours in past
+      - in: query
+        name: endTime
+        description: End period for the historic data to be retrieved, inclusive.
+        required: false
+        schema:
+          type: string
+          default: 24 hours in future
+      - in: query
+        name: outputAs
+        description: Output format for the data, although JSON is always recommended and CSV outputs are computed from JSON.
+        required: false
+        schema:
+          type: string
+          default: json
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  timeseries:
+                    $ref: '#/components/schemas/Timeseries'
+                  historic:
+                    type: object
+                    properties:
+                      startTime:
+                        type: string
+                        format: date-time
+                        description: The specified or computed start time, with any values before this time omitted.
+                      endTime:
+                        type: string
+                        format: date-time
+                        description: The specified or computed end time, with any values after this time omitted.
+                      limited:
+                        type: boolean
+                        description: A flag indicating whether the historic series was truncated, because too many values would have been returned.
+                      values:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/TimeseriesEntry'
+                    example:
+                      startTime: '2018-02-11T10:31:04.065Z'
+                      endTime: '2018-02-13T10:31:04.065Z'
+                      limited: false
+                      values:
+                      - time: '2018-02-12T10:30:40.125Z'
+                        duration: -4.284
+                        value: 3.23809
+                      - time: '2018-02-12T10:30:08.269Z'
+                        duration: -4.386
+                        value: 3.31608
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Forbidden'
+components:
+  schemas:
+    TimeseriesEntry:
+      type: object
+      description: A historic entry associated with a timeseries and a time.
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Date and time associated with the historic value
+        duration:
+          type: number
+          description: The duration this value applies to, or if negative, the window of error in which the value change could have occurred.
+        value:
+          description: The value associated with the time in the timeseries, unless the timeseries does not contain values (i.e. event only).
+        error:
+          type: boolean
+          description: Indication that an error occurred, and data could not be supplied.
+        message:
+          type: string
+          description: Short description of why data could not be supplied.
+        description:
+          type: string
+          description: Verbose description of why an error occurred and data could not be supplied.
+      example:
+        time: '2018-02-12T10:30:40.125Z'
+        duration: -2.1
+        value: 3.5
+    Forbidden:
+      type: object
+      description: The requested data could not be returned, because permissions do not permit.
+      properties:
+        error:
+          type: boolean
+          description: Indicator that an error was returned.
+        message:
+          type: string
+          description: Description of the error which occurred in friendly terms.
+        code:
+          type: string
+          description: A short description of the error, for use in code.
+          enum:
+          - ForbiddenError
+      example:
+        error: true
+        message: No access to this timeseries.
+        code: ForbiddenError
+    Unit:
+      type: object
+      description: The units associated with the values held in the timeseries.
+      properties:
+        unitId:
+          type: string
+          format: uuid
+          description: A unique identifier for the units associated with timeseries.
+        name:
+          type: string
+          description: A friendly description for the units used.
+      example:
+        unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+        name: amperes
+    Storage:
+      type: object
+      description: The storage mechanism used to hold the data internally.
+      properties:
+        unitId:
+          type: string
+          format: uuid
+          description: A unique identifier for the storage used for this data within the internal systems.
+        name:
+          type: string
+          description: A name for the storage, usually those used in programming (e.g. real, integer)
+        suffix:
+          type: string
+          description: The suffix used for data storage in the internal systems.
+      example:
+        storageId: 3
+        name: Real
+        suffix: real
+    BadRequest:
+      type: object
+      description: An invalid ID or query parameter was used to request information, such as an ID not in the [UUID syntax](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+      properties:
+        error:
+          type: boolean
+          description: Indicator that an error was returned.
+        message:
+          type: string
+          description: Description of the error which occurred in friendly terms.
+        code:
+          type: string
+          description: A short description of the error, for use in code.
+          enum:
+          - MalformedUUID
+          - BadRequestError
+      example:
+        error: true
+        message: Malformed UUID cannot be used.
+        code: MalformedUUID
+    Timeseries:
+      type: object
+      properties:
+        timeseriesId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with this timeseries.
+        unit:
+          $ref: '#/components/schemas/Unit'
+        storage:
+          $ref: '#/components/schemas/Storage'
+        derivatives:
+          type: array
+          description: Placeholder for future use.
+        aggregation:
+          type: array
+          description: Placeholder for future use.
+        assessments:
+          type: array
+          description: Placeholder for future use.
+        latest:
+          description: The most recent timeseries entry, only shown if within the last week, and a historic range has not been requested. Code must be resilient if `latest` is omitted from a timeseries.
+          $ref: '#/components/schemas/TimeseriesEntry'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      example:
+        timeseriesId: 371fbff8-f61d-4f66-99be-7d9de8ad51f2
+        unit:
+          unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+          name: amperes
+        storage:
+          storageId: 3
+          name: Real
+          suffix: real
+        derivatives: []
+        aggregation: []
+        assessments: []
+        latest:
+          time: '2018-02-12T10:30:40.125Z'
+          duration: -2.1
+          value: 3.5
+        links:
+        - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2
+          rel: self
+    Link:
+      type: object
+      description: A link provided for [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) purposes, to the item itself or an associated API method.
+      properties:
+        rel:
+          type: string
+          description: The relation of the URL to the entity in the API, which will be taken from [this list](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) where possible, but non-standard relations are permitted.
+        href:
+          type: string
+          description: An absolute URL for the resource.
+        method:
+          type: string
+          description: The HTTP protocol method to be used, or `GET` if not specified.
+          default: GET
+          enum:
+          - GET
+          - POST
+          - PATCH
+          - PUT
+          - DELETE
+      example:
+        rel: self
+        href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic

@@ -1,0 +1,48 @@
+openapi: 3.0.0
+info:
+  title: 'Urban Observatory API: Urban Sciences Building Entity Summary API'
+  version: 2.0a
+  description: "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format."
+  contact:
+    name: Luke Smith
+    email: luke.smith@ncl.ac.uk
+    url: http://www.urbanobservatory.ac.uk/
+servers:
+- url: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+  description: Urban Sciences Building production API
+tags:
+- name: Summary
+paths:
+  /api/v2.0a/sensors/summary:
+    get:
+      operationId: SummaryController.getSummary
+      summary: List all entities in summary form
+      description: Non-paginated list of all entities, with only basic information provided.
+      tags:
+      - Summary
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntitySummary'
+components:
+  schemas:
+    EntitySummary:
+      type: object
+      properties:
+        entityId:
+          type: string
+          description: A unique identifier associated with this entity.
+        name:
+          type: string
+          description: Friendly name associated with the entity, not used internally.
+        feed:
+          type: object
+          description: A direct mapping of feed IDs to their respective metrics, with all other data omitted.
+      example:
+        entityId: 970d26c6-37c3-49e4-b2f8-00db042ac3eb
+        name: 'Urban Sciences Building: Floor 2: Room 2.048 Zone 1'
+        feed:
+          87b2d34e-b96e-44c1-ae69-374f4bac02cd: Room Temperature

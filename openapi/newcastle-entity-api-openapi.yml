@@ -1,0 +1,499 @@
+openapi: 3.0.0
+info:
+  title: 'Urban Observatory API: Urban Sciences Building Entity API'
+  version: 2.0a
+  description: "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format."
+  contact:
+    name: Luke Smith
+    email: luke.smith@ncl.ac.uk
+    url: http://www.urbanobservatory.ac.uk/
+servers:
+- url: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+  description: Urban Sciences Building production API
+tags:
+- name: Entity
+  description: An entity ordinarily describes a spatial location, such as a room in a building, or a pole in the street. In some circumstances, an entity may be a mobile piece of equipment, such as those used for validation, in which case the location will be provided as a timeseries.
+paths:
+  /api/v2.0a/sensors/entity:
+    get:
+      operationId: EntityController.getAll
+      summary: List all entities (paginated)
+      description: Paginated list of all entities, including their associated feeds and timeseries.
+      tags:
+      - Entity
+      parameters:
+      - in: query
+        name: page
+        description: Page number to return results from, will default to `1` if omitted.
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - in: query
+        name: pageSize
+        description: Request a number of items per page, however the API may constrain the range.
+        required: false
+        schema:
+          type: integer
+          default: 10
+      - in: query
+        name: meta:{key}={value}
+        description: Filter based on metadata, e.g. `meta:roomNumber=2.048`
+        required: false
+        schema: {}
+      - in: query
+        name: brokerage:sourceId={value}
+        description: Filter based on the ID at the source controller or broker, such as the BACNET ID within a building. This is usually useful if you have some prior knowledge of the systems, or are using the data in combination with related data sources. Note that source IDs are not required to confirm to any standard, other than the controller ID and source ID combined must be a unique pair.
+        required: false
+        schema:
+          type: string
+      - in: query
+        name: metric
+        description: Filter to only include entities with, and feeds therein, matching at least one of the metrics specified. Partial matches on metrics are included, and each word is considered to be additive and case insensitive, so phrases must be surrounded by double quotes. For example, to return the occupancy and room temperature, but exclude flow temperatures, use `metric=occupied+"room temperature"`.
+        required: false
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  items:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Entity'
+  /api/v2.0a/sensors/entity/{id}:
+    get:
+      operationId: EntityController.getOne
+      summary: Request a single entity by its unique ID
+      description: A single entity and its associated feeds will be returned, if a valid ID is supplied and permissions permit.
+      tags:
+      - Entity
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Entity'
+        '400':
+          description: Bad request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+components:
+  schemas:
+    TimeseriesEntry:
+      type: object
+      description: A historic entry associated with a timeseries and a time.
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Date and time associated with the historic value
+        duration:
+          type: number
+          description: The duration this value applies to, or if negative, the window of error in which the value change could have occurred.
+        value:
+          description: The value associated with the time in the timeseries, unless the timeseries does not contain values (i.e. event only).
+        error:
+          type: boolean
+          description: Indication that an error occurred, and data could not be supplied.
+        message:
+          type: string
+          description: Short description of why data could not be supplied.
+        description:
+          type: string
+          description: Verbose description of why an error occurred and data could not be supplied.
+      example:
+        time: '2018-02-12T10:30:40.125Z'
+        duration: -2.1
+        value: 3.5
+    Feed:
+      type: object
+      properties:
+        feedId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with this feed.
+        metric:
+          type: string
+          description: A short description for the metric represented, e.g. Room temperature.
+        meta:
+          type: object
+          description: Metadata associated with the feed, such as the room number or floor.
+        provider:
+          type: object
+          description: A description of the organisation or person providing the data, and the licence under which it is provided.
+          properties:
+            providerId:
+              type: string
+              format: uuid
+              description: A unique identifier associated with this provider, licence, organisation and contact data.
+            organisation:
+              $ref: '#/components/schemas/Organisation'
+            contact:
+              $ref: '#/components/schemas/Contact'
+            licence:
+              $ref: '#/components/schemas/Licence'
+        technology:
+          type: object
+          description: Placeholder for future information.
+        hardware:
+          type: object
+          description: Placeholder for future information.
+        service:
+          type: array
+          description: Placeholder for future information.
+        timeseries:
+          type: array
+          items:
+            $ref: '#/components/schemas/Timeseries'
+      example:
+        feedId: eeaa50bb-fb5f-47be-a6ab-eb4c67debecb
+        metric: Room temperature
+        meta:
+          building: Urban Sciences Building
+          roomNumber: '2.048'
+          buildingFloor: '2'
+        provider:
+          providerId: 986cd257-b50d-4fe8-8439-dc2a69271172
+          organisation:
+            organisationId: 2567c616-43f3-4b6b-930b-126ba9ad51c8
+            name: Urban Observatory
+            url: http://www.urbanobservatory.ac.uk/
+            privateSector: false
+          contact:
+            contactId: 19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0
+            name: Urban Observatory
+            email: urbanobservatory@ncl.ac.uk
+            phone: 0191 208 8599
+          licence:
+            licenceId: 1629fceb-799b-4840-8f5b-8b8612b374c9
+            name: 'Urban Observatory: Ethical approval required'
+            url: http://www.urbanobservatory.ac.uk/
+            description:
+              open: false
+        technology: null
+        hardware: null
+        service: []
+        timeseries:
+        - timeseriesId: 371fbff8-f61d-4f66-99be-7d9de8ad51f2
+          unit:
+            unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+            name: amperes
+          storage:
+            storageId: 3
+            name: Real
+            suffix: real
+          derivatives: []
+          aggregation: []
+          assessments: []
+          latest:
+            time: '2018-02-12T10:30:40.125Z'
+            duration: -2.1
+            value: 3.5
+          links:
+          - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2
+            rel: self
+        links:
+        - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/feed/eeaa50bb-fb5f-47be-a6ab-eb4c67debecb
+          rel: self
+    Licence:
+      type: object
+      description: ''
+      properties:
+        licenceId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with the licence.
+        name:
+          type: string
+          description: The name for the licence, e.g. Open Government Licence v3.
+        url:
+          type: string
+          description: A URL for the licence, or where more information can be obtained, such as the procedure for approval to use the data.
+        description:
+          type: object
+          description: 'A data-based description of the licence, such as the constraints which may be in place, e.g. `open: false`.'
+      example:
+        licenceId: 1629fceb-799b-4840-8f5b-8b8612b374c9
+        name: 'Urban Observatory: Ethical approval required'
+        url: http://www.urbanobservatory.ac.uk/
+        description:
+          open: false
+    Organisation:
+      type: object
+      description: An organisation which is providing the data to the Urban Observatory, or responsible for some element.
+      properties:
+        organisationId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with the organisation.
+        name:
+          type: string
+          description: The name of the organisation, which may be a subsidiary of the legal entity, e.g. Urban Observatory.
+        url:
+          type: string
+          description: A URL for the organisation's web page.
+        privateSector:
+          type: boolean
+          description: Indication of whether the organisation is public or private sector.
+      example:
+        organisationId: 2567c616-43f3-4b6b-930b-126ba9ad51c8
+        name: Urban Observatory
+        url: http://www.urbanobservatory.ac.uk/
+        privateSector: false
+    Link:
+      type: object
+      description: A link provided for [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) purposes, to the item itself or an associated API method.
+      properties:
+        rel:
+          type: string
+          description: The relation of the URL to the entity in the API, which will be taken from [this list](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) where possible, but non-standard relations are permitted.
+        href:
+          type: string
+          description: An absolute URL for the resource.
+        method:
+          type: string
+          description: The HTTP protocol method to be used, or `GET` if not specified.
+          default: GET
+          enum:
+          - GET
+          - POST
+          - PATCH
+          - PUT
+          - DELETE
+      example:
+        rel: self
+        href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic
+    Unit:
+      type: object
+      description: The units associated with the values held in the timeseries.
+      properties:
+        unitId:
+          type: string
+          format: uuid
+          description: A unique identifier for the units associated with timeseries.
+        name:
+          type: string
+          description: A friendly description for the units used.
+      example:
+        unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+        name: amperes
+    Entity:
+      type: object
+      properties:
+        entityId:
+          type: string
+          description: A unique identifier associated with this entity.
+        name:
+          type: string
+          description: Friendly name associated with the entity, not used internally.
+        meta:
+          type: object
+          description: Metadata associated with the entity, such as room numbers or building name.
+        position:
+          type: array
+        feed:
+          type: array
+          items:
+            $ref: '#/components/schemas/Feed'
+      example:
+        entityId: e33f9ed0-cb60-4326-8ea6-4f166dd0c767
+        name: 'Urban Sciences Building: Floor 2: Room 2.048 Zone 1'
+        meta:
+          building: Urban Sciences Building
+          roomZone: '1'
+          roomNumber: '2.048'
+          buildingFloor: '2'
+        position: []
+        feed:
+        - feedId: eeaa50bb-fb5f-47be-a6ab-eb4c67debecb
+          metric: Room temperature
+          meta:
+            building: Urban Sciences Building
+            roomNumber: '2.048'
+            buildingFloor: '2'
+          provider:
+            providerId: 986cd257-b50d-4fe8-8439-dc2a69271172
+            organisation:
+              organisationId: 2567c616-43f3-4b6b-930b-126ba9ad51c8
+              name: Urban Observatory
+              url: http://www.urbanobservatory.ac.uk/
+              privateSector: false
+            contact:
+              contactId: 19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0
+              name: Urban Observatory
+              email: urbanobservatory@ncl.ac.uk
+              phone: 0191 208 8599
+            licence:
+              licenceId: 1629fceb-799b-4840-8f5b-8b8612b374c9
+              name: 'Urban Observatory: Ethical approval required'
+              url: http://www.urbanobservatory.ac.uk/
+              description:
+                open: false
+          technology: null
+          hardware: null
+          service: []
+          timeseries:
+          - timeseriesId: 371fbff8-f61d-4f66-99be-7d9de8ad51f2
+            unit:
+              unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+              name: amperes
+            storage:
+              storageId: 3
+              name: Real
+              suffix: real
+            derivatives: []
+            aggregation: []
+            assessments: []
+            latest:
+              time: '2018-02-12T10:30:40.125Z'
+              duration: -2.1
+              value: 3.5
+            links:
+            - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2
+              rel: self
+          links:
+          - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/feed/eeaa50bb-fb5f-47be-a6ab-eb4c67debecb
+            rel: self
+    BadRequest:
+      type: object
+      description: An invalid ID or query parameter was used to request information, such as an ID not in the [UUID syntax](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+      properties:
+        error:
+          type: boolean
+          description: Indicator that an error was returned.
+        message:
+          type: string
+          description: Description of the error which occurred in friendly terms.
+        code:
+          type: string
+          description: A short description of the error, for use in code.
+          enum:
+          - MalformedUUID
+          - BadRequestError
+      example:
+        error: true
+        message: Malformed UUID cannot be used.
+        code: MalformedUUID
+    Pagination:
+      type: object
+      description: The pagination associated with the response, and data concerning the total number of items and pages.
+      properties:
+        pageNumber:
+          type: number
+          description: Index of the page returned by the request.
+        pageSize:
+          type: number
+          description: Number of items per page to be returned.
+        pageCount:
+          type: number
+          description: Total number of pages available.
+        total:
+          type: number
+          description: Total number of items available, after any filtering has been applied.
+      example:
+        pageNumber: 1
+        pageSize: 10
+        pageCount: 1
+        total: 1
+    Contact:
+      type: object
+      description: The contact for more information, or technical issues relating to the sensing. This may not always be available.
+      properties:
+        contactId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with the contact.
+        name:
+          type: string
+          description: An individual's name, or an indication of shared contact details
+        email:
+          type: string
+          description: An email address to contact.
+        phone:
+          type: string
+          description: A telephone number to use, which may not always be available.
+      example:
+        contactId: 19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0
+        name: Urban Observatory
+        email: urbanobservatory@ncl.ac.uk
+        phone: 0191 208 8599
+    Timeseries:
+      type: object
+      properties:
+        timeseriesId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with this timeseries.
+        unit:
+          $ref: '#/components/schemas/Unit'
+        storage:
+          $ref: '#/components/schemas/Storage'
+        derivatives:
+          type: array
+          description: Placeholder for future use.
+        aggregation:
+          type: array
+          description: Placeholder for future use.
+        assessments:
+          type: array
+          description: Placeholder for future use.
+        latest:
+          description: The most recent timeseries entry, only shown if within the last week, and a historic range has not been requested. Code must be resilient if `latest` is omitted from a timeseries.
+          $ref: '#/components/schemas/TimeseriesEntry'
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/Link'
+      example:
+        timeseriesId: 371fbff8-f61d-4f66-99be-7d9de8ad51f2
+        unit:
+          unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+          name: amperes
+        storage:
+          storageId: 3
+          name: Real
+          suffix: real
+        derivatives: []
+        aggregation: []
+        assessments: []
+        latest:
+          time: '2018-02-12T10:30:40.125Z'
+          duration: -2.1
+          value: 3.5
+        links:
+        - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2
+          rel: self
+    Storage:
+      type: object
+      description: The storage mechanism used to hold the data internally.
+      properties:
+        unitId:
+          type: string
+          format: uuid
+          description: A unique identifier for the storage used for this data within the internal systems.
+        name:
+          type: string
+          description: A name for the storage, usually those used in programming (e.g. real, integer)
+        suffix:
+          type: string
+          description: The suffix used for data storage in the internal systems.
+      example:
+        storageId: 3
+        name: Real
+        suffix: real
