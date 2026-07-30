@@ -13,9 +13,21 @@ description: >-
   a Figshare-powered research data repository (data.ncl), and runs EPrints-based
   institutional and thesis repositories that expose OAI-PMH.
 type: Index
+accessModel:
+  pricing: free
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Free
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
 position: Consumer
 access: 3rd-Party
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/newcastle.png
 url: https://raw.githubusercontent.com/api-evangelist/newcastle/refs/heads/main/apis.yml
 tags:
   - Education
@@ -30,81 +42,164 @@ created: '2026-06-03'
 modified: '2026-06-03'
 specificationVersion: '0.19'
 apis:
-  - aid: newcastle:urban-observatory
-    name: Newcastle Urban Observatory API
-    description: >-
-      REST API providing programmatic access to urban-sensing data from the
-      Urban Sciences Building and data sources across Newcastle. Exposes
-      entities, feeds and timeseries (temperature, occupancy, energy and
-      environmental readings) in JSON and CSV, with an OpenAPI specification.
-    humanURL: https://api.usb.urbanobservatory.ac.uk/
-    baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
-    tags: [ Open Data, Smart Cities, Sensors, IoT, Environment ]
-    properties:
-      - type: Documentation
-        url: https://api.usb.urbanobservatory.ac.uk/
-      - type: OpenAPI
-        url: https://api.usb.urbanobservatory.ac.uk/openapi.json
-      - type: OpenAPI
-        url: openapi/newcastle-urban-observatory.yaml
-      - type: JSONSchema
-        url: json-schema/newcastle-entity-schema.json
-      - type: x-vocabulary
-        url: vocabulary/newcastle-vocabulary.yml
-      - type: x-rules
-        url: rules/newcastle-rules.yml
-      - type: x-json-ld
-        url: json-ld/newcastle-context.jsonld
-      - type: Website
-        url: https://urbanobservatory.ac.uk/
-  - aid: newcastle:digitised-objects
-    name: Digitised Objects Repository Search and Data API
-    description: >-
-      Search and Data API for Newcastle University's Digitised Objects
-      Repository, providing programmatic access to metadata and digitised
-      materials from the university's collections.
-    humanURL: https://api-dor.ncl.ac.uk/
-    tags: [ Digital Library, Collections, Cultural Heritage, Search ]
-    properties:
-      - type: Documentation
-        url: https://api-dor.ncl.ac.uk/
-  - aid: newcastle:ecppec
-    name: ECPPEC Electoral Data API
-    description: >-
-      API for the Eighteenth-Century Political Participation and Electoral
-      Culture (ECPPEC) research project, providing access to historical British
-      electoral datasets including pollbook records and election directory data.
-    humanURL: https://ecppec.ncl.ac.uk/api/
-    tags: [ Research Data, History, Open Data ]
-    properties:
-      - type: Documentation
-        url: https://ecppec.ncl.ac.uk/api/
-  - aid: newcastle:data-ncl
-    name: data.ncl Research Data Repository (Figshare)
-    description: >-
-      Newcastle University's institutional research data repository, powered by
-      Figshare, for documenting, archiving and publishing datasets and code.
-      Programmatic access is available through the underlying Figshare API.
-    humanURL: https://data.ncl.ac.uk/
-    tags: [ Research Data, Open Data, Repository ]
-    properties:
-      - type: Documentation
-        url: https://www.ncl.ac.uk/library/academics-and-researchers/lrs/rdm/sharing/datancl/
-      - type: Website
-        url: https://data.ncl.ac.uk/
-  - aid: newcastle:eprints
-    name: EPrints Institutional Repository (OAI-PMH)
-    description: >-
-      Newcastle University's EPrints-based repositories (institutional outputs at
-      eprints.ncl.ac.uk and electronic theses at theses.ncl.ac.uk) expose
-      metadata harvesting via the standard EPrints OAI-PMH interface.
-    humanURL: https://eprints.ncl.ac.uk/
-    tags: [ Repository, OAI-PMH, Research Outputs, Theses ]
-    properties:
-      - type: Documentation
-        url: https://eprints.ncl.ac.uk/
-      - type: Website
-        url: https://theses.ncl.ac.uk/
+- aid: newcastle:digitised-objects
+  name: Digitised Objects Repository Search and Data API
+  description: >-
+    Search and Data API for Newcastle University's Digitised Objects Repository, providing programmatic
+    access to metadata and digitised materials from the university's collections.
+  humanURL: https://api-dor.ncl.ac.uk/
+  tags:
+  - Digital Library
+  - Collections
+  - Cultural Heritage
+  - Search
+  properties:
+  - type: Documentation
+    url: https://api-dor.ncl.ac.uk/
+- aid: newcastle:ecppec
+  name: ECPPEC Electoral Data API
+  description: >-
+    API for the Eighteenth-Century Political Participation and Electoral Culture (ECPPEC) research project,
+    providing access to historical British electoral datasets including pollbook records and election
+    directory data.
+  humanURL: https://ecppec.ncl.ac.uk/api/
+  tags:
+  - Research Data
+  - History
+  - Open Data
+  properties:
+  - type: Documentation
+    url: https://ecppec.ncl.ac.uk/api/
+- aid: newcastle:data-ncl
+  name: data.ncl Research Data Repository (Figshare)
+  description: >-
+    Newcastle University's institutional research data repository, powered by Figshare, for documenting,
+    archiving and publishing datasets and code. Programmatic access is available through the underlying
+    Figshare API.
+  humanURL: https://data.ncl.ac.uk/
+  tags:
+  - Research Data
+  - Open Data
+  - Repository
+  properties:
+  - type: Documentation
+    url: https://www.ncl.ac.uk/library/academics-and-researchers/lrs/rdm/sharing/datancl/
+  - type: Website
+    url: https://data.ncl.ac.uk/
+- aid: newcastle:eprints
+  name: EPrints Institutional Repository (OAI-PMH)
+  description: >-
+    Newcastle University's EPrints-based repositories (institutional outputs at eprints.ncl.ac.uk and
+    electronic theses at theses.ncl.ac.uk) expose metadata harvesting via the standard EPrints OAI-PMH
+    interface.
+  humanURL: https://eprints.ncl.ac.uk/
+  tags:
+  - Repository
+  - OAI-PMH
+  - Research Outputs
+  - Theses
+  properties:
+  - type: Documentation
+    url: https://eprints.ncl.ac.uk/
+  - type: Website
+    url: https://theses.ncl.ac.uk/
+- aid: newcastle:newcastle-entity-api
+  name: Newcastle University Entity API
+  description: >-
+    An entity ordinarily describes a spatial location, such as a room in a building, or a pole in the
+    street. In some circumstances, an entity may be a mobile piece of equipment, such as those used for
+    validation, in which case the location will be provided as a timeseries.
+  humanURL: https://api.usb.urbanobservatory.ac.uk/
+  baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+  tags:
+  - Entity
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-entity-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-entity-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
+- aid: newcastle:newcastle-feed-api
+  name: Newcastle University Feed API
+  description: >-
+    A feed is a representation of a measurement or parametrisation, usually a metric, for example the
+    observed temperature.
+  humanURL: https://api.usb.urbanobservatory.ac.uk/
+  baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+  tags:
+  - Feed
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-feed-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-entity-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
+- aid: newcastle:newcastle-summary-api
+  name: Newcastle University Summary API
+  description: The Summary API from Newcastle University — 1 operation(s) for summary.
+  humanURL: https://api.usb.urbanobservatory.ac.uk/
+  baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+  tags:
+  - Summary
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-summary-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-entity-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
+- aid: newcastle:newcastle-timeseries-api
+  name: Newcastle University Timeseries API
+  description: >-
+    There may be more than one timeseries associated with a feed, provided for convenience. Ordinarily
+    there will be a plain timeseries, representing raw data from the device. In some cases, there may
+    then be additional timeseries representing converted values (e.g. scaled), corrected, or aggregated
+    temporally.
+  humanURL: https://api.usb.urbanobservatory.ac.uk/
+  baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
+  tags:
+  - Timeseries
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-timeseries-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-entity-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
 common:
   - type: AgenticAccess
     url: agentic-access/newcastle-agentic-access.yml
