@@ -1,0 +1,20 @@
+{
+  "provider": "newcastle",
+  "sources": [
+    "newcastle-entity-api-openapi.yml",
+    "newcastle-feed-api-openapi.yml",
+    "newcastle-summary-api-openapi.yml",
+    "newcastle-timeseries-api-openapi.yml"
+  ],
+  "outputs": [
+    "newcastle-entity-api-openapi.yml",
+    "newcastle-feed-api-openapi.yml",
+    "newcastle-summary-api-openapi.yml",
+    "newcastle-timeseries-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
