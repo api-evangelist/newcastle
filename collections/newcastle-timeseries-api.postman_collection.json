@@ -1,0 +1,423 @@
+{
+  "item": [
+    {
+      "id": "acac3e07-4e31-4f45-838d-db58e2119d56",
+      "name": "Timeseries",
+      "description": {
+        "content": "There may be more than one timeseries associated with a feed, provided for convenience. Ordinarily there will be a plain timeseries, representing raw data from the device. In some cases, there may then be additional timeseries representing converted values (e.g. scaled), corrected, or aggregated temporally.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "325aeecb-efbd-4a36-8a44-ff8ba338a672",
+          "name": "Request a single timeseries by its unique ID",
+          "request": {
+            "name": "Request a single timeseries by its unique ID",
+            "description": {
+              "content": "A single timeseries and its current value will be returned, if recent, provided a valid ID is supplied and permissions permit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0a",
+                "sensors",
+                "timeseries",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Timeseries ID to retrieve description and latest observed value for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "73e6f4d3-4b4e-4fe9-a602-71e174ef39ef",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "timeseries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Timeseries ID to retrieve description and latest observed value for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timeseriesId\": \"3acf13a5-0038-3575-9bde-bbaf61555bb2\",\n  \"unit\": {\n    \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n    \"name\": \"amperes\"\n  },\n  \"storage\": {\n    \"storageId\": 3,\n    \"name\": \"Real\",\n    \"suffix\": \"real\"\n  },\n  \"latest\": {\n    \"time\": \"1977-09-11T05:37:09.690Z\",\n    \"duration\": 6357.870857911279,\n    \"value\": {},\n    \"error\": false,\n    \"message\": \"string\",\n    \"description\": \"string\"\n  },\n  \"links\": [\n    {\n      \"rel\": \"self\",\n      \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n    },\n    {\n      \"rel\": \"self\",\n      \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b5fdeb7c-d67a-47a8-8900-1e2c9eb59fca",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "timeseries",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Timeseries ID to retrieve description and latest observed value for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Malformed UUID cannot be used.\",\n  \"code\": \"MalformedUUID\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "97218e76-59c3-4350-90da-bbfc0f03e0b5",
+          "name": "Request historic data from a timeseries by its unique ID and a date range",
+          "request": {
+            "name": "Request historic data from a timeseries by its unique ID and a date range",
+            "description": {
+              "content": "A date range may be specified to obtain historic readings from a timeseries, or the last 24 hours will be provided by default.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0a",
+                "sensors",
+                "timeseries",
+                ":id",
+                "historic"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "startTime",
+                  "value": "24 hours in past",
+                  "description": "Start period for the historic data to be retrieved, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "endTime",
+                  "value": "24 hours in future",
+                  "description": "End period for the historic data to be retrieved, inclusive."
+                },
+                {
+                  "disabled": false,
+                  "key": "outputAs",
+                  "value": "json",
+                  "description": "Output format for the data, although JSON is always recommended and CSV outputs are computed from JSON."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Timeseries ID to retrieve historic data for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f488e860-dc64-4f7b-8a29-376898b68e08",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "timeseries",
+                    ":id",
+                    "historic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "24 hours in past"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "24 hours in future"
+                    },
+                    {
+                      "key": "outputAs",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Timeseries ID to retrieve historic data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"timeseries\": {\n    \"timeseriesId\": \"65a345b5-c65a-48b8-2de1-c7c34005bb98\",\n    \"unit\": {\n      \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n      \"name\": \"amperes\"\n    },\n    \"storage\": {\n      \"storageId\": 3,\n      \"name\": \"Real\",\n      \"suffix\": \"real\"\n    },\n    \"latest\": {\n      \"time\": \"1976-12-13T05:54:55.317Z\",\n      \"duration\": 7179.711485083634,\n      \"value\": {},\n      \"error\": true,\n      \"message\": \"string\",\n      \"description\": \"string\"\n    },\n    \"links\": [\n      {\n        \"rel\": \"self\",\n        \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n      },\n      {\n        \"rel\": \"self\",\n        \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n      }\n    ]\n  },\n  \"historic\": {\n    \"startTime\": \"1992-10-21T13:30:54.473Z\",\n    \"endTime\": \"1967-08-21T09:47:07.872Z\",\n    \"limited\": true,\n    \"values\": [\n      {\n        \"time\": \"1998-04-26T05:41:43.441Z\",\n        \"duration\": 2908.641127209353,\n        \"value\": {},\n        \"error\": true,\n        \"message\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"time\": \"1955-01-10T02:28:35.666Z\",\n        \"duration\": 2864.968006676093,\n        \"value\": {},\n        \"error\": false,\n        \"message\": \"string\",\n        \"description\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "1db4f35c-04e2-4f09-b0bb-b7eaa92f6b6a",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "timeseries",
+                    ":id",
+                    "historic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "24 hours in past"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "24 hours in future"
+                    },
+                    {
+                      "key": "outputAs",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Timeseries ID to retrieve historic data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Malformed UUID cannot be used.\",\n  \"code\": \"MalformedUUID\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "643920ea-5bf2-4d10-828c-b0195982d909",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "timeseries",
+                    ":id",
+                    "historic"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "startTime",
+                      "value": "24 hours in past"
+                    },
+                    {
+                      "key": "endTime",
+                      "value": "24 hours in future"
+                    },
+                    {
+                      "key": "outputAs",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Timeseries ID to retrieve historic data for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"No access to this timeseries.\",\n  \"code\": \"ForbiddenError\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "2a46d175-7a85-4ca4-921d-6e88d9f44507",
+    "name": "Urban Observatory API: Urban Sciences Building Entity Timeseries API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format.\n\nContact Support:\n Name: Luke Smith\n Email: luke.smith@ncl.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Urban Observatory API: Urban Sciences Building Entity Feed API",
+    "version": "2.0a"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Feed",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request a single feed by its unique ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a/api/v2.0a/sensors/feed/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Feed ID to retrieve description and associated set of timeseries for."
+              }
+            ]
+          },
+          "docs": "A single feed and its descendant timeseries will be returned."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

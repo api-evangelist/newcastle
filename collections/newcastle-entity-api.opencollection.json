@@ -1,0 +1,79 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Urban Observatory API: Urban Sciences Building Entity API",
+    "version": "2.0a"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all entities (paginated)",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a/api/v2.0a/sensors/entity",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number to return results from, will default to `1` if omitted."
+              },
+              {
+                "name": "pageSize",
+                "value": "",
+                "type": "query",
+                "description": "Request a number of items per page, however the API may constrain the range."
+              },
+              {
+                "name": "meta:{key}={value}",
+                "value": "",
+                "type": "query",
+                "description": "Filter based on metadata, e.g. `meta:roomNumber=2.048`"
+              },
+              {
+                "name": "brokerage:sourceId={value}",
+                "value": "",
+                "type": "query",
+                "description": "Filter based on the ID at the source controller or broker, such as the BACNET ID within a building. This is usually useful if you have some prior knowledge of the systems, or are using the data in combination with related data sources. Note that source IDs are not required to confirm to any standard, other than the controller ID and source ID combined must be a unique pair."
+              },
+              {
+                "name": "metric",
+                "value": "",
+                "type": "query",
+                "description": "Filter to only include entities with, and feeds therein, matching at least one of the metrics specified. Partial matches on metrics are included, and each word is considered to be additive and case insensitive, so phrases must be surrounded by double quotes. For example, to return the occupancy and room temperature, but exclude flow temperatures, use `metric=occupied+\"room temperature\"`."
+              }
+            ]
+          },
+          "docs": "Paginated list of all entities, including their associated feeds and timeseries."
+        },
+        {
+          "info": {
+            "name": "Request a single entity by its unique ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a/api/v2.0a/sensors/entity/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path"
+              }
+            ]
+          },
+          "docs": "A single entity and its associated feeds will be returned, if a valid ID is supplied and permissions permit."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

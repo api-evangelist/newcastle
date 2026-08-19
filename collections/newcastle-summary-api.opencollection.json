@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Urban Observatory API: Urban Sciences Building Entity Summary API",
+    "version": "2.0a"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Summary",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List all entities in summary form",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a/api/v2.0a/sensors/summary"
+          },
+          "docs": "Non-paginated list of all entities, with only basic information provided."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

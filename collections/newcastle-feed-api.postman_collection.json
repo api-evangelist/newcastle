@@ -1,0 +1,173 @@
+{
+  "item": [
+    {
+      "id": "8be6f0dd-a6fc-46ae-8080-b3ad43351528",
+      "name": "Feed",
+      "description": {
+        "content": "A feed is a representation of a measurement or parametrisation, usually a metric, for example the observed temperature.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "67b855e0-1548-4a1f-a202-26a788b18af1",
+          "name": "Request a single feed by its unique ID",
+          "request": {
+            "name": "Request a single feed by its unique ID",
+            "description": {
+              "content": "A single feed and its descendant timeseries will be returned.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0a",
+                "sensors",
+                "feed",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Feed ID to retrieve description and associated set of timeseries for."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "91ee9d8b-74e2-4619-b1bb-3a1f14fd52eb",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "feed",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Feed ID to retrieve description and associated set of timeseries for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"feedId\": \"958e730c-64de-bce5-cf8a-29ce31bfe81b\",\n  \"metric\": \"string\",\n  \"meta\": {},\n  \"provider\": {\n    \"providerId\": \"f5c4559d-d364-3f43-395a-588e716e7a09\",\n    \"organisation\": {\n      \"organisationId\": \"2567c616-43f3-4b6b-930b-126ba9ad51c8\",\n      \"name\": \"Urban Observatory\",\n      \"url\": \"http://www.urbanobservatory.ac.uk/\",\n      \"privateSector\": false\n    },\n    \"contact\": {\n      \"contactId\": \"19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0\",\n      \"name\": \"Urban Observatory\",\n      \"email\": \"urbanobservatory@ncl.ac.uk\",\n      \"phone\": \"0191 208 8599\"\n    },\n    \"licence\": {\n      \"licenceId\": \"1629fceb-799b-4840-8f5b-8b8612b374c9\",\n      \"name\": \"Urban Observatory: Ethical approval required\",\n      \"url\": \"http://www.urbanobservatory.ac.uk/\",\n      \"description\": {\n        \"open\": false\n      }\n    }\n  },\n  \"technology\": {},\n  \"hardware\": {},\n  \"timeseries\": [\n    {\n      \"timeseriesId\": \"edd0cb40-581e-f6c6-addd-f11138718767\",\n      \"unit\": {\n        \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n        \"name\": \"amperes\"\n      },\n      \"storage\": {\n        \"storageId\": 3,\n        \"name\": \"Real\",\n        \"suffix\": \"real\"\n      },\n      \"latest\": {\n        \"time\": \"1988-04-14T11:01:16.711Z\",\n        \"duration\": 4391.317122874456,\n        \"value\": {},\n        \"error\": true,\n        \"message\": \"string\",\n        \"description\": \"string\"\n      },\n      \"links\": [\n        {\n          \"rel\": \"self\",\n          \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n        },\n        {\n          \"rel\": \"self\",\n          \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n        }\n      ]\n    },\n    {\n      \"timeseriesId\": \"262ab0f1-1230-1543-e4aa-bf9f426e4611\",\n      \"unit\": {\n        \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n        \"name\": \"amperes\"\n      },\n      \"storage\": {\n        \"storageId\": 3,\n        \"name\": \"Real\",\n        \"suffix\": \"real\"\n      },\n      \"latest\": {\n        \"time\": \"1995-10-01T22:19:50.693Z\",\n        \"duration\": 1273.379511539585,\n        \"value\": {},\n        \"error\": false,\n        \"message\": \"string\",\n        \"description\": \"string\"\n      },\n      \"links\": [\n        {\n          \"rel\": \"self\",\n          \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n        },\n        {\n          \"rel\": \"self\",\n          \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cfb43c24-a3d9-4ed5-8df7-6c6ae47d92b1",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "feed",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Feed ID to retrieve description and associated set of timeseries for."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Malformed UUID cannot be used.\",\n  \"code\": \"MalformedUUID\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "b16ac6b3-ecdf-4574-9ab8-7b516881a033",
+    "name": "Urban Observatory API: Urban Sciences Building Entity Feed API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format.\n\nContact Support:\n Name: Luke Smith\n Email: luke.smith@ncl.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Urban Observatory API: Urban Sciences Building Entity Timeseries API",
+    "version": "2.0a"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Timeseries",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Request a single timeseries by its unique ID",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a/api/v2.0a/sensors/timeseries/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Timeseries ID to retrieve description and latest observed value for."
+              }
+            ]
+          },
+          "docs": "A single timeseries and its current value will be returned, if recent, provided a valid ID is supplied and permissions permit."
+        },
+        {
+          "info": {
+            "name": "Request historic data from a timeseries by its unique ID and a date range",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a/api/v2.0a/sensors/timeseries/:id/historic",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Timeseries ID to retrieve historic data for."
+              },
+              {
+                "name": "startTime",
+                "value": "",
+                "type": "query",
+                "description": "Start period for the historic data to be retrieved, inclusive."
+              },
+              {
+                "name": "endTime",
+                "value": "",
+                "type": "query",
+                "description": "End period for the historic data to be retrieved, inclusive."
+              },
+              {
+                "name": "outputAs",
+                "value": "",
+                "type": "query",
+                "description": "Output format for the data, although JSON is always recommended and CSV outputs are computed from JSON."
+              }
+            ]
+          },
+          "docs": "A date range may be specified to obtain historic readings from a timeseries, or the last 24 hours will be provided by default."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

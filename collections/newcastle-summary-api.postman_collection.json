@@ -1,0 +1,108 @@
+{
+  "item": [
+    {
+      "id": "dec6ed51-a031-4599-9baa-4ce84852dd35",
+      "name": "Summary",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "9e5f81ca-0e98-4037-a615-92660a906ca8",
+          "name": "List all entities in summary form",
+          "request": {
+            "name": "List all entities in summary form",
+            "description": {
+              "content": "Non-paginated list of all entities, with only basic information provided.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0a",
+                "sensors",
+                "summary"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9ebb12fc-5e06-4656-a1fc-450e3ee5ec7c",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "summary"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entityId\": \"970d26c6-37c3-49e4-b2f8-00db042ac3eb\",\n  \"name\": \"Urban Sciences Building: Floor 2: Room 2.048 Zone 1\",\n  \"feed\": {\n    \"87b2d34e-b96e-44c1-ae69-374f4bac02cd\": \"Room Temperature\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "19fb54cc-713a-4ad8-9d0b-154e62ab0ed7",
+    "name": "Urban Observatory API: Urban Sciences Building Entity Summary API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format.\n\nContact Support:\n Name: Luke Smith\n Email: luke.smith@ncl.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}

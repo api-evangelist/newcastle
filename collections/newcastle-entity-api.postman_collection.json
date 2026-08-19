@@ -1,0 +1,291 @@
+{
+  "item": [
+    {
+      "id": "1f493ba6-4609-494f-82af-ad0df40fcd9b",
+      "name": "Entity",
+      "description": {
+        "content": "An entity ordinarily describes a spatial location, such as a room in a building, or a pole in the street. In some circumstances, an entity may be a mobile piece of equipment, such as those used for validation, in which case the location will be provided as a timeseries.",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "52dade8e-445a-445e-bd43-57f95fa6b451",
+          "name": "List all entities (paginated)",
+          "request": {
+            "name": "List all entities (paginated)",
+            "description": {
+              "content": "Paginated list of all entities, including their associated feeds and timeseries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0a",
+                "sensors",
+                "entity"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number to return results from, will default to `1` if omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "pageSize",
+                  "value": "10",
+                  "description": "Request a number of items per page, however the API may constrain the range."
+                },
+                {
+                  "disabled": false,
+                  "key": "brokerage:sourceId={value}",
+                  "value": "<string>",
+                  "description": "Filter based on the ID at the source controller or broker, such as the BACNET ID within a building. This is usually useful if you have some prior knowledge of the systems, or are using the data in combination with related data sources. Note that source IDs are not required to confirm to any standard, other than the controller ID and source ID combined must be a unique pair."
+                },
+                {
+                  "disabled": false,
+                  "key": "metric",
+                  "value": "<string>",
+                  "description": "Filter to only include entities with, and feeds therein, matching at least one of the metrics specified. Partial matches on metrics are included, and each word is considered to be additive and case insensitive, so phrases must be surrounded by double quotes. For example, to return the occupancy and room temperature, but exclude flow temperatures, use `metric=occupied+\"room temperature\"`."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ebe982a0-c2bf-46e5-8d89-7af973145010",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "entity"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "pageSize",
+                      "value": "10"
+                    },
+                    {
+                      "key": "brokerage:sourceId",
+                      "value": "{value}=<string>"
+                    },
+                    {
+                      "key": "metric",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"pagination\": {\n    \"pageNumber\": 1,\n    \"pageSize\": 10,\n    \"pageCount\": 1,\n    \"total\": 1\n  },\n  \"items\": [\n    {\n      \"entityId\": \"string\",\n      \"name\": \"string\",\n      \"meta\": {},\n      \"feed\": [\n        {\n          \"feedId\": \"43c3a79d-5757-989b-54b2-dfad8d70cdac\",\n          \"metric\": \"string\",\n          \"meta\": {},\n          \"provider\": {\n            \"providerId\": \"1114c0b6-acf6-ca47-5564-46b8798ff42d\",\n            \"organisation\": {\n              \"organisationId\": \"2567c616-43f3-4b6b-930b-126ba9ad51c8\",\n              \"name\": \"Urban Observatory\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"privateSector\": false\n            },\n            \"contact\": {\n              \"contactId\": \"19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0\",\n              \"name\": \"Urban Observatory\",\n              \"email\": \"urbanobservatory@ncl.ac.uk\",\n              \"phone\": \"0191 208 8599\"\n            },\n            \"licence\": {\n              \"licenceId\": \"1629fceb-799b-4840-8f5b-8b8612b374c9\",\n              \"name\": \"Urban Observatory: Ethical approval required\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"description\": {\n                \"open\": false\n              }\n            }\n          },\n          \"technology\": {},\n          \"hardware\": {},\n          \"timeseries\": [\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            },\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"feedId\": \"66d33f3f-f153-bf67-6060-d29c16c34ac0\",\n          \"metric\": \"string\",\n          \"meta\": {},\n          \"provider\": {\n            \"providerId\": \"11d6a8cd-4130-4145-7bf9-35c455bea15b\",\n            \"organisation\": {\n              \"organisationId\": \"2567c616-43f3-4b6b-930b-126ba9ad51c8\",\n              \"name\": \"Urban Observatory\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"privateSector\": false\n            },\n            \"contact\": {\n              \"contactId\": \"19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0\",\n              \"name\": \"Urban Observatory\",\n              \"email\": \"urbanobservatory@ncl.ac.uk\",\n              \"phone\": \"0191 208 8599\"\n            },\n            \"licence\": {\n              \"licenceId\": \"1629fceb-799b-4840-8f5b-8b8612b374c9\",\n              \"name\": \"Urban Observatory: Ethical approval required\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"description\": {\n                \"open\": false\n              }\n            }\n          },\n          \"technology\": {},\n          \"hardware\": {},\n          \"timeseries\": [\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            },\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"entityId\": \"string\",\n      \"name\": \"string\",\n      \"meta\": {},\n      \"feed\": [\n        {\n          \"feedId\": \"c7a7d1a0-9c76-c8fb-5048-f29bb07e6344\",\n          \"metric\": \"string\",\n          \"meta\": {},\n          \"provider\": {\n            \"providerId\": \"7eea99d3-de93-a8fa-c30f-30688b1b6cc0\",\n            \"organisation\": {\n              \"organisationId\": \"2567c616-43f3-4b6b-930b-126ba9ad51c8\",\n              \"name\": \"Urban Observatory\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"privateSector\": false\n            },\n            \"contact\": {\n              \"contactId\": \"19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0\",\n              \"name\": \"Urban Observatory\",\n              \"email\": \"urbanobservatory@ncl.ac.uk\",\n              \"phone\": \"0191 208 8599\"\n            },\n            \"licence\": {\n              \"licenceId\": \"1629fceb-799b-4840-8f5b-8b8612b374c9\",\n              \"name\": \"Urban Observatory: Ethical approval required\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"description\": {\n                \"open\": false\n              }\n            }\n          },\n          \"technology\": {},\n          \"hardware\": {},\n          \"timeseries\": [\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            },\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            }\n          ]\n        },\n        {\n          \"feedId\": \"4d43b5a2-be00-787b-7250-ea1b9c8316aa\",\n          \"metric\": \"string\",\n          \"meta\": {},\n          \"provider\": {\n            \"providerId\": \"662572e8-7677-8d03-bb04-18c19bba0fd8\",\n            \"organisation\": {\n              \"organisationId\": \"2567c616-43f3-4b6b-930b-126ba9ad51c8\",\n              \"name\": \"Urban Observatory\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"privateSector\": false\n            },\n            \"contact\": {\n              \"contactId\": \"19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0\",\n              \"name\": \"Urban Observatory\",\n              \"email\": \"urbanobservatory@ncl.ac.uk\",\n              \"phone\": \"0191 208 8599\"\n            },\n            \"licence\": {\n              \"licenceId\": \"1629fceb-799b-4840-8f5b-8b8612b374c9\",\n              \"name\": \"Urban Observatory: Ethical approval required\",\n              \"url\": \"http://www.urbanobservatory.ac.uk/\",\n              \"description\": {\n                \"open\": false\n              }\n            }\n          },\n          \"technology\": {},\n          \"hardware\": {},\n          \"timeseries\": [\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            },\n            {\n              \"timeseriesId\": \"371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n              \"unit\": {\n                \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n                \"name\": \"amperes\"\n              },\n              \"storage\": {\n                \"storageId\": 3,\n                \"name\": \"Real\",\n                \"suffix\": \"real\"\n              },\n              \"latest\": {\n                \"time\": \"2018-02-12T10:30:40.125Z\",\n                \"duration\": -2.1,\n                \"value\": 3.5\n              },\n              \"links\": [\n                {\n                  \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2\",\n                  \"rel\": \"self\"\n                }\n              ]\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a32b4205-5639-4ed5-b161-a870db7ea063",
+          "name": "Request a single entity by its unique ID",
+          "request": {
+            "name": "Request a single entity by its unique ID",
+            "description": {
+              "content": "A single entity and its associated feeds will be returned, if a valid ID is supplied and permissions permit.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "v2.0a",
+                "sensors",
+                "entity",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) "
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "437d1b12-dd0f-42fa-be0a-33ab48ba3643",
+              "name": "Successful request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"entityId\": \"string\",\n  \"name\": \"string\",\n  \"meta\": {},\n  \"feed\": [\n    {\n      \"feedId\": \"d8f1b556-8222-d0ae-2478-f02d0bf3d35e\",\n      \"metric\": \"string\",\n      \"meta\": {},\n      \"provider\": {\n        \"providerId\": \"6f62539c-341a-663b-0e33-d8de28b4208b\",\n        \"organisation\": {\n          \"organisationId\": \"2567c616-43f3-4b6b-930b-126ba9ad51c8\",\n          \"name\": \"Urban Observatory\",\n          \"url\": \"http://www.urbanobservatory.ac.uk/\",\n          \"privateSector\": false\n        },\n        \"contact\": {\n          \"contactId\": \"19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0\",\n          \"name\": \"Urban Observatory\",\n          \"email\": \"urbanobservatory@ncl.ac.uk\",\n          \"phone\": \"0191 208 8599\"\n        },\n        \"licence\": {\n          \"licenceId\": \"1629fceb-799b-4840-8f5b-8b8612b374c9\",\n          \"name\": \"Urban Observatory: Ethical approval required\",\n          \"url\": \"http://www.urbanobservatory.ac.uk/\",\n          \"description\": {\n            \"open\": false\n          }\n        }\n      },\n      \"technology\": {},\n      \"hardware\": {},\n      \"timeseries\": [\n        {\n          \"timeseriesId\": \"142728b9-692f-3973-3394-2601e5dd79cf\",\n          \"unit\": {\n            \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n            \"name\": \"amperes\"\n          },\n          \"storage\": {\n            \"storageId\": 3,\n            \"name\": \"Real\",\n            \"suffix\": \"real\"\n          },\n          \"latest\": {\n            \"time\": \"2011-10-18T16:05:56.537Z\",\n            \"duration\": 5931.825839468359,\n            \"value\": {},\n            \"error\": true,\n            \"message\": \"string\",\n            \"description\": \"string\"\n          },\n          \"links\": [\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            },\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            }\n          ]\n        },\n        {\n          \"timeseriesId\": \"d7075ccc-b3bd-b946-b854-508b9cd73d1c\",\n          \"unit\": {\n            \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n            \"name\": \"amperes\"\n          },\n          \"storage\": {\n            \"storageId\": 3,\n            \"name\": \"Real\",\n            \"suffix\": \"real\"\n          },\n          \"latest\": {\n            \"time\": \"1964-02-08T00:56:21.546Z\",\n            \"duration\": 827.3787673835176,\n            \"value\": {},\n            \"error\": true,\n            \"message\": \"string\",\n            \"description\": \"string\"\n          },\n          \"links\": [\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            },\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            }\n          ]\n        }\n      ]\n    },\n    {\n      \"feedId\": \"5355d444-b3c3-2a8f-9145-92580929875d\",\n      \"metric\": \"string\",\n      \"meta\": {},\n      \"provider\": {\n        \"providerId\": \"e24fc9fb-3ab2-de94-507a-8b2b961dff78\",\n        \"organisation\": {\n          \"organisationId\": \"2567c616-43f3-4b6b-930b-126ba9ad51c8\",\n          \"name\": \"Urban Observatory\",\n          \"url\": \"http://www.urbanobservatory.ac.uk/\",\n          \"privateSector\": false\n        },\n        \"contact\": {\n          \"contactId\": \"19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0\",\n          \"name\": \"Urban Observatory\",\n          \"email\": \"urbanobservatory@ncl.ac.uk\",\n          \"phone\": \"0191 208 8599\"\n        },\n        \"licence\": {\n          \"licenceId\": \"1629fceb-799b-4840-8f5b-8b8612b374c9\",\n          \"name\": \"Urban Observatory: Ethical approval required\",\n          \"url\": \"http://www.urbanobservatory.ac.uk/\",\n          \"description\": {\n            \"open\": false\n          }\n        }\n      },\n      \"technology\": {},\n      \"hardware\": {},\n      \"timeseries\": [\n        {\n          \"timeseriesId\": \"8f30c131-8a68-e115-54dd-1db7a3bd6dfb\",\n          \"unit\": {\n            \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n            \"name\": \"amperes\"\n          },\n          \"storage\": {\n            \"storageId\": 3,\n            \"name\": \"Real\",\n            \"suffix\": \"real\"\n          },\n          \"latest\": {\n            \"time\": \"2026-01-15T01:54:11.027Z\",\n            \"duration\": 1576.6081208179305,\n            \"value\": {},\n            \"error\": true,\n            \"message\": \"string\",\n            \"description\": \"string\"\n          },\n          \"links\": [\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            },\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            }\n          ]\n        },\n        {\n          \"timeseriesId\": \"47e16ef8-8963-7e3d-e4f3-7ee0efdcc830\",\n          \"unit\": {\n            \"unitId\": \"19bc95ba-83f2-4dcd-b49e-5e5415c75771\",\n            \"name\": \"amperes\"\n          },\n          \"storage\": {\n            \"storageId\": 3,\n            \"name\": \"Real\",\n            \"suffix\": \"real\"\n          },\n          \"latest\": {\n            \"time\": \"1979-07-10T18:06:30.545Z\",\n            \"duration\": 4285.5371184152755,\n            \"value\": {},\n            \"error\": true,\n            \"message\": \"string\",\n            \"description\": \"string\"\n          },\n          \"links\": [\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            },\n            {\n              \"rel\": \"self\",\n              \"href\": \"https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic\"\n            }\n          ]\n        }\n      ]\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "141b327e-65a5-4385-9921-27e76a3a002d",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "v2.0a",
+                    "sensors",
+                    "entity",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) "
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"error\": true,\n  \"message\": \"Malformed UUID cannot be used.\",\n  \"code\": \"MalformedUUID\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.usb.urbanobservatory.ac.uk/api/v2.0a",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "69cbb5a5-4100-4d16-8b22-122b0dac1336",
+    "name": "Urban Observatory API: Urban Sciences Building Entity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format.\n\nContact Support:\n Name: Luke Smith\n Email: luke.smith@ncl.ac.uk",
+      "type": "text/plain"
+    }
+  }
+}
