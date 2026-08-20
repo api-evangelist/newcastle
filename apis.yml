@@ -50,6 +50,11 @@ apis:
   humanURL: https://api-dor.ncl.ac.uk/
   tags:
   - Digital Library
+  - Collection
+  - Cultural Heritage
+  - Search
+  tags_raw:
+  - Digital Library
   - Collections
   - Cultural Heritage
   - Search
@@ -184,6 +189,8 @@ apis:
   humanURL: https://api.usb.urbanobservatory.ac.uk/
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
+  - Time Series
+  tags_raw:
   - Timeseries
   properties:
   - type: OpenAPI
