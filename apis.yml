@@ -1,138 +1,287 @@
 ---
 aid: newcastle
 name: Newcastle University
+x-type: university
+x-category: Public Research University
 description: >-
-  Newcastle University is a public research university in Newcastle upon Tyne,
-  United Kingdom, ranked #129 in the QS World University Rankings 2025. Its
-  public developer and API footprint centers on research and open-data
-  initiatives rather than a single central developer portal. Confirmed public
-  APIs include the Newcastle Urban Observatory REST API (one of the UK's largest
-  open urban-sensing platforms, with an OpenAPI specification), the Digitised
-  Objects Repository Search and Data API, and the ECPPEC electoral history
-  research API. The university also operates a verified GitHub organization and
-  a Figshare-powered research data repository (data.ncl), and runs EPrints-based
-  institutional and thesis repositories that expose OAI-PMH.
+  Newcastle University is a public research university in Newcastle upon Tyne, United Kingdom, and a
+  member of the Russell Group. Its programmable footprint is genuinely its own but it is small,
+  decentralised and unadvertised: there is no central developer portal, no API changelog, no status
+  page and no developer support channel anywhere on ncl.ac.uk. What the institution actually operates
+  and runs itself, verified live on 2026-08-30, is four things — the Urban Observatory API for the
+  Urban Sciences Building (the largest open urban-sensing platform in the UK, on a domain Newcastle
+  registered and serves from its own nameservers), the Library's Digitised Objects Repository Search
+  and Data API, which publishes its own OpenAPI at /info/open-api and serves 15,482 digitised objects
+  from Special Collections, the ECPPEC eighteenth-century electoral GraphQL API with open
+  introspection, and an OAI-PMH 2.0 endpoint over the eTheses repository. Alongside these it operates
+  a Shibboleth SAML 2.0 identity provider registered in the UK Access Management Federation with 168
+  service providers under ncl.ac.uk, which is by volume the institution's largest machine-readable
+  surface and is a login federation rather than a data API. Its research data repository, data.ncl,
+  is a Figshare tenant: the data and the DOIs are Newcastle's, the API contract is Figshare's, and it
+  is recorded here as a tenant relationship rather than credited to the university.
 type: Index
+x-coverage:
+  state: covered
+  reason: covered
+  detail: >-
+    Four institution-operated APIs and one identity federation were found, probed and verified live
+    on 2026-08-30, and one vendor-platform tenancy was identified and labelled rather than credited.
+    The profile is thin in developer-experience terms — no portal, no changelog, no status page, no
+    support channel, no scopes and no versioning policy — and that thinness is a real measurement of
+    the institution, not a gap in coverage. Two claims carried by the previous profile did not
+    survive probing and were corrected: eprints.ncl.ac.uk does not expose OAI-PMH (it is an ASP.NET
+    application and /cgi/oai2, /oai2 and /api all redirect to error_page.aspx), and the ECPPEC API
+    does not live at ecppec.ncl.ac.uk/api/, which is a WordPress documentation page pointing at the
+    real GraphQL host at api-ecppec.ncl.ac.uk.
+  generated: '2026-08-30'
+  method: probed
+  evidence:
+  - url: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/entity
+    status: 200
+    note: 616 entities returned anonymously
+  - url: https://api.usb.urbanobservatory.ac.uk/openapi.json
+    status: 200
+    note: first-party OpenAPI served by the API itself
+  - url: https://api-dor.ncl.ac.uk/info/open-api
+    status: 200
+    note: first-party OpenAPI, 18 paths, harvested into openapi/_original/
+  - url: https://api-dor.ncl.ac.uk/v1/digitised-objects?page.size=2
+    status: 200
+    note: 15,482 digitised objects across 7,741 pages
+  - url: https://api-ecppec.ncl.ac.uk/
+    status: 200
+    note: GraphQL POST with open introspection; 19 root queries; live data returned
+  - url: https://theses.ncl.ac.uk/oai/request?verb=Identify
+    status: 200
+    note: OAI-PMH 2.0, DSpace 6.3, formats oai_dc / dim / uketd_dc
+  - url: https://gateway.ncl.ac.uk/idp/shibboleth
+    status: 200
+    note: SAML 2.0 IdP metadata, scope ncl.ac.uk
+  - url: https://data.ncl.ac.uk/
+    status: 202
+    note: Figshare tenant; CNAME to figshare.com; edge returns an empty 202 bot challenge to non-browser clients
+  - url: https://eprints.ncl.ac.uk/cgi/oai2?verb=Identify
+    status: 404
+    note: redirects to error_page.aspx — the previously claimed OAI-PMH interface does not exist
+  - url: https://newcastle.urbanobservatory.ac.uk/api/v1.1/sensors/json/
+    status: 200
+    note: soft-200 — returns a 661-byte SPA shell, not data; the v1.1 API is gone from this host
+  - url: https://www.ncl.ac.uk/llms.txt
+    status: 404
+  - url: https://www.ncl.ac.uk/.well-known/security.txt
+    status: 404
 deliveryModel:
   model: saas
   open_source: false
-  commercial: true
+  commercial: false
   callable_host: true
   label: Hosted service · you call their endpoint
   confidence: high
   source:
   - openapi
-  - pricing
-  generated: '2026-08-28'
-  method: derived
+  - probe
+  generated: '2026-08-30'
+  method: probed
 accessModel:
   pricing: free
-  onboarding: unknown
+  onboarding: none
   trial: false
-  try_now: false
-  public: false
-  label: Free
-  confidence: medium
+  try_now: true
+  public: true
+  label: Free and open — no registration, no key, no scopes
+  confidence: high
   source:
+  - probe
   - plans
-  generated: '2026-07-22'
-  method: derived
-position: Consumer
-access: 3rd-Party
+  generated: '2026-08-30'
+  method: probed
+position: Provider
+access: Public
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/newcastle.png
 url: https://raw.githubusercontent.com/api-evangelist/newcastle/refs/heads/main/apis.yml
 tags:
-  - Education
-  - Higher Education
   - University
+  - Higher Education
+  - Education
   - United Kingdom
-  - Open Data
+  - Russell Group
   - Research Data
-  - Smart Cities
+  - Open Data
   - Digital Library
+  - Identity Federation
+  - Smart Cities
+  - Cultural Heritage
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 specificationVersion: '0.23'
 apis:
 - aid: newcastle:digitised-objects
   name: Digitised Objects Repository Search and Data API
+  x-operator: institution
+  x-operator-evidence: >-
+    api-dor.ncl.ac.uk resolves to dls-dor01.ncl.ac.uk (128.240.212.10), under the university's own
+    registrable domain. info.title reads "Newcastle University | Digitised Objects Repository |
+    Search and Data API"; the description names Special Collections and Archives as data curators
+    and Digital Library Services as administrators. No vendor identity in servers[], title or
+    contact.
   description: >-
-    Search and Data API for Newcastle University's Digitised Objects Repository, providing programmatic
-    access to metadata and digitised materials from the university's collections.
+    A single point-of-truth interface for searching, browsing and displaying the digitised objects
+    held in Newcastle University Library's Special Collections. Eighteen operations across
+    collections, digitised objects, items, search, autocomplete, transcripts, IIIF image delivery,
+    TEI content and CONTENTdm identifier resolution. Open, unauthenticated, HATEOAS-linked, and it
+    publishes its own OpenAPI and build number from a machine-readable /info endpoint. Verified live
+    2026-08-30 serving 15,482 digitised objects.
   humanURL: https://api-dor.ncl.ac.uk/
+  baseURL: https://api-dor.ncl.ac.uk
   tags:
   - Digital Library
-  - Collection
   - Cultural Heritage
   - Search
-  tags_raw:
-  - Digital Library
-  - Collections
-  - Cultural Heritage
-  - Search
+  - Repository
   properties:
+  - type: OpenAPI
+    url: openapi/newcastle-digitised-objects-api-openapi.yml
+  - type: APIReference
+    url: https://api-dor.ncl.ac.uk/info/open-api
   - type: Documentation
     url: https://api-dor.ncl.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-digitised-object-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-dor-collection-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-dor-pagination-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-dor-error-schema.json
+  - type: x-examples
+    url: examples/newcastle-digitised-objects-collections-example.json
+  - type: x-examples
+    url: examples/newcastle-digitised-objects-list-example.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-institution-vocabulary.yml
+  - type: Website
+    url: https://www.ncl.ac.uk/library/special-collections/
 - aid: newcastle:ecppec
-  name: ECPPEC Electoral Data API
+  name: ECPPEC Electoral Data GraphQL API
+  x-operator: institution
+  x-operator-evidence: >-
+    api-ecppec.ncl.ac.uk resolves to a10-vip-ecppec.ncl.ac.uk (128.240.212.230), inside Newcastle
+    University's own network and under its own registrable domain. The GraphQL server path
+    disclosed in error output is /home/ecppec/graphql-server/ECPPEC/graphql. No vendor identity
+    appears in the schema, the host or the errors.
   description: >-
-    API for the Eighteenth-Century Political Participation and Electoral Culture (ECPPEC) research project,
-    providing access to historical British electoral datasets including pollbook records and election
-    directory data.
+    A GraphQL API over the Eighteenth-Century Political Participation and Electoral Culture research
+    dataset — historical British elections, constituencies, candidates, poll books, voters, votes,
+    occupations, geocodes and cultural artefacts. Nineteen root queries, no mutations, open
+    unauthenticated introspection. Verified live 2026-08-30. Note that the previously catalogued
+    endpoint ecppec.ncl.ac.uk/api/ is a WordPress documentation page, not the API; the API is at
+    api-ecppec.ncl.ac.uk.
   humanURL: https://ecppec.ncl.ac.uk/api/
+  baseURL: https://api-ecppec.ncl.ac.uk/
   tags:
   - Research Data
   - History
   - Open Data
+  - GraphQL
   properties:
+  - type: GraphQL
+    url: graphql/newcastle-ecppec-schema.graphql
+  - type: x-graphql-descriptor
+    url: graphql/newcastle-ecppec-graphql.yml
   - type: Documentation
     url: https://ecppec.ncl.ac.uk/api/
-- aid: newcastle:data-ncl
-  name: data.ncl Research Data Repository (Figshare)
-  description: >-
-    Newcastle University's institutional research data repository, powered by Figshare, for documenting,
-    archiving and publishing datasets and code. Programmatic access is available through the underlying
-    Figshare API.
-  humanURL: https://data.ncl.ac.uk/
-  tags:
-  - Research Data
-  - Open Data
-  - Repository
-  properties:
-  - type: Documentation
-    url: https://www.ncl.ac.uk/library/academics-and-researchers/lrs/rdm/sharing/datancl/
+  - type: x-examples
+    url: examples/newcastle-ecppec-graphql-example.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-institution-vocabulary.yml
   - type: Website
-    url: https://data.ncl.ac.uk/
-- aid: newcastle:eprints
-  name: EPrints Institutional Repository (OAI-PMH)
+    url: https://ecppec.ncl.ac.uk/
+- aid: newcastle:etheses-oai
+  name: Newcastle University eTheses OAI-PMH Endpoint
+  x-operator: institution
+  x-operator-evidence: >-
+    theses.ncl.ac.uk is under the university's own registrable domain and the Identify response
+    names the repository "Newcastle University eTheses" with adminEmail lib-web@nclac.uk. The
+    repository software is DSpace, a third party's; the deployment, the host and the endpoint are
+    the institution's, which is what the operator axis measures.
   description: >-
-    Newcastle University's EPrints-based repositories (institutional outputs at eprints.ncl.ac.uk and
-    electronic theses at theses.ncl.ac.uk) expose metadata harvesting via the standard EPrints OAI-PMH
-    interface.
-  humanURL: https://eprints.ncl.ac.uk/
+    An OAI-PMH 2.0 metadata harvesting interface over Newcastle University's electronic theses
+    repository, running on DSpace 6.3. Supports oai_dc, dim and the uketd_dc profile used by the UK
+    Electronic Theses Online Service, with records back to 2008-09-18. This is the institution's only
+    working OAI-PMH endpoint — the interface previously catalogued at eprints.ncl.ac.uk does not
+    exist.
+  humanURL: https://theses.ncl.ac.uk/
+  baseURL: https://theses.ncl.ac.uk/oai/request
   tags:
   - Repository
   - OAI-PMH
   - Research Outputs
   - Theses
+  - Open Data
   properties:
   - type: Documentation
-    url: https://eprints.ncl.ac.uk/
+    url: https://theses.ncl.ac.uk/
+  - type: x-examples
+    url: examples/newcastle-etheses-oai-identify-example.xml
+  - type: x-conformance
+    url: conformance/newcastle-conformance.yml
   - type: Website
     url: https://theses.ncl.ac.uk/
-- aid: newcastle:newcastle-entity-api
-  name: Newcastle University Entity API
+- aid: newcastle:data-ncl
+  name: data.ncl Research Data Repository (Figshare tenancy)
+  x-operator: tenant
+  x-operator-evidence: >-
+    data.ncl.ac.uk is a CNAME to figshare.com. The domain is Newcastle's and the data, the
+    collections and the DOIs are Newcastle's, but the API contract, the OAuth scheme and the DOI
+    minting are Figshare's product. Figshare's generic specification is deliberately NOT saved under
+    this institution — this entry records the tenancy, which is a real institutional fact, without
+    crediting Newcastle for Figshare's engineering.
+  x-vendor: figshare
   description: >-
-    An entity ordinarily describes a spatial location, such as a room in a building, or a pole in the
-    street. In some circumstances, an entity may be a mobile piece of equipment, such as those used for
-    validation, in which case the location will be provided as a timeseries.
+    Newcastle University's institutional research data repository, operated for the university by
+    Figshare on a Newcastle-branded custom domain. Programmatic access exists but runs entirely on
+    Figshare's API, authentication and DOI infrastructure. Probing data.ncl.ac.uk from a non-browser
+    client returns an empty HTTP 202 from the Figshare edge, a bot challenge rather than a dead host.
+  humanURL: https://data.ncl.ac.uk/
+  tags:
+  - Research Data
+  - Open Data
+  - Repository
+  - Vendor Tenancy
+  properties:
+  - type: Website
+    url: https://data.ncl.ac.uk/
+  - type: Documentation
+    url: https://www.ncl.ac.uk/library/academics-and-researchers/lrs/rdm/sharing/datancl/
+- aid: newcastle:urban-observatory-entity
+  name: Urban Observatory API (Urban Sciences Building) — Entity
+  x-operator: institution
+  x-operator-evidence: >-
+    urbanobservatory.ac.uk is registered to the University of Newcastle upon Tyne (registrant
+    Hostmaster, Information Systems and Services, Claremont Tower), served from ns0.ncl.ac.uk and
+    ns1.ncl.ac.uk, and api.usb.urbanobservatory.ac.uk resolves to UOWEB4.ncl.ac.uk
+    (128.240.212.174). The specification's contact is luke.smith@ncl.ac.uk. A different registrable
+    domain, entirely the institution's engineering.
+  x-surface: urban-observatory
+  x-surface-note: >-
+    One contract, split per tag by refine-openapis. The four urban-observatory-* entries in this
+    file are per-tag views of the single OpenAPI archived at
+    openapi/_original/newcastle-urban-observatory.yaml — not four separate APIs.
+  description: >-
+    An entity ordinarily describes a spatial location, such as a room in a building or a pole in the
+    street. In some circumstances an entity may be a mobile piece of equipment, in which case the
+    location is provided as a timeseries.
   humanURL: https://api.usb.urbanobservatory.ac.uk/
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
   - Entity
+  - Smart Cities
+  - Open Data
   properties:
   - type: OpenAPI
     url: openapi/newcastle-entity-api-openapi.yml
+  - type: APIReference
+    url: https://api.usb.urbanobservatory.ac.uk/openapi.json
   - type: Documentation
     url: https://api.usb.urbanobservatory.ac.uk/
   - type: JSONSchema
@@ -143,10 +292,14 @@ apis:
     url: rules/newcastle-rules.yml
   - type: x-json-ld
     url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-entity-list-example.json
   - type: Website
     url: https://urbanobservatory.ac.uk/
-- aid: newcastle:newcastle-feed-api
-  name: Newcastle University Feed API
+- aid: newcastle:urban-observatory-feed
+  name: Urban Observatory API (Urban Sciences Building) — Feed
+  x-operator: institution
+  x-surface: urban-observatory
   description: >-
     A feed is a representation of a measurement or parametrisation, usually a metric, for example the
     observed temperature.
@@ -154,13 +307,15 @@ apis:
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
   - Feed
+  - Smart Cities
+  - Open Data
   properties:
   - type: OpenAPI
     url: openapi/newcastle-feed-api-openapi.yml
   - type: Documentation
     url: https://api.usb.urbanobservatory.ac.uk/
   - type: JSONSchema
-    url: json-schema/newcastle-entity-schema.json
+    url: json-schema/newcastle-feed-schema.json
   - type: x-vocabulary
     url: vocabulary/newcastle-vocabulary.yml
   - type: x-rules
@@ -169,69 +324,101 @@ apis:
     url: json-ld/newcastle-context.jsonld
   - type: Website
     url: https://urbanobservatory.ac.uk/
-- aid: newcastle:newcastle-summary-api
-  name: Newcastle University Summary API
-  description: The Summary API from Newcastle University — 1 operation(s) for summary.
+- aid: newcastle:urban-observatory-summary
+  name: Urban Observatory API (Urban Sciences Building) — Summary
+  x-operator: institution
+  x-surface: urban-observatory
+  description: >-
+    A compact summary view over Urban Sciences Building entities and the feeds attached to them.
   humanURL: https://api.usb.urbanobservatory.ac.uk/
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
   - Summary
+  - Smart Cities
+  - Open Data
   properties:
   - type: OpenAPI
     url: openapi/newcastle-summary-api-openapi.yml
   - type: Documentation
     url: https://api.usb.urbanobservatory.ac.uk/
   - type: JSONSchema
-    url: json-schema/newcastle-entity-schema.json
+    url: json-schema/newcastle-entitysummary-schema.json
   - type: x-vocabulary
     url: vocabulary/newcastle-vocabulary.yml
   - type: x-rules
     url: rules/newcastle-rules.yml
   - type: x-json-ld
     url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-summary-example.json
   - type: Website
     url: https://urbanobservatory.ac.uk/
-- aid: newcastle:newcastle-timeseries-api
-  name: Newcastle University Timeseries API
+- aid: newcastle:urban-observatory-timeseries
+  name: Urban Observatory API (Urban Sciences Building) — Timeseries
+  x-operator: institution
+  x-surface: urban-observatory
   description: >-
-    There may be more than one timeseries associated with a feed, provided for convenience. Ordinarily
-    there will be a plain timeseries, representing raw data from the device. In some cases, there may
-    then be additional timeseries representing converted values (e.g. scaled), corrected, or aggregated
-    temporally.
+    There may be more than one timeseries associated with a feed. Ordinarily there will be a plain
+    timeseries representing raw data from the device; in some cases there may be additional
+    timeseries representing converted, corrected or temporally aggregated values.
   humanURL: https://api.usb.urbanobservatory.ac.uk/
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
-  - Time Series
-  tags_raw:
   - Timeseries
+  - Smart Cities
+  - Open Data
   properties:
   - type: OpenAPI
     url: openapi/newcastle-timeseries-api-openapi.yml
   - type: Documentation
     url: https://api.usb.urbanobservatory.ac.uk/
   - type: JSONSchema
-    url: json-schema/newcastle-entity-schema.json
+    url: json-schema/newcastle-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseriesentry-schema.json
   - type: x-vocabulary
     url: vocabulary/newcastle-vocabulary.yml
   - type: x-rules
     url: rules/newcastle-rules.yml
   - type: x-json-ld
     url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-timeseries-entry-example.json
   - type: Website
     url: https://urbanobservatory.ac.uk/
 common:
-  - type: AgenticAccess
-    url: agentic-access/newcastle-agentic-access.yml
-  - type: DomainSecurity
-    url: security/newcastle-domain-security.yml
   - type: Website
     url: https://www.ncl.ac.uk/
-  - type: GitHub
+  - type: GitHubOrganization
     url: https://github.com/newcastleuniversity
   - type: LinkedIn
     url: https://www.linkedin.com/school/newcastle-university
   - type: Twitter
     url: https://x.com/UniofNewcastle
+  - type: IdentityFederation
+    url: https://gateway.ncl.ac.uk/idp/shibboleth
+  - type: ResearchRepository
+    url: https://eprints.ncl.ac.uk/
+  - type: ResearchRepository
+    url: https://theses.ncl.ac.uk/
+  - type: CourseCatalog
+    url: https://www.ncl.ac.uk/undergraduate/degrees/
+  - type: LibraryCatalog
+    url: https://www.ncl.ac.uk/library/special-collections/
+  - type: x-conformance
+    url: conformance/newcastle-conformance.yml
+  - type: Authentication
+    url: authentication/newcastle-authentication.yml
+  - type: x-scopes
+    url: scopes/newcastle-scopes.yml
+  - type: x-errors
+    url: errors/newcastle-errors.yml
+  - type: x-lifecycle
+    url: lifecycle/newcastle-lifecycle.yml
+  - type: AgenticAccess
+    url: agentic-access/newcastle-agentic-access.yml
+  - type: DomainSecurity
+    url: security/newcastle-domain-security.yml
   - type: Plans
     url: plans/newcastle-plans-pricing.yml
   - type: RateLimits
