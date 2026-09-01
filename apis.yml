@@ -364,6 +364,10 @@ apis:
   humanURL: https://api.usb.urbanobservatory.ac.uk/
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
+  - Time Series
+  - Smart Cities
+  - Open Data
+  tags_raw:
   - Timeseries
   - Smart Cities
   - Open Data
