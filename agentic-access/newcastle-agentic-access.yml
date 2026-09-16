@@ -1,20 +1,22 @@
-generated: '2026-07-15'
+generated: '2026-09-16'
 method: generated
-source: openapi/newcastle-urban-observatory.yaml
+source: openapi/newcastle-api-metadata-information-api-openapi.yml, openapi/newcastle-digitised-objects-api-openapi.yml,
+  openapi/newcastle-entity-api-openapi.yml, openapi/newcastle-feed-api-openapi.yml, openapi/newcastle-summary-api-openapi.yml,
+  openapi/newcastle-time-series-api-openapi.yml, openapi/newcastle-v1-api-openapi.yml
 description: Recommended x-agentic-access execution contracts, classified heuristically from
   the OpenAPI. A governance starting point for exposing this API to AI agents — review and bind
   audience per deployment. See research/curity/agentic-governance/.
 summary:
-  operations: 6
+  operations: 24
   by_action_class:
-    connected: 6
+    connected: 24
   by_consequence:
-    read: 6
+    read: 24
   human_in_the_loop_required: 0
 operations:
-- path: /api/v2.0a/sensors/timeseries/{id}
+- path: /
   method: get
-  operationId: TimeseriesController.getOne
+  operationId: getHome
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -22,9 +24,9 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/v2.0a/sensors/timeseries/{id}/historic
+- path: /info
   method: get
-  operationId: TimeseriesController.getHistoric
+  operationId: getInfo
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -32,9 +34,19 @@ operations:
     token:
       max-ttl: 3600
     audit: none
-- path: /api/v2.0a/sensors/feed/{id}
+- path: /info/open-api
   method: get
-  operationId: FeedController.getOne
+  operationId: getInfoOpenAPI
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /iiif/{id}
+  method: get
+  operationId: getIIIF
   x-agentic-access:
     action-class: connected
     consequence: read
@@ -62,9 +74,179 @@ operations:
     token:
       max-ttl: 3600
     audit: none
+- path: /api/v2.0a/sensors/feed/{id}
+  method: get
+  operationId: FeedController.getOne
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
 - path: /api/v2.0a/sensors/summary
   method: get
   operationId: SummaryController.getSummary
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2.0a/sensors/timeseries/{id}
+  method: get
+  operationId: TimeseriesController.getOne
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /api/v2.0a/sensors/timeseries/{id}/historic
+  method: get
+  operationId: TimeseriesController.getHistoric
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/collections
+  method: get
+  operationId: getV1CollectionsIndex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/collections/{id}
+  method: get
+  operationId: getV1CollectionsShow
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/digitised-objects
+  method: get
+  operationId: getV1DigitisedObjectsIndex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/digitised-objects/search
+  method: get
+  operationId: getV1DigitisedObjectsSearch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/digitised-objects/search/autocomplete
+  method: get
+  operationId: getV1DigitisedObjectsSearchAutocomplete
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/digitised-objects/{id}
+  method: get
+  operationId: getV1DigitisedObjectsShow
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/digitised-objects/{id}/transcript/content
+  method: get
+  operationId: getV1DigitisedObjectsTranscriptContent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/items
+  method: get
+  operationId: getV1ItemsIndex
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/items/search
+  method: get
+  operationId: getV1ItemsSearch
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/items/search/autocomplete
+  method: get
+  operationId: getV1ItemsSearchAutocomplete
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/items/{id}/{position}
+  method: get
+  operationId: getV1ItemsShow
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/items/{id}/{position}/transcript/content
+  method: get
+  operationId: getV1ItemsTranscriptContent
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/contentdm/{collectionId}/{itemId}
+  method: get
+  operationId: getV1Contentdm
+  x-agentic-access:
+    action-class: connected
+    consequence: read
+    subject: optional
+    token:
+      max-ttl: 3600
+    audit: none
+- path: /v1/tei/{id}/content
+  method: get
+  operationId: getV1TEIContent
   x-agentic-access:
     action-class: connected
     consequence: read
