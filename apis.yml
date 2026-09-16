@@ -119,18 +119,17 @@ apis:
   name: Digitised Objects Repository Search and Data API
   x-operator: institution
   x-operator-evidence: >-
-    api-dor.ncl.ac.uk resolves to dls-dor01.ncl.ac.uk (128.240.212.10), under the university's own
-    registrable domain. info.title reads "Newcastle University | Digitised Objects Repository |
-    Search and Data API"; the description names Special Collections and Archives as data curators
-    and Digital Library Services as administrators. No vendor identity in servers[], title or
-    contact.
+    api-dor.ncl.ac.uk resolves to dls-dor01.ncl.ac.uk (128.240.212.10), under the university's own registrable
+    domain. info.title reads "Newcastle University | Digitised Objects Repository | Search and Data API";
+    the description names Special Collections and Archives as data curators and Digital Library Services
+    as administrators. No vendor identity in servers[], title or contact.
   description: >-
-    A single point-of-truth interface for searching, browsing and displaying the digitised objects
-    held in Newcastle University Library's Special Collections. Eighteen operations across
-    collections, digitised objects, items, search, autocomplete, transcripts, IIIF image delivery,
-    TEI content and CONTENTdm identifier resolution. Open, unauthenticated, HATEOAS-linked, and it
-    publishes its own OpenAPI and build number from a machine-readable /info endpoint. Verified live
-    2026-08-30 serving 15,482 digitised objects.
+    A single point-of-truth interface for searching, browsing and displaying the digitised objects held
+    in Newcastle University Library's Special Collections. Eighteen operations across collections, digitised
+    objects, items, search, autocomplete, transcripts, IIIF image delivery, TEI content and CONTENTdm
+    identifier resolution. Open, unauthenticated, HATEOAS-linked, and it publishes its own OpenAPI and
+    build number from a machine-readable /info endpoint. Verified live 2026-08-30 serving 15,482 digitised
+    objects.
   humanURL: https://api-dor.ncl.ac.uk/
   baseURL: https://api-dor.ncl.ac.uk
   tags:
@@ -165,17 +164,16 @@ apis:
   name: ECPPEC Electoral Data GraphQL API
   x-operator: institution
   x-operator-evidence: >-
-    api-ecppec.ncl.ac.uk resolves to a10-vip-ecppec.ncl.ac.uk (128.240.212.230), inside Newcastle
-    University's own network and under its own registrable domain. The GraphQL server path
-    disclosed in error output is /home/ecppec/graphql-server/ECPPEC/graphql. No vendor identity
-    appears in the schema, the host or the errors.
+    api-ecppec.ncl.ac.uk resolves to a10-vip-ecppec.ncl.ac.uk (128.240.212.230), inside Newcastle University's
+    own network and under its own registrable domain. The GraphQL server path disclosed in error output
+    is /home/ecppec/graphql-server/ECPPEC/graphql. No vendor identity appears in the schema, the host
+    or the errors.
   description: >-
-    A GraphQL API over the Eighteenth-Century Political Participation and Electoral Culture research
-    dataset — historical British elections, constituencies, candidates, poll books, voters, votes,
-    occupations, geocodes and cultural artefacts. Nineteen root queries, no mutations, open
-    unauthenticated introspection. Verified live 2026-08-30. Note that the previously catalogued
-    endpoint ecppec.ncl.ac.uk/api/ is a WordPress documentation page, not the API; the API is at
-    api-ecppec.ncl.ac.uk.
+    A GraphQL API over the Eighteenth-Century Political Participation and Electoral Culture research dataset
+    — historical British elections, constituencies, candidates, poll books, voters, votes, occupations,
+    geocodes and cultural artefacts. Nineteen root queries, no mutations, open unauthenticated introspection.
+    Verified live 2026-08-30. Note that the previously catalogued endpoint ecppec.ncl.ac.uk/api/ is a
+    WordPress documentation page, not the API; the API is at api-ecppec.ncl.ac.uk.
   humanURL: https://ecppec.ncl.ac.uk/api/
   baseURL: https://api-ecppec.ncl.ac.uk/
   tags:
@@ -200,16 +198,15 @@ apis:
   name: Newcastle University eTheses OAI-PMH Endpoint
   x-operator: institution
   x-operator-evidence: >-
-    theses.ncl.ac.uk is under the university's own registrable domain and the Identify response
-    names the repository "Newcastle University eTheses" with adminEmail lib-web@nclac.uk. The
-    repository software is DSpace, a third party's; the deployment, the host and the endpoint are
-    the institution's, which is what the operator axis measures.
+    theses.ncl.ac.uk is under the university's own registrable domain and the Identify response names
+    the repository "Newcastle University eTheses" with adminEmail lib-web@nclac.uk. The repository software
+    is DSpace, a third party's; the deployment, the host and the endpoint are the institution's, which
+    is what the operator axis measures.
   description: >-
-    An OAI-PMH 2.0 metadata harvesting interface over Newcastle University's electronic theses
-    repository, running on DSpace 6.3. Supports oai_dc, dim and the uketd_dc profile used by the UK
-    Electronic Theses Online Service, with records back to 2008-09-18. This is the institution's only
-    working OAI-PMH endpoint — the interface previously catalogued at eprints.ncl.ac.uk does not
-    exist.
+    An OAI-PMH 2.0 metadata harvesting interface over Newcastle University's electronic theses repository,
+    running on DSpace 6.3. Supports oai_dc, dim and the uketd_dc profile used by the UK Electronic Theses
+    Online Service, with records back to 2008-09-18. This is the institution's only working OAI-PMH endpoint
+    — the interface previously catalogued at eprints.ncl.ac.uk does not exist.
   humanURL: https://theses.ncl.ac.uk/
   baseURL: https://theses.ncl.ac.uk/oai/request
   tags:
@@ -231,17 +228,17 @@ apis:
   name: data.ncl Research Data Repository (Figshare tenancy)
   x-operator: tenant
   x-operator-evidence: >-
-    data.ncl.ac.uk is a CNAME to figshare.com. The domain is Newcastle's and the data, the
-    collections and the DOIs are Newcastle's, but the API contract, the OAuth scheme and the DOI
-    minting are Figshare's product. Figshare's generic specification is deliberately NOT saved under
-    this institution — this entry records the tenancy, which is a real institutional fact, without
-    crediting Newcastle for Figshare's engineering.
+    data.ncl.ac.uk is a CNAME to figshare.com. The domain is Newcastle's and the data, the collections
+    and the DOIs are Newcastle's, but the API contract, the OAuth scheme and the DOI minting are Figshare's
+    product. Figshare's generic specification is deliberately NOT saved under this institution — this
+    entry records the tenancy, which is a real institutional fact, without crediting Newcastle for Figshare's
+    engineering.
   x-vendor: figshare
   description: >-
-    Newcastle University's institutional research data repository, operated for the university by
-    Figshare on a Newcastle-branded custom domain. Programmatic access exists but runs entirely on
-    Figshare's API, authentication and DOI infrastructure. Probing data.ncl.ac.uk from a non-browser
-    client returns an empty HTTP 202 from the Figshare edge, a bot challenge rather than a dead host.
+    Newcastle University's institutional research data repository, operated for the university by Figshare
+    on a Newcastle-branded custom domain. Programmatic access exists but runs entirely on Figshare's API,
+    authentication and DOI infrastructure. Probing data.ncl.ac.uk from a non-browser client returns an
+    empty HTTP 202 from the Figshare edge, a bot challenge rather than a dead host.
   humanURL: https://data.ncl.ac.uk/
   tags:
   - Research Data
@@ -257,20 +254,19 @@ apis:
   name: Urban Observatory API (Urban Sciences Building) — Entity
   x-operator: institution
   x-operator-evidence: >-
-    urbanobservatory.ac.uk is registered to the University of Newcastle upon Tyne (registrant
-    Hostmaster, Information Systems and Services, Claremont Tower), served from ns0.ncl.ac.uk and
-    ns1.ncl.ac.uk, and api.usb.urbanobservatory.ac.uk resolves to UOWEB4.ncl.ac.uk
-    (128.240.212.174). The specification's contact is luke.smith@ncl.ac.uk. A different registrable
-    domain, entirely the institution's engineering.
+    urbanobservatory.ac.uk is registered to the University of Newcastle upon Tyne (registrant Hostmaster,
+    Information Systems and Services, Claremont Tower), served from ns0.ncl.ac.uk and ns1.ncl.ac.uk, and
+    api.usb.urbanobservatory.ac.uk resolves to UOWEB4.ncl.ac.uk (128.240.212.174). The specification's
+    contact is luke.smith@ncl.ac.uk. A different registrable domain, entirely the institution's engineering.
   x-surface: urban-observatory
   x-surface-note: >-
-    One contract, split per tag by refine-openapis. The four urban-observatory-* entries in this
-    file are per-tag views of the single OpenAPI archived at
-    openapi/_original/newcastle-urban-observatory.yaml — not four separate APIs.
+    One contract, split per tag by refine-openapis. The four urban-observatory-* entries in this file
+    are per-tag views of the single OpenAPI archived at openapi/_original/newcastle-urban-observatory.yaml
+    — not four separate APIs.
   description: >-
-    An entity ordinarily describes a spatial location, such as a room in a building or a pole in the
-    street. In some circumstances an entity may be a mobile piece of equipment, in which case the
-    location is provided as a timeseries.
+    An entity ordinarily describes a spatial location, such as a room in a building or a pole in the street.
+    In some circumstances an entity may be a mobile piece of equipment, in which case the location is
+    provided as a timeseries.
   humanURL: https://api.usb.urbanobservatory.ac.uk/
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
@@ -358,9 +354,9 @@ apis:
   x-operator: institution
   x-surface: urban-observatory
   description: >-
-    There may be more than one timeseries associated with a feed. Ordinarily there will be a plain
-    timeseries representing raw data from the device; in some cases there may be additional
-    timeseries representing converted, corrected or temporally aggregated values.
+    There may be more than one timeseries associated with a feed. Ordinarily there will be a plain timeseries
+    representing raw data from the device; in some cases there may be additional timeseries representing
+    converted, corrected or temporally aggregated values.
   humanURL: https://api.usb.urbanobservatory.ac.uk/
   baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
   tags:
@@ -390,6 +386,28 @@ apis:
     url: examples/newcastle-timeseries-entry-example.json
   - type: Website
     url: https://urbanobservatory.ac.uk/
+- aid: newcastle:newcastle-api-metadata-information-api
+  name: Newcastle University API Metadata Information API
+  description: >-
+    A set of endpoints for gathering information about the API itself. They can be used for validation,
+    creating types or checking if the service is live.
+  humanURL: https://api-dor.ncl.ac.uk/
+  baseURL: https://api-dor.ncl.ac.uk
+  tags:
+  - API Metadata Information
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-api-metadata-information-api-openapi.yml
+- aid: newcastle:newcastle-v1-api
+  name: Newcastle University V1 API
+  description: A set of endpoints created as as part of the version one of the application.
+  humanURL: https://api-dor.ncl.ac.uk/
+  baseURL: https://api-dor.ncl.ac.uk
+  tags:
+  - V1
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-v1-api-openapi.yml
 common:
   - type: Website
     url: https://www.ncl.ac.uk/
