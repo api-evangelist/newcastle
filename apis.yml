@@ -349,43 +349,6 @@ apis:
     url: examples/newcastle-summary-example.json
   - type: Website
     url: https://urbanobservatory.ac.uk/
-- aid: newcastle:urban-observatory-timeseries
-  name: Urban Observatory API (Urban Sciences Building) — Timeseries
-  x-operator: institution
-  x-surface: urban-observatory
-  description: >-
-    There may be more than one timeseries associated with a feed. Ordinarily there will be a plain timeseries
-    representing raw data from the device; in some cases there may be additional timeseries representing
-    converted, corrected or temporally aggregated values.
-  humanURL: https://api.usb.urbanobservatory.ac.uk/
-  baseURL: https://api.usb.urbanobservatory.ac.uk/api/v2.0a
-  tags:
-  - Time Series
-  - Smart Cities
-  - Open Data
-  tags_raw:
-  - Timeseries
-  - Smart Cities
-  - Open Data
-  properties:
-  - type: OpenAPI
-    url: openapi/newcastle-timeseries-api-openapi.yml
-  - type: Documentation
-    url: https://api.usb.urbanobservatory.ac.uk/
-  - type: JSONSchema
-    url: json-schema/newcastle-timeseries-schema.json
-  - type: JSONSchema
-    url: json-schema/newcastle-timeseriesentry-schema.json
-  - type: x-vocabulary
-    url: vocabulary/newcastle-vocabulary.yml
-  - type: x-rules
-    url: rules/newcastle-rules.yml
-  - type: x-json-ld
-    url: json-ld/newcastle-context.jsonld
-  - type: x-examples
-    url: examples/newcastle-timeseries-entry-example.json
-  - type: Website
-    url: https://urbanobservatory.ac.uk/
 - aid: newcastle:newcastle-api-metadata-information-api
   name: Newcastle University API Metadata Information API
   description: >-
@@ -408,6 +371,36 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/newcastle-v1-api-openapi.yml
+- aid: newcastle:newcastle-time-series-api
+  name: Newcastle University Time Series API
+  description: >-
+    There may be more than one timeseries associated with a feed, provided for convenience. Ordinarily
+    there will be a plain timeseries, representing raw data from the device. In some cases, there may
+    then be additional timeseries representing converted values (e.g. scaled), corrected, or aggregated
+    temporally.
+  humanURL: https://api-dor.ncl.ac.uk/
+  baseURL: https://api-dor.ncl.ac.uk
+  tags:
+  - Time Series
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-time-series-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseriesentry-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-timeseries-entry-example.json
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
 common:
   - type: Website
     url: https://www.ncl.ac.uk/
