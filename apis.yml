@@ -367,6 +367,8 @@ apis:
   humanURL: https://api-dor.ncl.ac.uk/
   baseURL: https://api-dor.ncl.ac.uk
   tags:
+  - v1
+  tags_raw:
   - V1
   properties:
   - type: OpenAPI
