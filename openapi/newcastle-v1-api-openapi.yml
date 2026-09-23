@@ -1,0 +1,1709 @@
+openapi: 3.2.0
+info:
+  title: Newcastle University | Digitised Objects Repository |…
+  version: 1.27.0
+  description: 'The *Search and Data API* provides a single point of truth interface for searching, browsing and displaying digitised objects held in Newcastle University Library''s Special Collections.
+
+
+    Data curators: Special Collections and Archives\
+
+    Administrators: Digital Library Services'
+servers:
+- url: https://api-dor.ncl.ac.uk
+tags:
+- name: v1
+  description: A set of endpoints created as as part of the version one of the application.
+paths:
+  /v1/collections:
+    get:
+      operationId: getV1CollectionsIndex
+      summary: List of collections
+      description: Returns summary of collections present in the system.
+      tags:
+      - v1
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+        description: The pagination index, starting from 1 for the first page.
+      - in: query
+        name: page.size
+        schema:
+          type: number
+        description: The number of collections matching returned per page, between 1 and 100.
+      - in: query
+        name: page.start
+        schema:
+          type: number
+        description: The pagination starting offset starting from 0.
+      responses:
+        '200':
+          description: The list of collections matching a query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: ngQRYFju
+                        title:
+                          type:
+                          - string
+                          - 'null'
+                          example: Newcastle University Archives
+                        _links:
+                          type: object
+                          properties:
+                            definition:
+                              $ref: '#/components/schemas/HateoasLink'
+                          required:
+                          - definition
+                      required:
+                      - id
+                      - title
+                      - _links
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  _links:
+                    allOf:
+                    - $ref: '#/components/schemas/HomeLinks'
+                required:
+                - items
+                - pagination
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/collections/{id}:
+    get:
+      operationId: getV1CollectionsShow
+      summary: Collection definition
+      description: Returns all the metadata and signposts to the related resources for the given collection.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: ngQRYFju
+        required: true
+        description: Collection's identifier.
+      tags:
+      - v1
+      responses:
+        '200':
+          description: The complete definition of the identified collection.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: ngQRYFju
+                  title:
+                    type:
+                    - string
+                    - 'null'
+                    example: Newcastle University Archives
+                  digitisedObjects:
+                    type: object
+                    properties:
+                      totalElements:
+                        type: number
+                      _links:
+                        type: object
+                        properties:
+                          search:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - search
+                    required:
+                    - totalElements
+                    - _links
+                  items:
+                    type: object
+                    properties:
+                      totalElements:
+                        type: number
+                      _links:
+                        type: object
+                        properties:
+                          search:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - search
+                    required:
+                    - totalElements
+                    - _links
+                  _links:
+                    type: object
+                    properties:
+                      index:
+                        $ref: '#/components/schemas/HateoasLink'
+                    required:
+                    - index
+                required:
+                - id
+                - title
+                - digitisedObjects
+                - items
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A collection with the specified ID was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/digitised-objects:
+    get:
+      operationId: getV1DigitisedObjectsIndex
+      summary: List of digitised objects
+      description: Returns summary of digitised objects present in the system.
+      tags:
+      - v1
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+        description: The pagination index, starting from 1 for the first page.
+      - in: query
+        name: page.size
+        schema:
+          type: number
+        description: The number of digitised objects matching returned per page, between 1 and 100.
+      - in: query
+        name: page.start
+        schema:
+          type: number
+        description: The pagination starting offset starting from 0.
+      responses:
+        '200':
+          description: The list of digitised objects matching a query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type:
+                      - object
+                      - 'null'
+                      properties:
+                        id:
+                          type: string
+                          example: UkLWZg9D
+                        refCode:
+                          type:
+                          - string
+                          - 'null'
+                          example: NUA/005671/01
+                        title:
+                          type:
+                          - string
+                          - 'null'
+                          example: Aerial view of King's College
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                        _links:
+                          type: object
+                          properties:
+                            definition:
+                              $ref: '#/components/schemas/HateoasLink'
+                          required:
+                          - definition
+                      required:
+                      - id
+                      - refCode
+                      - title
+                      - description
+                      - _links
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  _links:
+                    allOf:
+                    - $ref: '#/components/schemas/HomeLinks'
+                    - type: object
+                      properties:
+                        search:
+                          $ref: '#/components/schemas/HateoasLink'
+                      required:
+                      - search
+                required:
+                - items
+                - pagination
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/digitised-objects/search:
+    get:
+      operationId: getV1DigitisedObjectsSearch
+      summary: Search digitised objects
+      description: Performs a keyword search with filters on the digitised objects present in the system.
+      tags:
+      - v1
+      parameters:
+      - $ref: '#/components/parameters/SearchPage'
+      - $ref: '#/components/parameters/SearchPageSize'
+      - $ref: '#/components/parameters/SearchPageStart'
+      - $ref: '#/components/parameters/SearchQ'
+      - $ref: '#/components/parameters/SearchQAdvanced'
+      - $ref: '#/components/parameters/SearchSort'
+      - $ref: '#/components/parameters/SearchFilterCollection'
+      - $ref: '#/components/parameters/SearchFilterCollectionId'
+      - $ref: '#/components/parameters/SearchFilterSubject'
+      - $ref: '#/components/parameters/SearchFilterThematicCategory'
+      - $ref: '#/components/parameters/SearchFilterDateFrom'
+      - $ref: '#/components/parameters/SearchFilterDateTo'
+      - $ref: '#/components/parameters/SearchFilterHasTEI'
+      - $ref: '#/components/parameters/SearchFilterHasTranscript'
+      - $ref: '#/components/parameters/SearchFilterScope'
+      responses:
+        '200':
+          description: The list of items matching the given search query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: UkLWZg9D
+                        refCode:
+                          type:
+                          - string
+                          - 'null'
+                          example: NUA/028944/02
+                        title:
+                          type:
+                          - string
+                          - 'null'
+                          example: Aerial view of main University campus and Newcastle city centre
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                          example: Aerial view of university campus from the west including the Armstrong Building, Bedson Building, King George VI Building and Agriculture Building
+                        format:
+                          type:
+                          - string
+                          - 'null'
+                          example: Photograph
+                        language:
+                          type:
+                          - string
+                          - 'null'
+                        creators:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        subjects:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        dates:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        places:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        canvas:
+                          type: string
+                        highlights:
+                          type: object
+                          description: The list of all matches for the given query per searched field.
+                          properties:
+                            title:
+                              type: array
+                              items:
+                                type: string
+                            description:
+                              type: array
+                              items:
+                                type: string
+                            content:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - title
+                          - description
+                          - content
+                        _links:
+                          type: object
+                          properties:
+                            definition:
+                              $ref: '#/components/schemas/HateoasLink'
+                          required:
+                          - definition
+                      required:
+                      - id
+                      - refCode
+                      - title
+                      - description
+                      - format
+                      - language
+                      - creators
+                      - subjects
+                      - dates
+                      - places
+                      - canvas
+                      - highlights
+                      - _links
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  sort:
+                    $ref: '#/components/schemas/Sort'
+                  query:
+                    $ref: '#/components/schemas/CancellableQuery'
+                  filters:
+                    $ref: '#/components/schemas/Filters'
+                  _links:
+                    allOf:
+                    - $ref: '#/components/schemas/HomeLinks'
+                    - type: object
+                      properties:
+                        index:
+                          $ref: '#/components/schemas/HateoasLink'
+                        home:
+                          $ref: '#/components/schemas/HateoasLink'
+                      required:
+                      - index
+                      - home
+                required:
+                - items
+                - pagination
+                - sort
+                - query
+                - filters
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: Digitised objects matching the given criteria were not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/digitised-objects/search/autocomplete:
+    get:
+      operationId: getV1DigitisedObjectsSearchAutocomplete
+      summary: Search digitised objects autocompletion
+      description: Provides search box autocompletion for the given phrase.
+      tags:
+      - v1
+      parameters:
+      - $ref: '#/components/parameters/AutocompleteQ'
+      - $ref: '#/components/parameters/AutocompletePageSize'
+      - $ref: '#/components/parameters/SearchFilterScope'
+      responses:
+        '200':
+          description: The list of terms/phrases matching the given query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutocompleteResponse'
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: No suggestions were available for the given query.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/digitised-objects/{id}:
+    get:
+      operationId: getV1DigitisedObjectsShow
+      summary: Digitised object definition
+      description: Returns all the metadata and signposts to the related resources for the given digitised object.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: UkLWZg9D
+        required: true
+        description: Digitised object's identifier.
+      tags:
+      - v1
+      responses:
+        '200':
+          description: The complete definition of the identified digitised object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: UkLWZg9D
+                  refCode:
+                    type:
+                    - string
+                    - 'null'
+                    example: NUA/005671/01
+                  title:
+                    type:
+                    - string
+                    - 'null'
+                    example: Aerial view of King's College
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                  format:
+                    type:
+                    - string
+                    - 'null'
+                    example: Photograph
+                  language:
+                    type:
+                    - string
+                    - 'null'
+                  creators:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  subjects:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  dates:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  places:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  publishers:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  provenances:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  contributors:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  copyright:
+                    type:
+                    - string
+                    - 'null'
+                  license:
+                    type:
+                    - string
+                    - 'null'
+                  manifest:
+                    type: string
+                  collection:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: ngQRYFju
+                      title:
+                        type:
+                        - string
+                        - 'null'
+                        example: Newcastle University Archives
+                      _links:
+                        type: object
+                        properties:
+                          definition:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - definition
+                    required:
+                    - id
+                    - title
+                    - _links
+                  items:
+                    type: object
+                    properties:
+                      totalElements:
+                        type: number
+                      _links:
+                        type: object
+                        properties:
+                          search:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - search
+                    required:
+                    - totalElements
+                    - _links
+                  transcript:
+                    type:
+                    - object
+                    - 'null'
+                    properties:
+                      _links:
+                        type: object
+                        properties:
+                          content:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - content
+                    required:
+                    - _links
+                  teis:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: UkLWZg9D
+                        type:
+                          type:
+                          - string
+                          - 'null'
+                          enum:
+                          - primary
+                        _links:
+                          type: object
+                          properties:
+                            content:
+                              $ref: '#/components/schemas/HateoasLink'
+                          required:
+                          - content
+                      required:
+                      - id
+                      - type
+                      - _links
+                  createdAt:
+                    type: string
+                    format: date-time
+                  updatedAt:
+                    type:
+                    - string
+                    - 'null'
+                    format: date-time
+                  _links:
+                    type: object
+                    properties:
+                      index:
+                        $ref: '#/components/schemas/HateoasLink'
+                      search:
+                        $ref: '#/components/schemas/HateoasLink'
+                    required:
+                    - index
+                    - search
+                required:
+                - id
+                - refCode
+                - title
+                - description
+                - format
+                - language
+                - creators
+                - subjects
+                - dates
+                - places
+                - publishers
+                - provenances
+                - contributors
+                - copyright
+                - license
+                - manifest
+                - collection
+                - items
+                - transcript
+                - teis
+                - createdAt
+                - updatedAt
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A digitised object with the specified ID was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/digitised-objects/{id}/transcript/content:
+    get:
+      operationId: getV1DigitisedObjectsTranscriptContent
+      summary: Digitised object's transcript
+      description: Returns a transcript of the given digitised object.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: UkLWZg9D
+        required: true
+        description: Digitised object's identifier.
+      tags:
+      - v1
+      responses:
+        '200':
+          description: The transcript of the digitised object in a plain text form.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A digitised object with the specified ID or its transcript was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/items:
+    get:
+      operationId: getV1ItemsIndex
+      summary: List of items
+      description: Returns summary of items present in the system.
+      tags:
+      - v1
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+        description: The pagination index, starting from 1 for the first page.
+      - in: query
+        name: page.size
+        schema:
+          type: number
+        description: The number of items matching returned per page, between 1 and 100.
+      - in: query
+        name: page.start
+        schema:
+          type: number
+        description: The pagination starting offset starting from 0.
+      responses:
+        '200':
+          description: The list of items matching a query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type: array
+                    items:
+                      type:
+                      - object
+                      - 'null'
+                      properties:
+                        id:
+                          type: string
+                          example: UkLWZg9D
+                        title:
+                          type:
+                          - string
+                          - 'null'
+                          example: Page 1
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                          example: First page of Chapter 1.
+                        _links:
+                          type: object
+                          properties:
+                            definition:
+                              $ref: '#/components/schemas/HateoasLink'
+                          required:
+                          - definition
+                      required:
+                      - id
+                      - title
+                      - description
+                      - digitisedObject
+                      - _links
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  _links:
+                    allOf:
+                    - $ref: '#/components/schemas/HomeLinks'
+                    - type: object
+                      properties:
+                        search:
+                          $ref: '#/components/schemas/HateoasLink'
+                      required:
+                      - search
+                required:
+                - items
+                - pagination
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/items/search:
+    get:
+      operationId: getV1ItemsSearch
+      summary: Search items
+      description: Performs a keyword search with filters on the items present in the system.
+      tags:
+      - v1
+      parameters:
+      - $ref: '#/components/parameters/SearchPage'
+      - $ref: '#/components/parameters/SearchPageSize'
+      - $ref: '#/components/parameters/SearchPageStart'
+      - $ref: '#/components/parameters/SearchQ'
+      - $ref: '#/components/parameters/SearchQAdvanced'
+      - $ref: '#/components/parameters/SearchSort'
+      - $ref: '#/components/parameters/SearchFilterCollection'
+      - $ref: '#/components/parameters/SearchFilterCollectionId'
+      - $ref: '#/components/parameters/SearchFilterDigitisedObject'
+      - $ref: '#/components/parameters/SearchFilterDigitisedObjectId'
+      - $ref: '#/components/parameters/SearchFilterSubject'
+      - $ref: '#/components/parameters/SearchFilterThematicCategory'
+      - $ref: '#/components/parameters/SearchFilterDateFrom'
+      - $ref: '#/components/parameters/SearchFilterDateTo'
+      - $ref: '#/components/parameters/SearchFilterHasTEI'
+      - $ref: '#/components/parameters/SearchFilterHasTranscript'
+      - $ref: '#/components/parameters/SearchFilterScope'
+      responses:
+        '200':
+          description: The list of items matching the given search query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: UkLWZg9D/3
+                        position:
+                          type: number
+                          example: 3
+                        refCode:
+                          type:
+                          - string
+                          - 'null'
+                          example: Alderson Collection PAR PET
+                        title:
+                          type:
+                          - string
+                          - 'null'
+                          example: Page 1
+                        description:
+                          type:
+                          - string
+                          - 'null'
+                          example: First page of Chapter 1.
+                        format:
+                          type:
+                          - string
+                          - 'null'
+                          example: Illustration
+                        language:
+                          type:
+                          - string
+                          - 'null'
+                        creators:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        subjects:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        dates:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        places:
+                          type:
+                          - array
+                          - 'null'
+                          items:
+                            type: string
+                        canvas:
+                          type: string
+                        digitisedObject:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: UkLWZg9D
+                            title:
+                              type:
+                              - string
+                              - 'null'
+                              example: Peter Parley's Visit to London During the Coronation of Queen Victoria
+                            manifest:
+                              type: string
+                            _links:
+                              type: object
+                              properties:
+                                definition:
+                                  $ref: '#/components/schemas/HateoasLink'
+                              required:
+                              - definition
+                          required:
+                          - id
+                          - title
+                          - manifest
+                          - _links
+                        highlights:
+                          type: object
+                          description: The list of all matches for the given query per searched field.
+                          properties:
+                            title:
+                              type: array
+                              items:
+                                type: string
+                            description:
+                              type: array
+                              items:
+                                type: string
+                            content:
+                              type: array
+                              items:
+                                type: string
+                          required:
+                          - title
+                          - description
+                          - content
+                        _links:
+                          type: object
+                          properties:
+                            definition:
+                              $ref: '#/components/schemas/HateoasLink'
+                          required:
+                          - definition
+                      required:
+                      - id
+                      - refCode
+                      - title
+                      - description
+                      - format
+                      - language
+                      - creators
+                      - subjects
+                      - dates
+                      - places
+                      - canvas
+                      - digitisedObject
+                      - highlights
+                      - _links
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  sort:
+                    $ref: '#/components/schemas/Sort'
+                  query:
+                    $ref: '#/components/schemas/CancellableQuery'
+                  filters:
+                    $ref: '#/components/schemas/Filters'
+                  _links:
+                    allOf:
+                    - $ref: '#/components/schemas/HomeLinks'
+                    - type: object
+                      properties:
+                        index:
+                          $ref: '#/components/schemas/HateoasLink'
+                        home:
+                          $ref: '#/components/schemas/HateoasLink'
+                      required:
+                      - index
+                      - home
+                required:
+                - items
+                - pagination
+                - sort
+                - query
+                - filters
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: Items matching the given criteria were not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/items/search/autocomplete:
+    get:
+      operationId: getV1ItemsSearchAutocomplete
+      summary: Search items autocompletion
+      description: Provides search box autocompletion for the given phrase.
+      tags:
+      - v1
+      parameters:
+      - $ref: '#/components/parameters/AutocompleteQ'
+      - $ref: '#/components/parameters/AutocompletePageSize'
+      - $ref: '#/components/parameters/SearchFilterScope'
+      responses:
+        '200':
+          description: The list of terms/phrases matching the given query.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AutocompleteResponse'
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: No suggestions were available for the given query.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/items/{id}/{position}:
+    get:
+      operationId: getV1ItemsShow
+      summary: Item definition
+      description: Returns all the metadata and signposts to the related resources for the given item.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: UkLWZg9D
+        required: true
+        description: Parent's digitised object identifier.
+      - in: path
+        name: position
+        schema:
+          type: number
+        example: 3
+        required: true
+        description: Item's position within the digitised object's structure.
+      tags:
+      - v1
+      responses:
+        '200':
+          description: The complete definition of the identified item.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: UkLWZg9D/3
+                  position:
+                    type: number
+                    example: 3
+                  refCode:
+                    type:
+                    - string
+                    - 'null'
+                    example: Alderson Collection PAR PET
+                  title:
+                    type:
+                    - string
+                    - 'null'
+                    example: Page 1
+                  description:
+                    type:
+                    - string
+                    - 'null'
+                    example: First page of Chapter 1.
+                  format:
+                    type:
+                    - string
+                    - 'null'
+                    example: Illustration
+                  language:
+                    type:
+                    - string
+                    - 'null'
+                  creators:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  subjects:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  dates:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  places:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  publishers:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  provenances:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  contributors:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: string
+                  copyright:
+                    type:
+                    - string
+                    - 'null'
+                  license:
+                    type:
+                    - string
+                    - 'null'
+                  canvas:
+                    type: string
+                  digitisedObject:
+                    type: object
+                    properties:
+                      id:
+                        type: string
+                        example: UkLWZg9D
+                      title:
+                        type:
+                        - string
+                        - 'null'
+                        example: Peter Parley's Visit to London During the Coronation of Queen Victoria
+                      description:
+                        type:
+                        - string
+                        - 'null'
+                        example: Colour illustrations depicting coronation of Queen Victoria
+                      manifest:
+                        type: string
+                      thumbnail:
+                        type: string
+                      _links:
+                        type: object
+                        properties:
+                          definition:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - definition
+                    required:
+                    - id
+                    - title
+                    - description
+                    - manifest
+                    - thumbnail
+                    - _links
+                  transcript:
+                    type:
+                    - object
+                    - 'null'
+                    properties:
+                      _links:
+                        type: object
+                        properties:
+                          content:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - content
+                    required:
+                    - _links
+                  _links:
+                    type: object
+                    properties:
+                      index:
+                        $ref: '#/components/schemas/HateoasLink'
+                      search:
+                        $ref: '#/components/schemas/HateoasLink'
+                    required:
+                    - index
+                    - search
+                required:
+                - id
+                - refCode
+                - title
+                - description
+                - format
+                - language
+                - creators
+                - subjects
+                - dates
+                - places
+                - publishers
+                - provenances
+                - contributors
+                - copyright
+                - license
+                - canvas
+                - digitisedObject
+                - transcript
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A digitised object with the specified ID was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/items/{id}/{position}/transcript/content:
+    get:
+      operationId: getV1ItemsTranscriptContent
+      summary: Item's transcript
+      description: Returns a transcript of the given item.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: UkLWZg9D
+        required: true
+        description: Parent's digitised object identifier.
+      - in: path
+        name: position
+        schema:
+          type: number
+        example: 3
+        required: true
+        description: Item's position within the digitised object's structure.
+      tags:
+      - v1
+      responses:
+        '200':
+          description: The transcript of the item in a plain text form.
+          content:
+            text/plain:
+              schema:
+                type: string
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: An item with the specified ID and position or its transcript was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/contentdm/{collectionId}/{itemId}:
+    get:
+      operationId: getV1Contentdm
+      summary: CONTENTdm reverse mapping
+      description: Maps items from CONTENTdm realms against records present in the Digitised Objects Repository.
+      parameters:
+      - in: path
+        name: collectionId
+        schema:
+          type: string
+        example: p21051coll2
+        required: true
+        description: CONTETNdm collection's id (alias)
+      - in: path
+        name: itemId
+        schema:
+          type: string
+        example: '1922'
+        required: true
+        description: CONTETNdm item's id (pointer)
+      tags:
+      - v1
+      responses:
+        '302':
+          description: Redirect to the digitised object's description (```/v1/digitised-objects/{id}```).
+          headers:
+            Location:
+              description: URL where the digitised object's description lives.
+              schema:
+                type: string
+                format: uri
+              required: true
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A digitised object with the specified collection and object IDs was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/tei/{id}/content:
+    get:
+      operationId: getV1TEIContent
+      summary: TEI Document Content
+      description: Signpost to to a service responsible for providing the content of a TEI document with the given identifier.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: UkLWZg9D
+        required: true
+        description: TEI document's identifier.
+      tags:
+      - v1
+      responses:
+        '302':
+          description: Redirects to an XML content of the given TEI document.
+          content:
+            application/xml:
+              schema:
+                type: object
+                additionalProperties: true
+              example: "<TEI xmlns=\"http://www.tei-c.org/ns/1.0\">\n  (...)\n</TEI>\n"
+          headers:
+            Location:
+              description: URL where the TEI content can be consumed.
+              schema:
+                type: string
+                format: uri
+              required: true
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A TEI document with the specified ID was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+components:
+  schemas:
+    StringOrArrayOfStrings:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
+    Pagination:
+      type: object
+      description: Defines the metadata for the pagination used for providing the data on the given endpoint.
+      properties:
+        size:
+          type: number
+          description: Represents how many items can be presented on one page.
+        totalPages:
+          type: number
+          description: Represents how many pages are in total to fetch.
+        totalElements:
+          type: number
+          description: Represents how many items are in total to fetch.
+        number:
+          type: number
+          description: Represents the current page's number.
+        _links:
+          type: object
+          description: Standard set of links related to pagination.
+          properties:
+            first:
+              $ref: '#/components/schemas/HateoasLink'
+            previous:
+              $ref: '#/components/schemas/HateoasLink'
+            next:
+              $ref: '#/components/schemas/HateoasLink'
+            last:
+              $ref: '#/components/schemas/HateoasLink'
+          required:
+          - first
+          - last
+      required:
+      - size
+      - totalPages
+      - totalElements
+      - number
+      - _links
+    Facet:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        count:
+          type: number
+        _links:
+          type: object
+          properties:
+            activate:
+              $ref: '#/components/schemas/HateoasLink'
+            deactivate:
+              $ref: '#/components/schemas/HateoasLink'
+      required:
+      - id
+      - name
+      - count
+    HateoasLink:
+      type: object
+      properties:
+        href:
+          type: string
+        type:
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+        parameters:
+          $ref: '#/components/schemas/HateoasParameters'
+      required:
+      - href
+      - type
+    AutocompleteResponse:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                example: Photograph taken by Gertrude Bell showing Delhi, India
+              highlight:
+                type: string
+                example: Photograph taken by <mark>Gertrude Bell</mark> showing Delhi, India
+            required:
+            - title
+            - highlight
+        query:
+          $ref: '#/components/schemas/ReadonlyQuery'
+        _links:
+          allOf:
+          - type: object
+            properties:
+              search:
+                $ref: '#/components/schemas/HateoasLink'
+            required:
+            - search
+      required:
+      - items
+      - query
+      - _links
+    FilterOption:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        active:
+          type:
+          - array
+          - 'null'
+          items:
+            allOf:
+            - $ref: '#/components/schemas/FilterValue'
+            - type: object
+              properties:
+                _links:
+                  type: object
+                  properties:
+                    deactivate:
+                      $ref: '#/components/schemas/HateoasLink'
+                  required:
+                  - deactivate
+              required:
+              - _links
+            $ref: '#/components/schemas/FilterValue'
+        facets:
+          type:
+          - array
+          - 'null'
+          items:
+            allOf:
+            - $ref: '#/components/schemas/Facet'
+        _links:
+          type: object
+          properties:
+            reset:
+              $ref: '#/components/schemas/HateoasLink'
+      required:
+      - id
+      - name
+      - active
+      - facets
+      - _links
+    CancellableQuery:
+      type: object
+      allOf:
+      - $ref: '#/components/schemas/ReadonlyQuery'
+      - type: object
+        properties:
+          _links:
+            type: object
+            properties:
+              deactivate:
+                $ref: '#/components/schemas/HateoasLink'
+        required:
+        - _links
+    SortOption:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        _links:
+          type: object
+          properties:
+            activate:
+              $ref: '#/components/schemas/HateoasLink'
+            deactivate:
+              $ref: '#/components/schemas/HateoasLink'
+          required:
+          - activate
+      required:
+      - id
+      - name
+      - _links
+    Filters:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/FilterOption'
+        _links:
+          type: object
+          properties:
+            reset:
+              $ref: '#/components/schemas/HateoasLink'
+      required:
+      - options
+      - _links
+    Sort:
+      type: object
+      properties:
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortOption'
+        active:
+          allOf:
+          - $ref: '#/components/schemas/SortOption'
+          - type: object
+            properties:
+              _links:
+                type: object
+                properties:
+                  deactivate:
+                    $ref: '#/components/schemas/HateoasLink'
+                required:
+                - deactivate
+            required:
+            - _links
+        _links:
+          type: object
+          description: Standard set of links related to sorting.
+          properties:
+            reset:
+              $ref: '#/components/schemas/HateoasLink'
+      required:
+      - options
+      - active
+      - _links
+    HateoasParameters:
+      type: object
+      additionalProperties: true
+      description: Any relevant parameters that should be appended to the URL (for GET method) or passed as a payload for other HTTP methods.
+      example:
+        '?': '...'
+    HomeLinks:
+      type: object
+      description: Standard set of links related to the homepage.
+      properties:
+        home:
+          $ref: '#/components/schemas/HateoasLink'
+      required:
+      - home
+    ReadonlyQuery:
+      type: object
+      properties:
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - value
+    FilterValue:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        _links:
+          type: object
+          properties:
+            activate:
+              $ref: '#/components/schemas/HateoasLink'
+            deactivate:
+              $ref: '#/components/schemas/HateoasLink'
+      required:
+      - id
+      - name
+      - _links
+  parameters:
+    SearchPageStart:
+      in: query
+      name: page.start
+      schema:
+        type: number
+      description: The pagination starting offset starting from 0.
+    AutocompleteQ:
+      in: query
+      name: q
+      schema:
+        type: string
+      required: true
+      description: The search phrase that should be autocompleted.
+    AutocompletePageSize:
+      in: query
+      name: page.size
+      schema:
+        type: number
+      description: The maximum number of items returned, between 1 and 25 (by default it is 10).
+    SearchFilterHasTEI:
+      in: query
+      name: filter.hasTEI
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: Determines whether returned items should have a TEI file related or not.
+    SearchFilterCollection:
+      in: query
+      name: filter.collection
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of collection titles that the items should belong to.
+    SearchQAdvanced:
+      in: query
+      name: q.advanced
+      schema:
+        type: string
+      description: Query string dedicated to advanced searches, written in restricted [Elasticsearch\'s query syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax).
+    SearchFilterDateFrom:
+      in: query
+      name: filter.date.from
+      schema:
+        type: number
+      description: The start of the date range query.
+    SearchPage:
+      in: query
+      name: page
+      schema:
+        type: number
+      description: The pagination index, starting from 1 for the first page.
+    SearchFilterThematicCategory:
+      in: query
+      name: filter.thematicCategory
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of thematic category terms that the items should belong to.
+    SearchFilterCollectionId:
+      in: query
+      name: filter.collection.id
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of collection ids that the items should belong to.
+    SearchFilterDateTo:
+      in: query
+      name: filter.date.to
+      schema:
+        type: number
+      description: The end of the date range query.
+    SearchFilterScope:
+      in: query
+      name: scope
+      schema:
+        type: string
+        example: digital.showcase
+      description: Scopes query to return items assigned to the given system.
+    SearchFilterSubject:
+      in: query
+      name: filter.subject
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of subject terms that the items should belong to.
+    SearchFilterDigitisedObject:
+      in: query
+      name: filter.digitisedObject
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of digitised object titles that the items should belong to.
+    SearchFilterDigitisedObjectId:
+      in: query
+      name: filter.digitisedObject.id
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of digitised object ids that the items should belong to.
+    SearchFilterHasTranscript:
+      in: query
+      name: filter.hasTranscript
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: Determines whether returned items should have a raw transcript file related or not.
+    SearchSort:
+      in: query
+      name: sort
+      schema:
+        type: string
+        enum:
+        - relevance
+        - title.asc
+        - title.desc
+        - date.asc
+        - date.desc
+        - createdAt.desc
+      description: Determines the sorting method.
+    SearchPageSize:
+      in: query
+      name: page.size
+      schema:
+        type: number
+      description: The number of items matching returned per page, between 1 and 100.
+    SearchQ:
+      in: query
+      name: q
+      schema:
+        type: string
+      description: The main search phrase.

@@ -1,0 +1,52 @@
+{
+  "data": {
+    "elections": [
+      {
+        "election_id": "Beds_1780a",
+        "election_year": "1780",
+        "constituency": "Bedfordshire",
+        "office": "parliament",
+        "contested": "N"
+      },
+      {
+        "election_id": "Beds_1784a",
+        "election_year": "1784",
+        "constituency": "Bedfordshire",
+        "office": "parliament",
+        "contested": "Y"
+      },
+      {
+        "election_id": "Bedford_1780a",
+        "election_year": "1780",
+        "constituency": "Bedford",
+        "office": "parliament",
+        "contested": "Y"
+      }
+    ],
+    "constituencies": [
+      {
+        "constituency_id": 1,
+        "constituency": "Abingdon",
+        "has_data": false
+      },
+      {
+        "constituency_id": 2,
+        "constituency": "Aldborough",
+        "has_data": false
+      },
+      {
+        "constituency_id": 3,
+        "constituency": "Aldeburgh",
+        "has_data": false
+      }
+    ]
+  },
+  "_meta": {
+    "generated": "2026-08-30",
+    "method": "probed",
+    "source": "POST https://api-ecppec.ncl.ac.uk/ (GraphQL)",
+    "x-operator": "institution",
+    "query": "{ elections(election_year_gte:1780, election_year_lte:1784, take:3){ election_id election_year constituency office contested } constituencies(take:3){ constituency_id constituency has_data } }",
+    "note": "Live unauthenticated GraphQL response captured 2026-08-30."
+  }
+}

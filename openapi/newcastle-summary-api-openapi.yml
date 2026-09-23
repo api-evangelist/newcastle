@@ -1,8 +1,22 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
-  title: 'Urban Observatory API: Urban Sciences Building Entity Summary API'
+  title: 'Urban Observatory API: Urban Sciences Building Summary API'
   version: 2.0a
-  description: "The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.\n\nFor more information...\n* [Data explorer](https://3d.usb.urbanobservatory.ac.uk/) \n* [Live stream](https://api.usb.urbanobservatory.ac.uk/live/) \n* [Newcastle University](https://www.ncl.ac.uk/) \n* [Urban Observatory](http://www.urbanobservatory.ac.uk/) \n\nYou can also download this specification in [OpenAPI](openapi.json) format."
+  description: 'The Urban Observatory represents the largest open platform of urban sensing data in the United Kingdom. The updated API is currently in operation for the Urban Sciences Building and some of the newer data sources across the city. It is anticipated that this schema, once complete, will replace the existing API.
+
+
+    For more information...
+
+    * Data explorer
+
+    * Live stream
+
+    * Newcastle University
+
+    * Urban Observatory
+
+
+    You can also download this specification in OpenAPI format.'
   contact:
     name: Luke Smith
     email: luke.smith@ncl.ac.uk

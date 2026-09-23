@@ -1,0 +1,80 @@
+name: Newcastle University — error contracts
+aid: newcastle
+generated: '2026-08-30'
+method: derived
+x-evidence-method: probed
+source: live error probes against Newcastle University operated hosts, 2026-08-30
+note: >-
+  Every payload below was elicited from the live service, not read out of a specification. The three
+  institution-operated APIs use three different, mutually incompatible error envelopes, which is
+  what a federation of independently built research and library systems looks like from the outside.
+apis:
+- aid: newcastle:digitised-objects
+  x-operator: institution
+  envelope: '{"error": {"code": <string>, "message": <string>}}'
+  content_type: application/json
+  observed:
+  - request: GET https://api-dor.ncl.ac.uk/v1/collections/ZZZZZZ
+    status: 404
+    body: '{"error":{"code":"RESOURCE_NOT_FOUND","message":"A collection with the specified ID was not found."}}'
+  - request: GET https://api-dor.ncl.ac.uk/v1/nope
+    status: 404
+    body: '{"error":{"code":"RESOURCE_NOT_FOUND","message":"The requested URL \"/v1/nope\" was not found on the server."}}'
+  assessment: >-
+    Consistent, machine-readable, stable code vocabulary, no stack traces. The strongest error
+    contract in the institution's footprint.
+- aid: newcastle:urban-observatory
+  x-operator: institution
+  envelope: '{"error": true, "message": <string>, "code": <string>}'
+  content_type: application/json
+  observed:
+  - request: GET https://api.usb.urbanobservatory.ac.uk/api/v2.0a/
+    status: 404
+    body: '{"error":true,"message":"Invalid route.","code":"NotFound"}'
+  - request: GET https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/nope
+    status: 400
+    body: '{"error":true,"message":"Malformed UUID cannot be used.","code":"MalformedUUID"}'
+  assessment: >-
+    Machine-readable and consistent, and the 400 correctly distinguishes a malformed identifier from
+    a missing resource. Flat envelope, different shape from the DOR API.
+- aid: newcastle:ecppec
+  x-operator: institution
+  envelope: 'GraphQL: {"errors":[{"message":..., "locations":[...], "extensions":{...}}]}'
+  content_type: application/json
+  observed:
+  - request: GET https://api-ecppec.ncl.ac.uk/
+    status: 400
+    body: 'GET query missing.'
+    note: plain text, not JSON
+  - request: GET https://api-ecppec.ncl.ac.uk/?type=constituencies
+    status: 400
+    body: 'Must provide query string.'
+    note: plain text, not JSON
+  - request: GET https://api-ecppec.ncl.ac.uk/?query=elections
+    status: 400
+    body: '{"errors":[{"message":"Syntax Error: Unexpected Name \"elections\".","locations":[{"line":1,"column":1}],"extensions":{"code":"GRAPHQL_PARSE_FAILED","exception":{"stacktrace":[...]}}}]}'
+  - request: GET https://api-ecppec.ncl.ac.uk/api
+    status: 404
+    body: 'HTML: <pre>Cannot GET /api</pre> (default Express handler)'
+  findings:
+  - severity: low
+    finding: >-
+      GraphQL parse errors return a full Node.js stack trace in extensions.exception.stacktrace,
+      disclosing the server filesystem path /home/ecppec/graphql-server/ECPPEC/graphql. This is a
+      development-mode error formatter left on in production. Information disclosure only — no
+      credential or data leak was observed — but it is the kind of finding worth reporting upstream
+      rather than scoring.
+  - severity: low
+    finding: >-
+      Three different error media types from one endpoint depending on how the request is malformed:
+      plain text, JSON, and HTML. A client cannot parse errors from this API generically.
+  assessment: >-
+    Inconsistent. The GraphQL-layer errors are well formed; everything in front of the GraphQL layer
+    is the framework's default.
+- aid: newcastle:etheses-oai
+  x-operator: institution
+  envelope: 'OAI-PMH <error code="..."> element inside a 200 OAI-PMH response'
+  content_type: text/xml
+  note: >-
+    Standard OAI-PMH 2.0 error handling — protocol errors are carried in the body at HTTP 200, per
+    the specification. Conformant behaviour, not a defect.

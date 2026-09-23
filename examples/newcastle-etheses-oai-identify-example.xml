@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="static/style.xsl"?><OAI-PMH xmlns="http://www.openarchives.org/OAI/2.0/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/ http://www.openarchives.org/OAI/2.0/OAI-PMH.xsd"><responseDate>2026-08-30T20:25:13Z</responseDate><request verb="Identify">http://theses.ncl.ac.uk/oai/request</request><Identify><repositoryName>Newcastle University eTheses</repositoryName><baseURL>http://theses.ncl.ac.uk/oai/request</baseURL><protocolVersion>2.0</protocolVersion><adminEmail>lib-web@nclac.uk</adminEmail><earliestDatestamp>2008-09-18T12:48:45Z</earliestDatestamp><deletedRecord>transient</deletedRecord><granularity>YYYY-MM-DDThh:mm:ssZ</granularity><description><oai-identifier xmlns="http://www.openarchives.org/OAI/2.0/oai-identifier" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.openarchives.org/OAI/2.0/oai-identifier http://www.openarchives.org/OAI/2.0/oai-identifier.xsd">
+<scheme>oai</scheme>
+<repositoryIdentifier>localhost</repositoryIdentifier>
+<delimiter>:</delimiter>
+<sampleIdentifier>oai:localhost:10443.1/1234</sampleIdentifier>
+</oai-identifier>
+</description></Identify></OAI-PMH>

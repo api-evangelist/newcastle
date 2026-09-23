@@ -1,20 +1,39 @@
 {
   "provider": "newcastle",
   "sources": [
-    "newcastle-entity-api-openapi.yml",
-    "newcastle-feed-api-openapi.yml",
-    "newcastle-summary-api-openapi.yml",
-    "newcastle-timeseries-api-openapi.yml"
+    "_original/newcastle-digitised-objects-repository.json",
+    "_original/newcastle-urban-observatory.yaml"
   ],
   "outputs": [
+    "newcastle-api-metadata-information-api-openapi.yml",
+    "newcastle-digitised-objects-api-openapi.yml",
+    "newcastle-v1-api-openapi.yml",
     "newcastle-entity-api-openapi.yml",
     "newcastle-feed-api-openapi.yml",
     "newcastle-summary-api-openapi.yml",
     "newcastle-timeseries-api-openapi.yml"
   ],
-  "archived": [],
+  "archived": [
+    "deleted 1 superseded output(s) from the previous generation"
+  ],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "newcastle-digitised-objects-repository.json: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "newcastle-digitised-objects-repository.json: multi-axis tagging (12 tags, 3 first tags, 2.44x duplication over 18 operations) \u2014 split on first tag, 15 operations narrowed",
+    "newcastle-urban-observatory.yaml: upgraded openapi 3.0.0 -> OpenAPI 3.2.0",
+    "newcastle-urban-observatory.yaml: declared missing tag: Summary",
+    "superseded outputs removed: newcastle-time-series-api-openapi.yml",
+    "apis.yml register: written (+1 apis, 10 total)"
+  ],
+  "skipped": [
+    "newcastle-api-metadata-information-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "newcastle-digitised-objects-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "newcastle-entity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "newcastle-feed-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "newcastle-summary-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "newcastle-time-series-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "newcastle-v1-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

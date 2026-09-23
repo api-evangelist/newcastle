@@ -1,0 +1,19 @@
+name: Newcastle University — authorization scopes
+aid: newcastle
+generated: '2026-08-30'
+method: derived
+x-evidence-method: probed
+source: live probes of Newcastle University operated hosts, 2026-08-30
+scopes: []
+note: >-
+  No institution-operated Newcastle University API defines authorization scopes. The Digitised
+  Objects Repository, the ECPPEC GraphQL API, the Urban Observatory API and the eTheses OAI-PMH
+  endpoint are all open and unauthenticated, so there is nothing to scope. The one scoped
+  authorization surface in the institution's footprint belongs to its Figshare tenant at
+  data.ncl.ac.uk, and those scopes are Figshare's, defined in Figshare's contract — recording them
+  here would credit Newcastle with a vendor's authorization design.
+released_attributes:
+  note: >-
+    The nearest institution-operated analogue to a scope is SAML attribute release from the
+    Shibboleth IdP at gateway.ncl.ac.uk. Attribute release policy is not published in the public
+    federation metadata, so no attribute list is asserted here.

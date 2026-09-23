@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-dor-pagination-schema.json",
+  "title": "DorPagination",
+  "description": "Pagination envelope returned by the Digitised Objects Repository API. Note that it differs from the Urban Observatory API's pagination shape; the two Newcastle-operated APIs do not share a pagination vocabulary.",
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "components.schemas.Pagination in openapi/_original/newcastle-digitised-objects-repository.json, confirmed against a live response",
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "properties": {
+    "size": {
+      "type": "integer",
+      "description": "Number of items in this page."
+    },
+    "number": {
+      "type": "integer",
+      "description": "1-based page number."
+    },
+    "totalPages": {
+      "type": "integer"
+    },
+    "totalElements": {
+      "type": "integer"
+    },
+    "_links": {
+      "$ref": "https://api-evangelist.com/newcastle/newcastle-hateoas-links-schema.json"
+    }
+  },
+  "required": [
+    "size",
+    "number",
+    "totalPages",
+    "totalElements"
+  ]
+}

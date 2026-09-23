@@ -127,5 +127,12 @@
         }
       ]
     }
-  ]
+  ],
+  "_meta": {
+    "generated": "2026-08-30",
+    "method": "probed",
+    "source": "GET https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/entity",
+    "x-operator": "institution",
+    "note": "Confirmed a real capture, not a fabrication: entityId d8271b8d-70f0-4a00-a0b5-c61560e0dfa7 still resolves live at /api/v2.0a/sensors/entity/{id} (HTTP 200) as 'Urban Sciences Building: Floor 1 Ambient Kitchen' on 2026-08-30."
+  }
 }

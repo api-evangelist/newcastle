@@ -1,0 +1,80 @@
+name: Newcastle University — API lifecycle posture
+aid: newcastle
+generated: '2026-08-30'
+method: derived
+x-evidence-method: probed
+source: live probes and specification reads, 2026-08-30
+summary: >-
+  Newcastle publishes no central developer portal, no API changelog, no deprecation policy and no
+  status page for any of its institution-operated APIs. Versioning is present but is expressed only
+  in the URL path and the specification version field. There is no communication channel through
+  which a consumer would learn that one of these APIs had changed or gone away.
+apis:
+- aid: newcastle:digitised-objects
+  x-operator: institution
+  versioning: URL path prefix /v1 plus a semantic version in info.version and a separate build number
+  current_version: 1.27.0
+  build: 1.35.3
+  version_endpoint: https://api-dor.ncl.ac.uk/info
+  spec_endpoint: https://api-dor.ncl.ac.uk/info/open-api
+  deprecation_policy: none published
+  changelog: none published
+  status_page: none published
+  assessment: >-
+    The best-run surface here. The API serves its own OpenAPI and its own version and build numbers
+    from a machine-readable /info endpoint, which is more lifecycle transparency than most
+    institutions in this cohort offer. What is missing is any forward-looking commitment — nothing
+    tells a consumer what happens when /v1 is retired.
+- aid: newcastle:urban-observatory
+  x-operator: institution
+  versioning: URL path /api/v2.0a
+  current_version: 2.0a
+  spec_endpoint: https://api.usb.urbanobservatory.ac.uk/openapi.json
+  deprecation_policy: none published
+  changelog: none published
+  status_page: none published
+  succession_note: >-
+    The specification says of itself that the v2.0a API "is currently in operation for the Urban
+    Sciences Building and some of the newer data sources across the city" and that "it is
+    anticipated that this schema, once complete, will replace the existing API." That is a stated
+    intent to supersede an older API, published inside the contract, with no date and no migration
+    guidance. The "a" suffix on 2.0a signals alpha; it has carried that suffix since at least 2026.
+  predecessor_status: >-
+    The older Urban Observatory portal at newcastle.urbanobservatory.ac.uk now serves a
+    single-page-application shell for every path probed, including /api/v1.1/sensors/json/ and
+    /api_docs/ — HTTP 200 with 661 bytes of JavaScript bootstrap and no data. The v1.1 REST API and
+    its documentation are effectively gone from that host, without a redirect, a tombstone, or a
+    notice. api.newcastle.urbanobservatory.ac.uk answers but returns nginx 403 at the root.
+- aid: newcastle:ecppec
+  x-operator: institution
+  versioning: none — no version in the endpoint, the schema, or a header
+  deprecation_policy: none published
+  changelog: none published
+  project_status: >-
+    ECPPEC is a completed research project. The website footer reads "© 2026 Newcastle University
+    (Version 1.1.1)", which versions the website rather than the API. Research-project APIs of this
+    kind are typically maintained only as long as their grant, which is a real availability risk a
+    consumer cannot read anywhere on the surface.
+- aid: newcastle:etheses-oai
+  x-operator: institution
+  versioning: OAI-PMH protocol version 2.0
+  software: DSpace 6.3
+  software_note: >-
+    DSpace 6.3 reached end of support upstream; the deployment is the institution's to maintain.
+    Recorded as an operational fact about the deployment, not as a conformance failure.
+  earliest_datestamp: '2008-09-18T12:48:45Z'
+- aid: newcastle:eprints-website
+  x-operator: institution
+  finding: >-
+    eprints.ncl.ac.uk answers 200 and is a live Newcastle University service, but it is no longer
+    EPrints software and it exposes no API at all. /cgi/oai2, /oai2 and /api all redirect to
+    error_page.aspx. Any catalog entry claiming an OAI-PMH interface at this host is claiming
+    something that does not exist; the institution's working OAI-PMH endpoint is at
+    theses.ncl.ac.uk.
+observability:
+  status_page: none found
+  incident_history: none found
+  uptime_commitment: none found
+  support_channel: >-
+    Per-service, via named humans and library/IT contact pages. There is no central developer
+    support address, no developer forum, and no issue tracker for any of these APIs.

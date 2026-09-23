@@ -1,3 +1,8 @@
+# Provenance
+generated: '2026-08-30'
+method: generated
+x-provenance-note: >-
+  Authored by API Evangelist. Newcastle University publishes no rate-limit table for any of its APIs; verified again 2026-08-30 across api-dor.ncl.ac.uk, api-ecppec.ncl.ac.uk and api.usb.urbanobservatory.ac.uk, none of which returned a RateLimit or X-RateLimit header.
 specification: API Commons Rate Limits
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/RateLimits

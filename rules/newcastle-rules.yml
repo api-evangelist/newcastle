@@ -1,3 +1,10 @@
+# Provenance
+# generated: 2026-08-30
+# method: generated
+# source: Authored by API Evangelist as a Spectral ruleset for the Newcastle Urban Observatory
+#   OpenAPI. Newcastle University publishes no governance ruleset of its own; this is ours, not
+#   theirs, and must not be credited to the institution.
+# x-operator: institution
 formats:
   - oas3
 rules:

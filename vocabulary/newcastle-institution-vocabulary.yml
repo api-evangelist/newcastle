@@ -1,0 +1,109 @@
+vocabulary:
+  name: Newcastle University Institutional Surface Vocabulary
+  description: >-
+    Controlled vocabulary for the concepts exposed by the surfaces Newcastle University
+    itself operates — the Digitised Objects Repository Search and Data API, the ECPPEC
+    electoral GraphQL API, the eTheses OAI-PMH endpoint and the Shibboleth identity
+    federation. The Urban Observatory's sensing vocabulary is kept separately in
+    newcastle-vocabulary.yml because it is a different domain with a different owner inside
+    the university.
+  generated: '2026-08-30'
+  method: derived
+  source: >-
+    Derived from openapi/_original/newcastle-digitised-objects-repository.json,
+    graphql/newcastle-ecppec-schema.graphql, the live OAI-PMH Identify response from
+    theses.ncl.ac.uk, and the SAML metadata at gateway.ncl.ac.uk.
+  x-operator: institution
+  terms:
+    - term: DigitisedObject
+      definition: >-
+        A digitised item from Newcastle University Library's Special Collections, carrying an
+        opaque short id, a Special Collections refCode, a title and a curatorial description.
+      source: Digitised Objects Repository API
+      tags: [ digital-library, core ]
+    - term: Collection
+      definition: >-
+        A named Special Collections grouping of digitised objects, such as the 17th Century
+        Collection or the Alvi (Moniza) Archive.
+      source: Digitised Objects Repository API
+      tags: [ digital-library, core ]
+    - term: Item
+      definition: >-
+        An addressable component of a digitised object — typically a single page or image —
+        identified by the object id plus a position.
+      source: Digitised Objects Repository API
+      tags: [ digital-library ]
+    - term: Transcript
+      definition: >-
+        Text content associated with a digitised object or an item position, served either as
+        plain content or as TEI-encoded XML.
+      source: Digitised Objects Repository API
+      tags: [ digital-library, text ]
+    - term: IIIFImage
+      definition: >-
+        An image served under the International Image Interoperability Framework for a
+        digitised object, enabling deep zoom and cross-institution image reuse.
+      source: Digitised Objects Repository API
+      tags: [ digital-library, standards ]
+    - term: Election
+      definition: >-
+        A historical British parliamentary election contest in a named constituency, carrying
+        a year, month, office, franchise type, whether it was contested, and whether it was a
+        by-election or part of a general election.
+      source: ECPPEC GraphQL API
+      tags: [ research-data, history, core ]
+    - term: Constituency
+      definition: >-
+        An eighteenth-century electoral constituency, flagged by whether ECPPEC holds
+        transcribed data for it.
+      source: ECPPEC GraphQL API
+      tags: [ research-data, history, core ]
+    - term: PollBook
+      definition: >-
+        A transcribed contemporary record of how named individuals voted in a given
+        constituency contest — the primary evidentiary source behind the dataset.
+      source: ECPPEC GraphQL API
+      tags: [ research-data, history, core ]
+    - term: Voter
+      definition: >-
+        An individual recorded in a poll book, carrying forename, surname, occupation and
+        guild where the source records them.
+      source: ECPPEC GraphQL API
+      tags: [ research-data, history ]
+    - term: Vote
+      definition: >-
+        A single cast vote as recorded on a page and line of a poll book, including whether it
+        was rejected.
+      source: ECPPEC GraphQL API
+      tags: [ research-data, history ]
+    - term: Candidate
+      definition: >-
+        A person standing in one or more elections, with birth and death years and the
+        constituencies contested.
+      source: ECPPEC GraphQL API
+      tags: [ research-data, history ]
+    - term: Artefact
+      definition: >-
+        A cultural artefact of electoral culture — a ribbon, broadside, medal or ballad —
+        described with attributes and digitised files.
+      source: ECPPEC GraphQL API
+      tags: [ research-data, cultural-heritage ]
+    - term: OAIRecord
+      definition: >-
+        A metadata record for a Newcastle University electronic thesis, harvestable over
+        OAI-PMH 2.0 in oai_dc, dim or uketd_dc.
+      source: theses.ncl.ac.uk OAI-PMH endpoint
+      tags: [ repository, standards ]
+    - term: IdentityProvider
+      definition: >-
+        Newcastle University's Shibboleth SAML 2.0 Identity Provider, entityID
+        https://gateway.ncl.ac.uk/idp/shibboleth, asserting the scope ncl.ac.uk within the UK
+        Access Management Federation.
+      source: gateway.ncl.ac.uk SAML metadata
+      tags: [ identity, standards, core ]
+    - term: ServiceProvider
+      definition: >-
+        A Newcastle-operated SAML Service Provider registered in the UK Access Management
+        Federation; 168 are registered under ncl.ac.uk.
+      source: UK Access Management Federation metadata
+      tags: [ identity, standards ]

@@ -1,0 +1,147 @@
+openapi: 3.2.0
+info:
+  title: Newcastle University | Digitised Objects Repository |…
+  version: 1.27.0
+  description: 'The *Search and Data API* provides a single point of truth interface for searching, browsing and displaying digitised objects held in Newcastle University Library''s Special Collections.
+
+
+    Data curators: Special Collections and Archives\
+
+    Administrators: Digital Library Services'
+servers:
+- url: https://api-dor.ncl.ac.uk
+tags:
+- name: API Metadata Information
+  description: A set of endpoints for gathering information about the API itself. They can be used for validation, creating types or checking if the service is live.
+paths:
+  /:
+    get:
+      operationId: getHome
+      summary: The API's home page
+      description: Returns an OpenAPI interactive documentation for devices requesting HTML, or starting HATEAOS links for JSON requests.
+      tags:
+      - API Metadata Information
+      responses:
+        '200':
+          description: The API's starting point.
+          content:
+            text/html:
+              schema:
+                type: string
+                description: An OpenAPI interactive documentation
+            application/json:
+              schema:
+                type: object
+                properties:
+                  _links:
+                    type: object
+                    properties:
+                      info:
+                        $ref: '#/components/schemas/HateoasLink'
+                      collections:
+                        $ref: '#/components/schemas/HateoasLink'
+                      digitisedObjects:
+                        $ref: '#/components/schemas/HateoasLink'
+                      items:
+                        $ref: '#/components/schemas/HateoasLink'
+                    required:
+                    - specification
+                required:
+                - _links
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /info:
+    get:
+      operationId: getInfo
+      summary: The API's information
+      description: Returns a basic set of information describing the state of the API and its current version.
+      tags:
+      - API Metadata Information
+      responses:
+        '200':
+          description: The metadata object describing the basic information about the API.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  version:
+                    $ref: '#/components/schemas/Version'
+                  build:
+                    $ref: '#/components/schemas/Version'
+                  baseUrl:
+                    type: string
+                    example: https://api.dor.ncl.ac.uk
+                  _links:
+                    type: object
+                    allOf:
+                    - $ref: '#/components/schemas/HomeLinks'
+                    - type: object
+                      properties:
+                        specification:
+                          $ref: '#/components/schemas/HateoasLink'
+                      required:
+                      - specification
+                required:
+                - version
+                - build
+                - baseUrl
+                - _links
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /info/open-api:
+    get:
+      operationId: getInfoOpenAPI
+      summary: The OpenAPI specification
+      description: Presents the current OpenAPI document specification that the API service pledge to implement.
+      tags:
+      - API Metadata Information
+      responses:
+        '200':
+          description: A JSON object representing the API's OpenAPI schema.
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+                example: '{ "openapi": "3.0.0 (...)" }'
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+components:
+  schemas:
+    HateoasParameters:
+      type: object
+      additionalProperties: true
+      description: Any relevant parameters that should be appended to the URL (for GET method) or passed as a payload for other HTTP methods.
+      example:
+        '?': '...'
+    Version:
+      type: string
+      description: A representation of a version compatible with [Semantic Versioning 2.0.0](https://semver.org/).
+      pattern: /[0-9]+\.[0-9]+\.[0-9]+/
+      example: 1.0.0
+    HomeLinks:
+      type: object
+      description: Standard set of links related to the homepage.
+      properties:
+        home:
+          $ref: '#/components/schemas/HateoasLink'
+      required:
+      - home
+    HateoasLink:
+      type: object
+      properties:
+        href:
+          type: string
+        type:
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+        parameters:
+          $ref: '#/components/schemas/HateoasParameters'
+      required:
+      - href
+      - type

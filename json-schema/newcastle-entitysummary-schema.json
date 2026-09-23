@@ -16,5 +16,12 @@
       "type": "object",
       "description": "A direct mapping of feed IDs to their respective metrics, with all other data omitted."
     }
+  },
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "openapi/_original/newcastle-urban-observatory.yaml",
+    "x-operator": "institution",
+    "note": "Derived by API Evangelist from Newcastle University's own published Urban Observatory OpenAPI. Not published by the institution in this form."
   }
 }

@@ -1,0 +1,68 @@
+name: Newcastle University — authentication posture
+aid: newcastle
+generated: '2026-08-30'
+method: derived
+x-evidence-method: probed
+source: live probes of Newcastle University operated hosts, 2026-08-30
+summary: >-
+  Every Newcastle University operated public API found in this profile is open and unauthenticated.
+  The institution's real authentication engineering is not in front of its APIs — it is its
+  federated SAML estate, which is machine-readable and institution-operated but is a login system,
+  not a programmable API.
+apis:
+- aid: newcastle:digitised-objects
+  x-operator: institution
+  scheme: none
+  detail: >-
+    The OpenAPI at https://api-dor.ncl.ac.uk/info/open-api declares no securitySchemes and no
+    top-level security requirement. GET https://api-dor.ncl.ac.uk/v1/collections returns 200 with
+    data and no credential.
+  verified: '2026-08-30'
+- aid: newcastle:ecppec
+  x-operator: institution
+  scheme: none
+  detail: >-
+    The GraphQL endpoint accepts unauthenticated POST queries and leaves introspection open.
+    Verified 2026-08-30 with an anonymous query returning real constituency records.
+  verified: '2026-08-30'
+- aid: newcastle:urban-observatory
+  x-operator: institution
+  scheme: none
+  detail: >-
+    No securitySchemes in the Urban Sciences Building OpenAPI. GET
+    /api/v2.0a/sensors/entity returned 200 and 616 entities anonymously on 2026-08-30. Some
+    operations note that results are returned "provided permissions permit", which is a
+    server-side data visibility rule rather than a caller credential.
+  verified: '2026-08-30'
+- aid: newcastle:etheses-oai
+  x-operator: institution
+  scheme: none
+  detail: OAI-PMH is an open harvesting protocol; verb=Identify returns 200 with no credential.
+  verified: '2026-08-30'
+- aid: newcastle:data-ncl
+  x-operator: tenant
+  scheme: vendor
+  detail: >-
+    data.ncl.ac.uk is a Figshare tenant (CNAME to figshare.com). Programmatic access runs on
+    Figshare's OAuth 2.0 and personal-token scheme, documented and operated by Figshare, not by
+    Newcastle. Not scored here.
+identity_federation:
+  x-operator: institution
+  protocol: SAML 2.0 / Shibboleth
+  entity_id: https://gateway.ncl.ac.uk/idp/shibboleth
+  metadata_url: https://gateway.ncl.ac.uk/idp/shibboleth
+  scope: ncl.ac.uk
+  federation: UK Access Management Federation (feeds eduGAIN)
+  federation_metadata: http://metadata.ukfederation.org.uk/ukfederation-metadata.xml
+  sso_endpoints:
+  - https://gateway.ncl.ac.uk/idp/profile/SAML2/Redirect/SSO
+  - https://gateway.ncl.ac.uk/idp/profile/SAML2/POST/SSO
+  - https://gateway.ncl.ac.uk/idp/profile/SAML2/POST-SimpleSign/SSO
+  - https://gateway.ncl.ac.uk/idp/profile/Shibboleth/SSO
+  service_providers_registered: 168
+  development_idp: https://dev-gateway.ncl.ac.uk/idp/shibboleth
+  verified: '2026-08-30'
+  detail: >-
+    This is the largest genuinely institution-operated machine-readable surface Newcastle has. It is
+    a login federation, not a data API, and it is recorded here rather than as an apis[] contract
+    with request/response semantics.

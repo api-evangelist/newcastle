@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-dor-collection-schema.json",
+  "title": "Collection",
+  "description": "A named Special Collections grouping in the Digitised Objects Repository, e.g. '17th Century Collection' or 'Alvi (Moniza) Archive'.",
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "live response from https://api-dor.ncl.ac.uk/v1/collections and the published OpenAPI",
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Opaque short identifier for the collection, e.g. Y6Jn."
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title of the collection."
+    },
+    "_links": {
+      "$ref": "https://api-evangelist.com/newcastle/newcastle-hateoas-links-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "title"
+  ]
+}

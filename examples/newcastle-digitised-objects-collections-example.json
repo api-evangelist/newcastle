@@ -1,0 +1,87 @@
+{
+  "items": [
+    {
+      "id": "Y6Jn",
+      "title": "17th Century Collection",
+      "_links": {
+        "definition": {
+          "type": "GET",
+          "href": "https://api-dor.ncl.ac.uk/v1/collections/Y6Jn"
+        }
+      }
+    },
+    {
+      "id": "W5Sw",
+      "title": "18th Century Collection",
+      "_links": {
+        "definition": {
+          "type": "GET",
+          "href": "https://api-dor.ncl.ac.uk/v1/collections/W5Sw"
+        }
+      }
+    },
+    {
+      "id": "C6R9",
+      "title": "19th Century Collection",
+      "_links": {
+        "definition": {
+          "type": "GET",
+          "href": "https://api-dor.ncl.ac.uk/v1/collections/C6R9"
+        }
+      }
+    },
+    {
+      "id": "cNFz",
+      "title": "19th Century Novels",
+      "_links": {
+        "definition": {
+          "type": "GET",
+          "href": "https://api-dor.ncl.ac.uk/v1/collections/cNFz"
+        }
+      }
+    },
+    {
+      "id": "PdUs",
+      "title": "20th Century Collection",
+      "_links": {
+        "definition": {
+          "type": "GET",
+          "href": "https://api-dor.ncl.ac.uk/v1/collections/PdUs"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "size": 20,
+    "totalPages": 8,
+    "totalElements": 154,
+    "number": 1,
+    "_links": {
+      "first": {
+        "type": "GET",
+        "href": "https://api-dor.ncl.ac.uk/v1/collections?page=1"
+      },
+      "next": {
+        "type": "GET",
+        "href": "https://api-dor.ncl.ac.uk/v1/collections?page=2"
+      },
+      "last": {
+        "type": "GET",
+        "href": "https://api-dor.ncl.ac.uk/v1/collections?page=8"
+      }
+    }
+  },
+  "_links": {
+    "home": {
+      "type": "GET",
+      "href": "https://api-dor.ncl.ac.uk"
+    }
+  },
+  "_meta": {
+    "generated": "2026-08-30",
+    "method": "probed",
+    "source": "GET https://api-dor.ncl.ac.uk/v1/collections",
+    "x-operator": "institution",
+    "note": "Live response captured 2026-08-30, truncated to the first 5 of the returned collections. Not fabricated."
+  }
+}

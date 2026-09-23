@@ -1,5 +1,12 @@
 {
   "time": "2018-02-12T10:30:40.125Z",
   "duration": -2.1,
-  "value": 3.5
+  "value": 3.5,
+  "_meta": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "openapi/_original/newcastle-urban-observatory.yaml",
+    "x-operator": "institution",
+    "note": "These are the provider's own example values, copied verbatim from the published OpenAPI (time 2018-02-12T10:30:40.125Z, duration -2.1, value 3.5). Not a live capture."
+  }
 }

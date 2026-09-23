@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-hateoas-links-schema.json",
+  "title": "HateoasLinks",
+  "description": "The HATEOAS link envelope used throughout the Digitised Objects Repository API. Every resource and every collection carries one.",
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "components.schemas.HateoasLink and HomeLinks in openapi/_original/newcastle-digitised-objects-repository.json",
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "additionalProperties": {
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string",
+        "description": "HTTP method for the link.",
+        "enum": [
+          "GET"
+        ]
+      },
+      "href": {
+        "type": "string",
+        "format": "uri",
+        "description": "Absolute URL of the linked resource."
+      },
+      "parameters": {
+        "type": "object",
+        "description": "Optional templated parameters for the link."
+      }
+    },
+    "required": [
+      "type",
+      "href"
+    ]
+  }
+}

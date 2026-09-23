@@ -1,0 +1,60 @@
+name: ECPPEC GraphQL API
+aid: newcastle:ecppec
+generated: '2026-08-30'
+method: derived
+x-evidence-method: probed
+source: https://api-ecppec.ncl.ac.uk/
+x-operator: institution
+operator_evidence: >-
+  api-ecppec.ncl.ac.uk resolves to a10-vip-ecppec.ncl.ac.uk (128.240.212.230), inside Newcastle
+  University's own network and under the university's own registrable domain. The GraphQL server
+  path disclosed in error stack traces is /home/ecppec/graphql-server/ECPPEC/graphql. No vendor
+  identity appears anywhere in the schema, the errors or the host.
+endpoint: https://api-ecppec.ncl.ac.uk/
+transport: HTTP POST, application/json
+schema: graphql/newcastle-ecppec-schema.graphql
+introspection:
+  enabled: true
+  verified: '2026-08-30'
+  note: Full introspection is open and unauthenticated.
+authentication: none
+operations:
+  query: 19
+  mutation: 0
+  subscription: 0
+types:
+  object: 17
+  input: 1
+  enum: 3
+  scalar: 1
+root_queries:
+- artefacts
+- artefact_attributes
+- artefact_files
+- candidates
+- candidates_elections
+- constituencies
+- elections
+- election_attributes
+- election_dailies
+- election_dates
+- location_from_lat_lng
+- poll_books
+- stat_num_poll_books
+- stats
+- voters
+- votes
+- voters_occupations
+- occupations_group
+- geocodes
+- ms_comments
+verification:
+  query: '{ constituencies(take:3){ constituency_id constituency has_data } }'
+  status: 200
+  result: returned three real constituency records (Abingdon, Aldborough, Aldeburgh)
+  checked: '2026-08-30'
+notes: >-
+  ECPPEC is the Eighteenth-Century Political Participation and Electoral Culture project, an AHRC
+  funded research project hosted at Newcastle University. The project website at ecppec.ncl.ac.uk
+  documents the API but is not itself the API; ecppec.ncl.ac.uk/api/ is a WordPress documentation
+  page that points at the api-ecppec.ncl.ac.uk host.

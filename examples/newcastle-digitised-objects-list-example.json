@@ -1,0 +1,65 @@
+{
+  "items": [
+    {
+      "id": "f7Vy",
+      "refCode": "17th C. Coll. 220.52 NEW",
+      "title": "The New Testament of our Lord and Saviour Jesus Christ : Newly translated out of the originall Greeke: and with the former translations dilligently compared and revised, by his Maiesties speciall commandment",
+      "description": "Frontispiece showing illustrations of the 12 deciphels.",
+      "_links": {
+        "definition": {
+          "type": "GET",
+          "href": "https://api-dor.ncl.ac.uk/v1/digitised-objects/f7Vy"
+        }
+      }
+    },
+    {
+      "id": "R65Y",
+      "refCode": "17th C. Coll. 821.4 DRU",
+      "title": "Poems, by That most Famous Wit, William Drummond of Hawthornden.",
+      "description": "William Drummond (1585-1649) was a Scottish poet, born at Hawthornden Castle, Midlothian. He was influenced more greatly by English and Italian poets than by any characteristically Scottish writing and he was sometimes referred to as \"the Scottish Petrarch\". This book has been severely trimmed, with loss of text from the bottom of the pages.",
+      "_links": {
+        "definition": {
+          "type": "GET",
+          "href": "https://api-dor.ncl.ac.uk/v1/digitised-objects/R65Y"
+        }
+      }
+    }
+  ],
+  "pagination": {
+    "size": 2,
+    "totalPages": 7741,
+    "totalElements": 15482,
+    "number": 1,
+    "_links": {
+      "first": {
+        "type": "GET",
+        "href": "https://api-dor.ncl.ac.uk/v1/digitised-objects?page.size=2&page=1"
+      },
+      "next": {
+        "type": "GET",
+        "href": "https://api-dor.ncl.ac.uk/v1/digitised-objects?page.size=2&page=2"
+      },
+      "last": {
+        "type": "GET",
+        "href": "https://api-dor.ncl.ac.uk/v1/digitised-objects?page.size=2&page=7741"
+      }
+    }
+  },
+  "_links": {
+    "search": {
+      "type": "GET",
+      "href": "https://api-dor.ncl.ac.uk/v1/digitised-objects/search"
+    },
+    "home": {
+      "type": "GET",
+      "href": "https://api-dor.ncl.ac.uk"
+    }
+  },
+  "_meta": {
+    "generated": "2026-08-30",
+    "method": "probed",
+    "source": "GET https://api-dor.ncl.ac.uk/v1/digitised-objects?page.size=2",
+    "x-operator": "institution",
+    "note": "Live response captured 2026-08-30 unmodified. The repository reported 15,482 digitised objects across 7,741 pages at page.size=2."
+  }
+}

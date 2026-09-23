@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-dor-error-schema.json",
+  "title": "DorError",
+  "description": "Error envelope returned by the Digitised Objects Repository API.",
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "probed",
+    "source": "live 404 and 400 responses captured from https://api-dor.ncl.ac.uk on 2026-08-30",
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "properties": {
+    "error": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Stable machine-readable error code.",
+          "examples": [
+            "RESOURCE_NOT_FOUND",
+            "BAD_REQUEST"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable explanation."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    }
+  },
+  "required": [
+    "error"
+  ]
+}

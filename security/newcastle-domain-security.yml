@@ -1,5 +1,9 @@
 generated: '2026-07-11'
-method: probed
+method: derived
+x-evidence-method: probed
+x-provenance-note: >-
+  Written by API Evangelist's probe-domain-security.py from live DNS and TLS observations
+  of Newcastle University hosts. Not a Newcastle-published document.
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
 - host: www.ncl.ac.uk

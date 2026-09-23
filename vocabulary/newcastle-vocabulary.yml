@@ -1,3 +1,12 @@
+# Provenance
+generated: '2026-08-30'
+method: derived
+source: openapi/_original/newcastle-urban-observatory.yaml
+x-operator: institution
+x-provenance-note: >-
+  Terms derived from the Urban Observatory's own published OpenAPI (tag descriptions and component
+  schemas). The definitions are API Evangelist's wording of Newcastle's concepts; the concepts are
+  Newcastle's.
 vocabulary:
   name: Newcastle Urban Observatory Vocabulary
   description: >-

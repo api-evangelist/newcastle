@@ -29,5 +29,12 @@
       "type": "string",
       "description": "Verbose description of why an error occurred and data could not be supplied."
     }
+  },
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "openapi/_original/newcastle-urban-observatory.yaml",
+    "x-operator": "institution",
+    "note": "Derived by API Evangelist from Newcastle University's own published Urban Observatory OpenAPI. Not published by the institution in this form."
   }
 }

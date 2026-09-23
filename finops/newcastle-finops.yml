@@ -1,3 +1,8 @@
+# Provenance
+generated: '2026-08-30'
+method: generated
+x-provenance-note: >-
+  Authored by API Evangelist. Newcastle University's APIs are free and unmetered; there is no provider-published cost surface behind this document.
 specification: FinOps Framework
 specificationVersion: '1.0'
 schema: https://www.finops.org/framework/

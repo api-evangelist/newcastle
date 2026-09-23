@@ -1,3 +1,8 @@
+# Provenance
+generated: '2026-08-30'
+method: generated
+x-provenance-note: >-
+  Authored by API Evangelist from Newcastle University's published access terms. Newcastle publishes no pricing or plan document of its own; this is our reading of an institution that sells nothing, not a provider artifact.
 specification: API Commons Plans
 specificationVersion: '0.1'
 schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main/schema/api-commons.yml#/$defs/Plans

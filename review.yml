@@ -3,8 +3,76 @@ name: Newcastle University
 description: Newcastle University public developer/API footprint review for APIs.json cataloging.
 url: https://raw.githubusercontent.com/api-evangelist/newcastle/refs/heads/main/review.yml
 created: '2026-06-03'
-modified: '2026-06-03'
+modified: '2026-08-30'
 reviews:
+  - date: '2026-08-30'
+    rating: 3
+    summary: >-
+      Re-profiled under the university pipeline, which settles WHO OPERATES each surface before
+      saving any contract. Four institution-operated APIs were verified live and one vendor tenancy
+      was identified and re-labelled rather than credited. New this pass: the Digitised Objects
+      Repository publishes its own OpenAPI at /info/open-api (18 paths, harvested); the ECPPEC API
+      is a GraphQL server at api-ecppec.ncl.ac.uk with open introspection (19 root queries,
+      harvested to SDL); and Newcastle operates a Shibboleth SAML 2.0 identity provider registered
+      in the UK Access Management Federation with 168 service providers under ncl.ac.uk — the
+      institution's largest machine-readable surface and one no previous pass had recorded. Two
+      June claims did not survive probing and were corrected. Expect the score to move on the
+      strength of real harvested contracts, not on volume.
+    endpoints:
+      - url: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/entity
+        status: 200
+        note: Urban Observatory entity collection, 616 entities returned anonymously.
+      - url: https://api.usb.urbanobservatory.ac.uk/openapi.json
+        status: 200
+        note: First-party OpenAPI served by the API itself.
+      - url: https://api-dor.ncl.ac.uk/info/open-api
+        status: 200
+        note: First-party OpenAPI, 18 paths, harvested into openapi/_original/.
+      - url: https://api-dor.ncl.ac.uk/v1/digitised-objects?page.size=2
+        status: 200
+        note: 15,482 digitised objects across 7,741 pages.
+      - url: https://api-dor.ncl.ac.uk/v1/collections/ZZZZZZ
+        status: 404
+        note: 'Clean error contract: {"error":{"code":"RESOURCE_NOT_FOUND",...}}.'
+      - url: https://api-ecppec.ncl.ac.uk/
+        status: 200
+        note: >-
+          GraphQL over POST. Open introspection, 19 root queries, live data returned. The June pass
+          read this host's bare-GET 400 as a dead host; it is a live server refusing a malformed
+          request.
+      - url: https://theses.ncl.ac.uk/oai/request?verb=Identify
+        status: 200
+        note: OAI-PMH 2.0, DSpace 6.3, repositoryName "Newcastle University eTheses".
+      - url: https://gateway.ncl.ac.uk/idp/shibboleth
+        status: 200
+        note: SAML 2.0 IdP metadata, scope ncl.ac.uk, UK Access Management Federation.
+      - url: https://eprints.ncl.ac.uk/cgi/oai2?verb=Identify
+        status: 404
+        note: >-
+          Redirects to error_page.aspx. eprints.ncl.ac.uk is a live Newcastle service but is not
+          EPrints software and exposes no OAI-PMH; the June claim was wrong and has been removed.
+      - url: https://ecppec.ncl.ac.uk/api/
+        status: 200
+        note: WordPress documentation page, not the API. Kept as Documentation only.
+      - url: https://data.ncl.ac.uk/
+        status: 202
+        note: >-
+          Figshare tenant (CNAME to figshare.com). Empty 202 to non-browser clients is a bot
+          challenge, not a dead host. Re-labelled x-operator: tenant.
+      - url: https://newcastle.urbanobservatory.ac.uk/api/v1.1/sensors/json/
+        status: 200
+        note: >-
+          Soft-200 — a 661-byte SPA shell, not data. The older v1.1 API is gone from this host with
+          no redirect or tombstone.
+      - url: https://www.ncl.ac.uk/llms.txt
+        status: 404
+        note: No llms.txt.
+      - url: https://www.ncl.ac.uk/.well-known/security.txt
+        status: 404
+        note: No security.txt.
+      - url: https://github.com/newcastleuniversity
+        status: 200
+        note: Verified official GitHub org, 20 public repos, no API specifications among them.
   - date: '2026-06-03'
     rating: 3
     summary: >-

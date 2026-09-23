@@ -1,0 +1,47 @@
+openapi: 3.2.0
+info:
+  title: Newcastle University | Repository | Search and Data…
+  version: 1.27.0
+  description: 'The *Search and Data API* provides a single point of truth interface for searching, browsing and displaying digitised objects held in Newcastle University Library''s Special Collections.
+
+
+    Data curators: Special Collections and Archives\
+
+    Administrators: Digital Library Services'
+servers:
+- url: https://api-dor.ncl.ac.uk
+tags:
+- name: Digitised Objects
+  description: A set of endpoints describing the digitised objects present in the repository.
+paths:
+  /iiif/{id}:
+    get:
+      operationId: getIIIF
+      summary: IIIF permalink
+      description: Signpost to to a service responsible for IIIF manifests generation for the given digitised object.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: UkLWZg9D
+        required: true
+        description: Digitised object's identifier.
+      tags:
+      - Digitised Objects
+      responses:
+        '302':
+          description: Redirects to a IIIF manifest.
+          headers:
+            Location:
+              description: URL where the IIIF manifest will be created.
+              schema:
+                type: string
+                format: uri
+              required: true
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A digitised object with the specified ID was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.

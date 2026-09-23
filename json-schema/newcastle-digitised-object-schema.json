@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.com/newcastle/newcastle-digitised-object-schema.json",
+  "title": "DigitisedObject",
+  "description": "A digitised object held in Newcastle University Library's Special Collections, as returned by the Digitised Objects Repository Search and Data API.",
+  "x-provenance": {
+    "generated": "2026-08-30",
+    "method": "derived",
+    "source": "openapi/_original/newcastle-digitised-objects-repository.json plus live responses from https://api-dor.ncl.ac.uk/v1/digitised-objects",
+    "x-operator": "institution"
+  },
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Opaque short identifier for the digitised object, e.g. f7Vy."
+    },
+    "refCode": {
+      "type": "string",
+      "description": "Special Collections reference code, e.g. '17th C. Coll. 220.52 NEW'."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the digitised object as catalogued."
+    },
+    "description": {
+      "type": "string",
+      "description": "Curatorial description of the object."
+    },
+    "_links": {
+      "$ref": "https://api-evangelist.com/newcastle/newcastle-hateoas-links-schema.json"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "_links"
+  ],
+  "additionalProperties": true
+}

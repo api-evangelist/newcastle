@@ -1,0 +1,353 @@
+# generated: 2026-08-30
+# method: derived
+# x-evidence-method: probed
+# x-source-url: https://api-ecppec.ncl.ac.uk/
+# x-operator: institution
+# Rendered by API Evangelist from the live GraphQL introspection response of Newcastle
+# University's ECPPEC API. The type system is Newcastle's; this SDL serialisation is ours.
+# ECPPEC GraphQL schema (Newcastle University)
+# Source: https://api-ecppec.ncl.ac.uk/ (introspection)
+
+schema {
+  query: Query
+}
+
+"""A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar."""
+scalar DateTime
+
+type Query {
+  artefacts(display_name: String, description: String, source: String, manifest: String): [artefact!]!
+  artefact_attributes(attribute_name: String, artefact_id: Int, attribute_value: String): [artefact_attributes!]!
+  artefact_files(id: Int, file_type: String, display_label: String, filename: String): [artefact_files!]!
+  candidates(candidate_id: Int, candidate_name: String, title: [String], suffix: String, short_name: String, born: Int, born_gte: Int, born_lte: Int, died: Int, died_gte: Int, died_lte: Int, take: Int, cursor_candidate_id: Int): [candidate!]!
+  candidates_elections(candidate_id: Int, election_id: String, running_as: String, returned: Boolean, overturned_by: String, seated: Boolean, take: Int, cursor_candidates_elections_id: Int): [candidates_election!]!
+  constituencies(constituency_id: Int, constituency: String, has_data: Boolean, take: Int, cursor_constituency_id: Int): [constituency!]!
+  elections(election_year_gte: Int = 1500, election_year_lte: Int = 2020, election_month: String, constituency: String, constituency_id: Int, office: String, electorate_size_est_lte: Int, electorate_size_est_gte: Int, countyboroughuniv: String, franchise_type: [String], by_election_general: String, by_election_cause: String, contested: String, has_data: Boolean, take: Int, cursor_id: Int): [election!]!
+  election_attributes(election_id: String, attribute_name: String, take: Int, cursor_id: Int): [election_attribute!]!
+  election_dailies(election_id: String, candidate_id: Int): [election_dailies!]!
+  election_dates(election_year: Int = 0, election_year_gte: Int = 0, election_year_lte: Int = 9999, orderBy: OrderByDate): [election_dates!]!
+  location_from_lat_lng(lat: Float, lng: Float, distance: Float = 1000): [locations_from_lat_lng!]!
+  poll_books(pollbook_id: String, constituency_id: Int, has_data: Boolean, take: Int, cursor_pollbook_id: String): [poll_book!]!
+  stat_num_poll_books(constituency_id: Int): Int
+  stats(constituency: String, num_elections_all_lte: Int, num_contested_all_lte: Int, percent_contested_all_lte: Float, num_uncontested_all_lte: Int, percent_uncontested_all_lte: Float, num_elections_by_lte: Int, num_contested_by_lte: Int, percent_contested_by_lte: Float, num_uncontested_by_lte: Int, percent_uncontested_by_lte: Float, num_elections_general_lte: Int, num_contested_general_lte: Int, percent_contested_general_lte: Float, num_uncontested_general_lte: Int, percent_uncontested_general_lte: Float, num_elections_all_gte: Int, num_contested_all_gte: Int, percent_contested_all_gte: Float, num_uncontested_all_gte: Int, percent_uncontested_all_gte: Float, num_elections_by_gte: Int, num_contested_by_gte: Int, percent_contested_by_gte: Float, num_uncontested_by_gte: Int, percent_uncontested_by_gte: Float, num_elections_general_gte: Int, num_contested_general_gte: Int, percent_contested_general_gte: Float, num_uncontested_general_gte: Int, percent_uncontested_general_gte: Float): [stats!]!
+  voters(forename: String, surname: String, occupation: String, guild: String, take: Int, cursor_voter_id: Int): [voter!]!
+  votes(page: Int, line: Int, rejected: Boolean, take: Int, cursor_votes_id: Int): [vote!]!
+  voters_occupations(occupation: String, take: Int, cursor_id: Int): [voters_occupations!]!
+  occupations_group(occupation: String): [occupations_map!]!
+  geocodes(street: String, city: String, county: String, parish: String, abode: String, address: String, constituency: String): [geocodes!]!
+  ms_comments(voter_id: Int, election_id: String, rejected: Boolean, comment: String, take: Int, cursor_id: Int): [ms_comments!]!
+}
+
+enum SortOrder {
+  asc
+  desc
+}
+
+input OrderByDate {
+  election_date: SortOrder!
+}
+
+type aggregate {
+  count: Int
+}
+
+enum GroupCategory {
+  election_year
+  election_month
+  constituency
+  countyboroughuniv
+  franchise_type
+  by_election_general
+  by_election_cause
+  contested
+}
+
+type artefact_files {
+  id: Int!
+  file_type: String!
+  display_label: String
+  file_name: String
+}
+
+type artefact_attributes {
+  id: Int!
+  artefact_id: Int!
+  attribute_name: String
+  attribute_value: String
+  artefact: [artefact]
+  artefact_files: [artefact_files]
+  candidates: [candidate]
+  constituencies: [constituency]
+  election: [election]
+}
+
+type artefact {
+  id: Int!
+  display_name: String
+  description: String
+  source: String
+  source_link: String
+  license: String
+  attribution: String
+  manifest: String
+  artefact_attributes(attribute_name: String, artefact_id: Int, attribute_value: String): [artefact_attributes]
+}
+
+type candidate {
+  candidate_id: Int!
+  candidate_name: String
+  title: String
+  suffix: String
+  short_name: String
+  born: Int
+  died: Int
+  candidates_elections(election_id: String, running_as: String, returned: Boolean, overturned_by: String, seated: Boolean, take: Int, cursor_candidates_elections_id: Int): [candidates_election]
+  votes(page: Int, line: Int, rejected: Boolean, take: Int, cursor_votes_id: Int): [vote]
+  artefacts: [artefact]
+  elections: [election]
+}
+
+type candidates_election {
+  candidates_elections_id: Int!
+  election_id: String!
+  candidate_id: Int!
+  running_as: String
+  returned: Boolean
+  overturned_by: String
+  seated: Boolean
+  election(election_year_gte: Int = 1500, election_year_lte: Int = 2020, election_month: String, constituency: String, constituency_id: Int, office: String, electorate_size_est_lte: Int, electorate_size_est_gte: Int, countyboroughuniv: String, franchise_type: [String], by_election_general: String, by_election_cause: String, contested: String, take: Int, cursor_id: Int): [election]
+  candidate: [candidate]
+}
+
+type constituency {
+  constituency_id: Int!
+  constituency: String
+  has_data: Boolean
+  lat: Float
+  lng: Float
+  elections: [election]
+  electionsCount: Int
+  stats: [stats]
+  artefact: [artefact]
+}
+
+type election_attribute {
+  id: Int!
+  election_id: String!
+  attribute_name: String!
+  attribute_value: String!
+  election: [election]
+}
+
+type election_dailies {
+  id: Int!
+  election_id: String!
+  candidate_id: Int!
+  candidate_name: String
+  day_num: Int
+  polldate: DateTime
+  day_of_week: String
+  daily_votes: Int
+  total_votes: Int
+  with_voters: Int
+  election: [election]
+  candidate: [candidate]
+}
+
+type election_dates {
+  election_id: String!
+  election_date: DateTime
+  election: [election]
+}
+
+type election {
+  id: Int
+  election_id: String
+  election_year: String
+  election_month: String
+  election_date: DateTime
+  office: String
+  electorate_size_est: String
+  electorate_size_desc: String
+  voterate: String
+  countyboroughuniv: String
+  franchise_detail: String
+  franchise_type: String
+  by_election_general: String
+  by_election_cause: String
+  contested: String
+  notes: String
+  notable_remarks: String
+  constituency: String
+  constituency_id: String
+  constituencies: constituency
+  pollbook_id: String
+  has_data: Boolean
+  ms_comments(rejected: Boolean, in_votes: Boolean): [ms_comments]
+  candidates_elections(candidate_id: Int, running_as: String, returned: Boolean, overturned_by: String, seated: Boolean, take: Int, cursor_candidates_elections_id: Int): [candidates_election]
+  poll_books(has_data: Boolean): [poll_book]
+  votes(page: Int, line: Int, rejected: Boolean, take: Int, cursor_votes_id: Int): [vote]
+  artefacts: [artefact]
+  voters: [voter]
+  election_dailies: [election_dailies]
+}
+
+type locations_from_lat_lng {
+  constituency_id: String
+  constituency: String
+  lat: Float
+  lng: Float
+  distance: Float
+  has_data: Boolean
+  elections: [election]
+  electionsCount: Int
+  stats: [stats]
+  artefact: [artefact]
+}
+
+enum LocationType {
+  borough
+  county
+}
+
+type poll_book {
+  pollbook_id: String
+  constituency_id: String
+  printms: String
+  citation: String
+  holdings: String
+  source: String
+  election_id: String
+  notes: String
+  has_data: Boolean
+  constituency: constituency
+  elections: election
+  votes(page: Int, line: Int, rejected: Boolean, take: Int, cursor_votes_id: Int): [vote]
+}
+
+type stats {
+  constituency_id: Int
+  constituency: constituency
+  num_elections_all: Int
+  num_contested_all: Int
+  percent_contested_all: Float
+  num_uncontested_all: Int
+  percent_uncontested_all: Float
+  num_elections_by: Int
+  num_contested_by: Int
+  percent_contested_by: Float
+  num_uncontested_by: Int
+  percent_uncontested_by: Float
+  num_elections_general: Int
+  num_contested_general: Int
+  percent_contested_general: Float
+  num_uncontested_general: Int
+  percent_uncontested_general: Float
+}
+
+type voter {
+  voter_id: Int
+  forename: String
+  surname: String
+  suffix: String
+  suffix_std: String
+  title: String
+  class: String
+  occupation: String
+  occupation_std: String
+  occupations_level1: [occupations_map]
+  occupations_level2: [occupations_map]
+  guild: String
+  alley: String
+  street: String
+  city: String
+  county: String
+  county_std: String
+  college: String
+  college_std: String
+  fellowship: String
+  degree: String
+  oath: String
+  parish: String
+  parish_of_freehold: String
+  hundred: String
+  ward_of_freehold: String
+  occupier_and_freehold: String
+  abode: String
+  abode_std: String
+  ward: String
+  area: String
+  location_sanitized: String
+  geocode_id: Int
+  geocode: geocodes
+  geo_lat: Float
+  geo_long: Float
+  notes: String
+  votes(page: Int, line: Int, rejected: Boolean, take: Int, cursor_votes_id: Int): [vote]
+  candidates: [candidate]
+  election: [election]
+  ms_comments(voter_id: Int, election_id: String, rejected: Boolean, take: Int, cursor_id: Int): [ms_comments]
+}
+
+type vote {
+  votes_id: Int
+  voter_id: Int
+  voter(forename: String, surname: String, occupation: String, guild: String): [voter]
+  elections: [election]
+  pollbook_id: String
+  poll_books(has_data: Boolean): [poll_book]
+  constituency_id: String
+  constituencies: [constituency]
+  page: Int
+  line: Int
+  candidate_id: Int
+  candidate: [candidate]
+  poll_date: String
+  rejected: Boolean
+  reason_rejected: String
+}
+
+type voters_occupations {
+  id: Int
+  voter_id: Int
+  occupation: String
+  voters: [voter]
+  level1: [occupations_map]
+  level2: [occupations_map]
+}
+
+type occupations_map {
+  level_num: Int
+  level_code: String
+  level_name: String
+  voters: [voter]
+}
+
+type geocodes {
+  geocode_id: Int
+  concat_id: String
+  street: String
+  city: String
+  county: String
+  parish: String
+  abode: String
+  address_type: String
+  address: String
+  score: Float
+  lat: Float
+  lng: Float
+  constituency_id: Int
+  constituency: constituency
+  voter(forename: String, surname: String, occupation: String, guild: String): [voter]
+}
+
+type ms_comments {
+  id: Int
+  election_id: String
+  ms_comment: String
+  rejected: Boolean
+  in_votes: Boolean
+  voter: [voter]
+  elections: [election]
+}
+
