@@ -361,18 +361,115 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/newcastle-api-metadata-information-api-openapi.yml
-- aid: newcastle:newcastle-v1-api
-  name: Newcastle University V1 API
-  description: A set of endpoints created as as part of the version one of the application.
+- aid: newcastle:newcastle-collections-api
+  name: Newcastle University Collections API
+  description: A set of endpoints describing the collections present in the repository.
   humanURL: https://api-dor.ncl.ac.uk/
   baseURL: https://api-dor.ncl.ac.uk
   tags:
-  - v1
-  tags_raw:
-  - V1
+  - Collections
   properties:
   - type: OpenAPI
-    url: openapi/newcastle-v1-api-openapi.yml
+    url: openapi/newcastle-collections-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseriesentry-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-timeseries-entry-example.json
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
+- aid: newcastle:newcastle-contentdm-api
+  name: Newcastle University CONTEN Tdm API
+  description: >-
+    A set of endpoints used for describing digitised objects stored in the repository, as well as all
+    the complementary resources created based on them.
+  humanURL: https://api-dor.ncl.ac.uk/
+  baseURL: https://api-dor.ncl.ac.uk
+  tags:
+  - CONTENTdm
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-contentdm-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseriesentry-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-timeseries-entry-example.json
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
+- aid: newcastle:newcastle-items-api
+  name: Newcastle University Items API
+  description: >-
+    A set of endpoints describing the integrants of the given digitised object present in the repository.
+  humanURL: https://api-dor.ncl.ac.uk/
+  baseURL: https://api-dor.ncl.ac.uk
+  tags:
+  - Items
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-items-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseriesentry-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-timeseries-entry-example.json
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
+- aid: newcastle:newcastle-tei-api
+  name: Newcastle University TEI API
+  description: >-
+    A set of endpoints providing metadata and content definitions of documents encoded using [Text Encoding
+    Initiative](https://tei-c.org/) guidance.
+  humanURL: https://api-dor.ncl.ac.uk/
+  baseURL: https://api-dor.ncl.ac.uk
+  tags:
+  - TEI
+  properties:
+  - type: OpenAPI
+    url: openapi/newcastle-tei-api-openapi.yml
+  - type: Documentation
+    url: https://api.usb.urbanobservatory.ac.uk/
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseries-schema.json
+  - type: JSONSchema
+    url: json-schema/newcastle-timeseriesentry-schema.json
+  - type: x-vocabulary
+    url: vocabulary/newcastle-vocabulary.yml
+  - type: x-rules
+    url: rules/newcastle-rules.yml
+  - type: x-json-ld
+    url: json-ld/newcastle-context.jsonld
+  - type: x-examples
+    url: examples/newcastle-timeseries-entry-example.json
+  - type: Website
+    url: https://urbanobservatory.ac.uk/
 - aid: newcastle:newcastle-time-series-api
   name: Newcastle University Time Series API
   description: >-

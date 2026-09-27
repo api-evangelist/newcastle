@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Newcastle University | Repository | Search and Data…
+  title: Newcastle University | Digitised Objects Repository |…
   version: 1.27.0
   description: 'The *Search and Data API* provides a single point of truth interface for searching, browsing and displaying digitised objects held in Newcastle University Library''s Special Collections.
 
@@ -11,47 +11,16 @@ info:
 servers:
 - url: https://api-dor.ncl.ac.uk
 tags:
-- name: Digitised Objects
-  description: A set of endpoints describing the digitised objects present in the repository.
+- name: Items
+  description: A set of endpoints describing the integrants of the given digitised object present in the repository.
 paths:
-  /iiif/{id}:
+  /v1/items:
     get:
-      operationId: getIIIF
-      summary: IIIF permalink
-      description: Signpost to to a service responsible for IIIF manifests generation for the given digitised object.
-      parameters:
-      - in: path
-        name: id
-        schema:
-          type: string
-        example: UkLWZg9D
-        required: true
-        description: Digitised object's identifier.
+      operationId: getV1ItemsIndex
+      summary: List of items
+      description: Returns summary of items present in the system.
       tags:
-      - Digitised Objects
-      responses:
-        '302':
-          description: Redirects to a IIIF manifest.
-          headers:
-            Location:
-              description: URL where the IIIF manifest will be created.
-              schema:
-                type: string
-                format: uri
-              required: true
-        '400':
-          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
-        '404':
-          description: A digitised object with the specified ID was not found.
-        5XX:
-          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
-  /v1/digitised-objects:
-    get:
-      operationId: getV1DigitisedObjectsIndex
-      summary: List of digitised objects
-      description: Returns summary of digitised objects present in the system.
-      tags:
-      - Digitised Objects
+      - Items
       parameters:
       - in: query
         name: page
@@ -62,7 +31,7 @@ paths:
         name: page.size
         schema:
           type: number
-        description: The number of digitised objects matching returned per page, between 1 and 100.
+        description: The number of items matching returned per page, between 1 and 100.
       - in: query
         name: page.start
         schema:
@@ -70,7 +39,7 @@ paths:
         description: The pagination starting offset starting from 0.
       responses:
         '200':
-          description: The list of digitised objects matching a query.
+          description: The list of items matching a query.
           content:
             application/json:
               schema:
@@ -86,20 +55,16 @@ paths:
                         id:
                           type: string
                           example: UkLWZg9D
-                        refCode:
-                          type:
-                          - string
-                          - 'null'
-                          example: NUA/005671/01
                         title:
                           type:
                           - string
                           - 'null'
-                          example: Aerial view of King's College
+                          example: Page 1
                         description:
                           type:
                           - string
                           - 'null'
+                          example: First page of Chapter 1.
                         _links:
                           type: object
                           properties:
@@ -109,9 +74,9 @@ paths:
                           - definition
                       required:
                       - id
-                      - refCode
                       - title
                       - description
+                      - digitisedObject
                       - _links
                   pagination:
                     $ref: '#/components/schemas/Pagination'
@@ -132,13 +97,13 @@ paths:
           description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
         5XX:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
-  /v1/digitised-objects/search:
+  /v1/items/search:
     get:
-      operationId: getV1DigitisedObjectsSearch
-      summary: Search digitised objects
-      description: Performs a keyword search with filters on the digitised objects present in the system.
+      operationId: getV1ItemsSearch
+      summary: Search items
+      description: Performs a keyword search with filters on the items present in the system.
       tags:
-      - Digitised Objects
+      - Items
       parameters:
       - $ref: '#/components/parameters/SearchPage'
       - $ref: '#/components/parameters/SearchPageSize'
@@ -148,6 +113,8 @@ paths:
       - $ref: '#/components/parameters/SearchSort'
       - $ref: '#/components/parameters/SearchFilterCollection'
       - $ref: '#/components/parameters/SearchFilterCollectionId'
+      - $ref: '#/components/parameters/SearchFilterDigitisedObject'
+      - $ref: '#/components/parameters/SearchFilterDigitisedObjectId'
       - $ref: '#/components/parameters/SearchFilterSubject'
       - $ref: '#/components/parameters/SearchFilterThematicCategory'
       - $ref: '#/components/parameters/SearchFilterDateFrom'
@@ -172,27 +139,30 @@ paths:
                       properties:
                         id:
                           type: string
-                          example: UkLWZg9D
+                          example: UkLWZg9D/3
+                        position:
+                          type: number
+                          example: 3
                         refCode:
                           type:
                           - string
                           - 'null'
-                          example: NUA/028944/02
+                          example: Alderson Collection PAR PET
                         title:
                           type:
                           - string
                           - 'null'
-                          example: Aerial view of main University campus and Newcastle city centre
+                          example: Page 1
                         description:
                           type:
                           - string
                           - 'null'
-                          example: Aerial view of university campus from the west including the Armstrong Building, Bedson Building, King George VI Building and Agriculture Building
+                          example: First page of Chapter 1.
                         format:
                           type:
                           - string
                           - 'null'
-                          example: Photograph
+                          example: Illustration
                         language:
                           type:
                           - string
@@ -223,6 +193,31 @@ paths:
                             type: string
                         canvas:
                           type: string
+                        digitisedObject:
+                          type: object
+                          properties:
+                            id:
+                              type: string
+                              example: UkLWZg9D
+                            title:
+                              type:
+                              - string
+                              - 'null'
+                              example: Peter Parley's Visit to London During the Coronation of Queen Victoria
+                            manifest:
+                              type: string
+                            _links:
+                              type: object
+                              properties:
+                                definition:
+                                  $ref: '#/components/schemas/HateoasLink'
+                              required:
+                              - definition
+                          required:
+                          - id
+                          - title
+                          - manifest
+                          - _links
                         highlights:
                           type: object
                           description: The list of all matches for the given query per searched field.
@@ -262,6 +257,7 @@ paths:
                       - dates
                       - places
                       - canvas
+                      - digitisedObject
                       - highlights
                       - _links
                   pagination:
@@ -294,16 +290,16 @@ paths:
         '400':
           description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
         '404':
-          description: Digitised objects matching the given criteria were not found.
+          description: Items matching the given criteria were not found.
         5XX:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
-  /v1/digitised-objects/search/autocomplete:
+  /v1/items/search/autocomplete:
     get:
-      operationId: getV1DigitisedObjectsSearchAutocomplete
-      summary: Search digitised objects autocompletion
+      operationId: getV1ItemsSearchAutocomplete
+      summary: Search items autocompletion
       description: Provides search box autocompletion for the given phrase.
       tags:
-      - Digitised Objects
+      - Items
       parameters:
       - $ref: '#/components/parameters/AutocompleteQ'
       - $ref: '#/components/parameters/AutocompletePageSize'
@@ -321,11 +317,11 @@ paths:
           description: No suggestions were available for the given query.
         5XX:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
-  /v1/digitised-objects/{id}:
+  /v1/items/{id}/{position}:
     get:
-      operationId: getV1DigitisedObjectsShow
-      summary: Digitised object definition
-      description: Returns all the metadata and signposts to the related resources for the given digitised object.
+      operationId: getV1ItemsShow
+      summary: Item definition
+      description: Returns all the metadata and signposts to the related resources for the given item.
       parameters:
       - in: path
         name: id
@@ -333,12 +329,19 @@ paths:
           type: string
         example: UkLWZg9D
         required: true
-        description: Digitised object's identifier.
+        description: Parent's digitised object identifier.
+      - in: path
+        name: position
+        schema:
+          type: number
+        example: 3
+        required: true
+        description: Item's position within the digitised object's structure.
       tags:
-      - Digitised Objects
+      - Items
       responses:
         '200':
-          description: The complete definition of the identified digitised object.
+          description: The complete definition of the identified item.
           content:
             application/json:
               schema:
@@ -346,26 +349,30 @@ paths:
                 properties:
                   id:
                     type: string
-                    example: UkLWZg9D
+                    example: UkLWZg9D/3
+                  position:
+                    type: number
+                    example: 3
                   refCode:
                     type:
                     - string
                     - 'null'
-                    example: NUA/005671/01
+                    example: Alderson Collection PAR PET
                   title:
                     type:
                     - string
                     - 'null'
-                    example: Aerial view of King's College
+                    example: Page 1
                   description:
                     type:
                     - string
                     - 'null'
+                    example: First page of Chapter 1.
                   format:
                     type:
                     - string
                     - 'null'
-                    example: Photograph
+                    example: Illustration
                   language:
                     type:
                     - string
@@ -420,19 +427,28 @@ paths:
                     type:
                     - string
                     - 'null'
-                  manifest:
+                  canvas:
                     type: string
-                  collection:
+                  digitisedObject:
                     type: object
                     properties:
                       id:
                         type: string
-                        example: ngQRYFju
+                        example: UkLWZg9D
                       title:
                         type:
                         - string
                         - 'null'
-                        example: Newcastle University Archives
+                        example: Peter Parley's Visit to London During the Coronation of Queen Victoria
+                      description:
+                        type:
+                        - string
+                        - 'null'
+                        example: Colour illustrations depicting coronation of Queen Victoria
+                      manifest:
+                        type: string
+                      thumbnail:
+                        type: string
                       _links:
                         type: object
                         properties:
@@ -443,21 +459,9 @@ paths:
                     required:
                     - id
                     - title
-                    - _links
-                  items:
-                    type: object
-                    properties:
-                      totalElements:
-                        type: number
-                      _links:
-                        type: object
-                        properties:
-                          search:
-                            $ref: '#/components/schemas/HateoasLink'
-                        required:
-                        - search
-                    required:
-                    - totalElements
+                    - description
+                    - manifest
+                    - thumbnail
                     - _links
                   transcript:
                     type:
@@ -473,41 +477,6 @@ paths:
                         - content
                     required:
                     - _links
-                  teis:
-                    type:
-                    - array
-                    - 'null'
-                    items:
-                      type: object
-                      properties:
-                        id:
-                          type: string
-                          example: UkLWZg9D
-                        type:
-                          type:
-                          - string
-                          - 'null'
-                          enum:
-                          - primary
-                        _links:
-                          type: object
-                          properties:
-                            content:
-                              $ref: '#/components/schemas/HateoasLink'
-                          required:
-                          - content
-                      required:
-                      - id
-                      - type
-                      - _links
-                  createdAt:
-                    type: string
-                    format: date-time
-                  updatedAt:
-                    type:
-                    - string
-                    - 'null'
-                    format: date-time
                   _links:
                     type: object
                     properties:
@@ -534,13 +503,9 @@ paths:
                 - contributors
                 - copyright
                 - license
-                - manifest
-                - collection
-                - items
+                - canvas
+                - digitisedObject
                 - transcript
-                - teis
-                - createdAt
-                - updatedAt
                 - _links
         '400':
           description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
@@ -548,11 +513,11 @@ paths:
           description: A digitised object with the specified ID was not found.
         5XX:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
-  /v1/digitised-objects/{id}/transcript/content:
+  /v1/items/{id}/{position}/transcript/content:
     get:
-      operationId: getV1DigitisedObjectsTranscriptContent
-      summary: Digitised object's transcript
-      description: Returns a transcript of the given digitised object.
+      operationId: getV1ItemsTranscriptContent
+      summary: Item's transcript
+      description: Returns a transcript of the given item.
       parameters:
       - in: path
         name: id
@@ -560,12 +525,19 @@ paths:
           type: string
         example: UkLWZg9D
         required: true
-        description: Digitised object's identifier.
+        description: Parent's digitised object identifier.
+      - in: path
+        name: position
+        schema:
+          type: number
+        example: 3
+        required: true
+        description: Item's position within the digitised object's structure.
       tags:
-      - Digitised Objects
+      - Items
       responses:
         '200':
-          description: The transcript of the digitised object in a plain text form.
+          description: The transcript of the item in a plain text form.
           content:
             text/plain:
               schema:
@@ -573,7 +545,7 @@ paths:
         '400':
           description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
         '404':
-          description: A digitised object with the specified ID or its transcript was not found.
+          description: An item with the specified ID and position or its transcript was not found.
         5XX:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
 components:
@@ -596,6 +568,12 @@ components:
       schema:
         type: number
       description: The pagination starting offset starting from 0.
+    SearchFilterDigitisedObject:
+      in: query
+      name: filter.digitisedObject
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of digitised object titles that the items should belong to.
     AutocompleteQ:
       in: query
       name: q
@@ -670,6 +648,12 @@ components:
       schema:
         $ref: '#/components/schemas/StringOrArrayOfStrings'
       description: List of collection ids that the items should belong to.
+    SearchFilterDigitisedObjectId:
+      in: query
+      name: filter.digitisedObject.id
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of digitised object ids that the items should belong to.
     SearchSort:
       in: query
       name: sort

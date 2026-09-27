@@ -1,0 +1,236 @@
+openapi: 3.2.0
+info:
+  title: Newcastle University | Digitised Objects Repository |…
+  version: 1.27.0
+  description: 'The *Search and Data API* provides a single point of truth interface for searching, browsing and displaying digitised objects held in Newcastle University Library''s Special Collections.
+
+
+    Data curators: Special Collections and Archives\
+
+    Administrators: Digital Library Services'
+servers:
+- url: https://api-dor.ncl.ac.uk
+tags:
+- name: Collections
+  description: A set of endpoints describing the collections present in the repository.
+paths:
+  /v1/collections:
+    get:
+      operationId: getV1CollectionsIndex
+      summary: List of collections
+      description: Returns summary of collections present in the system.
+      tags:
+      - Collections
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: number
+        description: The pagination index, starting from 1 for the first page.
+      - in: query
+        name: page.size
+        schema:
+          type: number
+        description: The number of collections matching returned per page, between 1 and 100.
+      - in: query
+        name: page.start
+        schema:
+          type: number
+        description: The pagination starting offset starting from 0.
+      responses:
+        '200':
+          description: The list of collections matching a query.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  items:
+                    type:
+                    - array
+                    - 'null'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: ngQRYFju
+                        title:
+                          type:
+                          - string
+                          - 'null'
+                          example: Newcastle University Archives
+                        _links:
+                          type: object
+                          properties:
+                            definition:
+                              $ref: '#/components/schemas/HateoasLink'
+                          required:
+                          - definition
+                      required:
+                      - id
+                      - title
+                      - _links
+                  pagination:
+                    $ref: '#/components/schemas/Pagination'
+                  _links:
+                    allOf:
+                    - $ref: '#/components/schemas/HomeLinks'
+                required:
+                - items
+                - pagination
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+  /v1/collections/{id}:
+    get:
+      operationId: getV1CollectionsShow
+      summary: Collection definition
+      description: Returns all the metadata and signposts to the related resources for the given collection.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: ngQRYFju
+        required: true
+        description: Collection's identifier.
+      tags:
+      - Collections
+      responses:
+        '200':
+          description: The complete definition of the identified collection.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: string
+                    example: ngQRYFju
+                  title:
+                    type:
+                    - string
+                    - 'null'
+                    example: Newcastle University Archives
+                  digitisedObjects:
+                    type: object
+                    properties:
+                      totalElements:
+                        type: number
+                      _links:
+                        type: object
+                        properties:
+                          search:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - search
+                    required:
+                    - totalElements
+                    - _links
+                  items:
+                    type: object
+                    properties:
+                      totalElements:
+                        type: number
+                      _links:
+                        type: object
+                        properties:
+                          search:
+                            $ref: '#/components/schemas/HateoasLink'
+                        required:
+                        - search
+                    required:
+                    - totalElements
+                    - _links
+                  _links:
+                    type: object
+                    properties:
+                      index:
+                        $ref: '#/components/schemas/HateoasLink'
+                    required:
+                    - index
+                required:
+                - id
+                - title
+                - digitisedObjects
+                - items
+                - _links
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A collection with the specified ID was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
+components:
+  schemas:
+    Pagination:
+      type: object
+      description: Defines the metadata for the pagination used for providing the data on the given endpoint.
+      properties:
+        size:
+          type: number
+          description: Represents how many items can be presented on one page.
+        totalPages:
+          type: number
+          description: Represents how many pages are in total to fetch.
+        totalElements:
+          type: number
+          description: Represents how many items are in total to fetch.
+        number:
+          type: number
+          description: Represents the current page's number.
+        _links:
+          type: object
+          description: Standard set of links related to pagination.
+          properties:
+            first:
+              $ref: '#/components/schemas/HateoasLink'
+            previous:
+              $ref: '#/components/schemas/HateoasLink'
+            next:
+              $ref: '#/components/schemas/HateoasLink'
+            last:
+              $ref: '#/components/schemas/HateoasLink'
+          required:
+          - first
+          - last
+      required:
+      - size
+      - totalPages
+      - totalElements
+      - number
+      - _links
+    HateoasParameters:
+      type: object
+      additionalProperties: true
+      description: Any relevant parameters that should be appended to the URL (for GET method) or passed as a payload for other HTTP methods.
+      example:
+        '?': '...'
+    HateoasLink:
+      type: object
+      properties:
+        href:
+          type: string
+        type:
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+        parameters:
+          $ref: '#/components/schemas/HateoasParameters'
+      required:
+      - href
+      - type
+    HomeLinks:
+      type: object
+      description: Standard set of links related to the homepage.
+      properties:
+        home:
+          $ref: '#/components/schemas/HateoasLink'
+      required:
+      - home

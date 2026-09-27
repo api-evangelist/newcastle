@@ -1,0 +1,53 @@
+openapi: 3.2.0
+info:
+  title: Newcastle University | Digitised Objects Repository |…
+  version: 1.27.0
+  description: 'The *Search and Data API* provides a single point of truth interface for searching, browsing and displaying digitised objects held in Newcastle University Library''s Special Collections.
+
+
+    Data curators: Special Collections and Archives\
+
+    Administrators: Digital Library Services'
+servers:
+- url: https://api-dor.ncl.ac.uk
+tags:
+- name: TEI
+  description: A set of endpoints providing metadata and content definitions of documents encoded using Text Encoding Initiative guidance.
+paths:
+  /v1/tei/{id}/content:
+    get:
+      operationId: getV1TEIContent
+      summary: TEI Document Content
+      description: Signpost to to a service responsible for providing the content of a TEI document with the given identifier.
+      parameters:
+      - in: path
+        name: id
+        schema:
+          type: string
+        example: UkLWZg9D
+        required: true
+        description: TEI document's identifier.
+      tags:
+      - TEI
+      responses:
+        '302':
+          description: Redirects to an XML content of the given TEI document.
+          content:
+            application/xml:
+              schema:
+                type: object
+                additionalProperties: true
+              example: "<TEI xmlns=\"http://www.tei-c.org/ns/1.0\">\n  (...)\n</TEI>\n"
+          headers:
+            Location:
+              description: URL where the TEI content can be consumed.
+              schema:
+                type: string
+                format: uri
+              required: true
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A TEI document with the specified ID was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.

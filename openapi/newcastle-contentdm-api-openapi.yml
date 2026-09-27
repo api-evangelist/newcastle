@@ -1,0 +1,54 @@
+openapi: 3.2.0
+info:
+  title: Newcastle University | Digitised Objects Repository |…
+  version: 1.27.0
+  description: 'The *Search and Data API* provides a single point of truth interface for searching, browsing and displaying digitised objects held in Newcastle University Library''s Special Collections.
+
+
+    Data curators: Special Collections and Archives\
+
+    Administrators: Digital Library Services'
+servers:
+- url: https://api-dor.ncl.ac.uk
+tags:
+- name: CONTENTdm
+  description: A set of endpoints used for describing digitised objects stored in the repository, as well as all the complementary resources created based on them.
+paths:
+  /v1/contentdm/{collectionId}/{itemId}:
+    get:
+      operationId: getV1Contentdm
+      summary: CONTENTdm reverse mapping
+      description: Maps items from CONTENTdm realms against records present in the Digitised Objects Repository.
+      parameters:
+      - in: path
+        name: collectionId
+        schema:
+          type: string
+        example: p21051coll2
+        required: true
+        description: CONTETNdm collection's id (alias)
+      - in: path
+        name: itemId
+        schema:
+          type: string
+        example: '1922'
+        required: true
+        description: CONTETNdm item's id (pointer)
+      tags:
+      - CONTENTdm
+      responses:
+        '302':
+          description: Redirect to the digitised object's description (```/v1/digitised-objects/{id}```).
+          headers:
+            Location:
+              description: URL where the digitised object's description lives.
+              schema:
+                type: string
+                format: uri
+              required: true
+        '400':
+          description: The server could not finalise the response due to the malformed, invalid or missing request parameters.
+        '404':
+          description: A digitised object with the specified collection and object IDs was not found.
+        5XX:
+          description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
