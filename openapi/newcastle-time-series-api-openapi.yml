@@ -143,6 +143,38 @@ paths:
                 $ref: '#/components/schemas/Forbidden'
 components:
   schemas:
+    Storage:
+      type: object
+      description: The storage mechanism used to hold the data internally.
+      properties:
+        unitId:
+          type: string
+          format: uuid
+          description: A unique identifier for the storage used for this data within the internal systems.
+        name:
+          type: string
+          description: A name for the storage, usually those used in programming (e.g. real, integer)
+        suffix:
+          type: string
+          description: The suffix used for data storage in the internal systems.
+      example:
+        storageId: 3
+        name: Real
+        suffix: real
+    Unit:
+      type: object
+      description: The units associated with the values held in the timeseries.
+      properties:
+        unitId:
+          type: string
+          format: uuid
+          description: A unique identifier for the units associated with timeseries.
+        name:
+          type: string
+          description: A friendly description for the units used.
+      example:
+        unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+        name: amperes
     Timeseries:
       type: object
       properties:
@@ -189,6 +221,68 @@ components:
         links:
         - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2
           rel: self
+    BadRequest:
+      type: object
+      description: An invalid ID or query parameter was used to request information, such as an ID not in the [UUID syntax](https://en.wikipedia.org/wiki/Universally_unique_identifier).
+      properties:
+        error:
+          type: boolean
+          description: Indicator that an error was returned.
+        message:
+          type: string
+          description: Description of the error which occurred in friendly terms.
+        code:
+          type: string
+          description: A short description of the error, for use in code.
+          enum:
+          - MalformedUUID
+          - BadRequestError
+      example:
+        error: true
+        message: Malformed UUID cannot be used.
+        code: MalformedUUID
+    Forbidden:
+      type: object
+      description: The requested data could not be returned, because permissions do not permit.
+      properties:
+        error:
+          type: boolean
+          description: Indicator that an error was returned.
+        message:
+          type: string
+          description: Description of the error which occurred in friendly terms.
+        code:
+          type: string
+          description: A short description of the error, for use in code.
+          enum:
+          - ForbiddenError
+      example:
+        error: true
+        message: No access to this timeseries.
+        code: ForbiddenError
+    Link:
+      type: object
+      description: A link provided for [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) purposes, to the item itself or an associated API method.
+      properties:
+        rel:
+          type: string
+          description: The relation of the URL to the entity in the API, which will be taken from [this list](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) where possible, but non-standard relations are permitted.
+        href:
+          type: string
+          description: An absolute URL for the resource.
+        method:
+          type: string
+          description: The HTTP protocol method to be used, or `GET` if not specified.
+          default: GET
+          enum:
+          - GET
+          - POST
+          - PATCH
+          - PUT
+          - DELETE
+      example:
+        rel: self
+        href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic
     TimeseriesEntry:
       type: object
       description: A historic entry associated with a timeseries and a time.
@@ -215,97 +309,3 @@ components:
         time: '2018-02-12T10:30:40.125Z'
         duration: -2.1
         value: 3.5
-    Link:
-      type: object
-      description: A link provided for [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) purposes, to the item itself or an associated API method.
-      properties:
-        rel:
-          type: string
-          description: The relation of the URL to the entity in the API, which will be taken from [this list](https://developer.mozilla.org/en-US/docs/Web/HTML/Link_types) where possible, but non-standard relations are permitted.
-        href:
-          type: string
-          description: An absolute URL for the resource.
-        method:
-          type: string
-          description: The HTTP protocol method to be used, or `GET` if not specified.
-          default: GET
-          enum:
-          - GET
-          - POST
-          - PATCH
-          - PUT
-          - DELETE
-      example:
-        rel: self
-        href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic
-    Unit:
-      type: object
-      description: The units associated with the values held in the timeseries.
-      properties:
-        unitId:
-          type: string
-          format: uuid
-          description: A unique identifier for the units associated with timeseries.
-        name:
-          type: string
-          description: A friendly description for the units used.
-      example:
-        unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
-        name: amperes
-    Forbidden:
-      type: object
-      description: The requested data could not be returned, because permissions do not permit.
-      properties:
-        error:
-          type: boolean
-          description: Indicator that an error was returned.
-        message:
-          type: string
-          description: Description of the error which occurred in friendly terms.
-        code:
-          type: string
-          description: A short description of the error, for use in code.
-          enum:
-          - ForbiddenError
-      example:
-        error: true
-        message: No access to this timeseries.
-        code: ForbiddenError
-    BadRequest:
-      type: object
-      description: An invalid ID or query parameter was used to request information, such as an ID not in the [UUID syntax](https://en.wikipedia.org/wiki/Universally_unique_identifier).
-      properties:
-        error:
-          type: boolean
-          description: Indicator that an error was returned.
-        message:
-          type: string
-          description: Description of the error which occurred in friendly terms.
-        code:
-          type: string
-          description: A short description of the error, for use in code.
-          enum:
-          - MalformedUUID
-          - BadRequestError
-      example:
-        error: true
-        message: Malformed UUID cannot be used.
-        code: MalformedUUID
-    Storage:
-      type: object
-      description: The storage mechanism used to hold the data internally.
-      properties:
-        unitId:
-          type: string
-          format: uuid
-          description: A unique identifier for the storage used for this data within the internal systems.
-        name:
-          type: string
-          description: A name for the storage, usually those used in programming (e.g. real, integer)
-        suffix:
-          type: string
-          description: The suffix used for data storage in the internal systems.
-      example:
-        storageId: 3
-        name: Real
-        suffix: real
