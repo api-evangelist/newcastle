@@ -577,7 +577,236 @@ paths:
         5XX:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
 components:
+  parameters:
+    AutocompleteQ:
+      in: query
+      name: q
+      schema:
+        type: string
+      required: true
+      description: The search phrase that should be autocompleted.
+    SearchFilterHasTranscript:
+      in: query
+      name: filter.hasTranscript
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: Determines whether returned items should have a raw transcript file related or not.
+    SearchFilterScope:
+      in: query
+      name: scope
+      schema:
+        type: string
+        example: digital.showcase
+      description: Scopes query to return items assigned to the given system.
+    SearchFilterDateFrom:
+      in: query
+      name: filter.date.from
+      schema:
+        type: number
+      description: The start of the date range query.
+    SearchFilterDateTo:
+      in: query
+      name: filter.date.to
+      schema:
+        type: number
+      description: The end of the date range query.
+    AutocompletePageSize:
+      in: query
+      name: page.size
+      schema:
+        type: number
+      description: The maximum number of items returned, between 1 and 25 (by default it is 10).
+    SearchFilterHasTEI:
+      in: query
+      name: filter.hasTEI
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: Determines whether returned items should have a TEI file related or not.
+    SearchPage:
+      in: query
+      name: page
+      schema:
+        type: number
+      description: The pagination index, starting from 1 for the first page.
+    SearchPageSize:
+      in: query
+      name: page.size
+      schema:
+        type: number
+      description: The number of items matching returned per page, between 1 and 100.
+    SearchFilterCollectionId:
+      in: query
+      name: filter.collection.id
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of collection ids that the items should belong to.
+    SearchPageStart:
+      in: query
+      name: page.start
+      schema:
+        type: number
+      description: The pagination starting offset starting from 0.
+    SearchFilterSubject:
+      in: query
+      name: filter.subject
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of subject terms that the items should belong to.
+    SearchQ:
+      in: query
+      name: q
+      schema:
+        type: string
+      description: The main search phrase.
+    SearchQAdvanced:
+      in: query
+      name: q.advanced
+      schema:
+        type: string
+      description: Query string dedicated to advanced searches, written in restricted [Elasticsearch\'s query syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax).
+    SearchFilterCollection:
+      in: query
+      name: filter.collection
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of collection titles that the items should belong to.
+    SearchFilterThematicCategory:
+      in: query
+      name: filter.thematicCategory
+      schema:
+        $ref: '#/components/schemas/StringOrArrayOfStrings'
+      description: List of thematic category terms that the items should belong to.
+    SearchSort:
+      in: query
+      name: sort
+      schema:
+        type: string
+        enum:
+        - relevance
+        - title.asc
+        - title.desc
+        - date.asc
+        - date.desc
+        - createdAt.desc
+      description: Determines the sorting method.
   schemas:
+    AutocompleteResponse:
+      type: object
+      properties:
+        items:
+          type:
+          - array
+          - 'null'
+          items:
+            type: object
+            properties:
+              title:
+                type: string
+                example: Photograph taken by Gertrude Bell showing Delhi, India
+              highlight:
+                type: string
+                example: Photograph taken by <mark>Gertrude Bell</mark> showing Delhi, India
+            required:
+            - title
+            - highlight
+        query:
+          $ref: '#/components/schemas/ReadonlyQuery'
+        _links:
+          allOf:
+          - type: object
+            properties:
+              search:
+                $ref: '#/components/schemas/HateoasLink'
+            required:
+            - search
+      required:
+      - items
+      - query
+      - _links
+    FilterValue:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        _links:
+          type: object
+          properties:
+            activate:
+              $ref: '#/components/schemas/HateoasLink'
+            deactivate:
+              $ref: '#/components/schemas/HateoasLink'
+      required:
+      - id
+      - name
+      - _links
+    SortOption:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        _links:
+          type: object
+          properties:
+            activate:
+              $ref: '#/components/schemas/HateoasLink'
+            deactivate:
+              $ref: '#/components/schemas/HateoasLink'
+          required:
+          - activate
+      required:
+      - id
+      - name
+      - _links
+    HateoasLink:
+      type: object
+      properties:
+        href:
+          type: string
+        type:
+          type: string
+          enum:
+          - GET
+          - POST
+          - PUT
+          - DELETE
+        parameters:
+          $ref: '#/components/schemas/HateoasParameters'
+      required:
+      - href
+      - type
+    ReadonlyQuery:
+      type: object
+      properties:
+        value:
+          type:
+          - string
+          - 'null'
+      required:
+      - value
+    Facet:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        count:
+          type: number
+        _links:
+          type: object
+          properties:
+            activate:
+              $ref: '#/components/schemas/HateoasLink'
+            deactivate:
+              $ref: '#/components/schemas/HateoasLink'
+      required:
+      - id
+      - name
+      - count
     HateoasParameters:
       type: object
       additionalProperties: true
@@ -628,29 +857,6 @@ components:
       - active
       - facets
       - _links
-    HateoasLink:
-      type: object
-      properties:
-        href:
-          type: string
-        type:
-          type: string
-          enum:
-          - GET
-          - POST
-          - PUT
-          - DELETE
-        parameters:
-          $ref: '#/components/schemas/HateoasParameters'
-      required:
-      - href
-      - type
-    StringOrArrayOfStrings:
-      oneOf:
-      - type: string
-      - type: array
-        items:
-          type: string
     CancellableQuery:
       type: object
       allOf:
@@ -664,37 +870,12 @@ components:
                 $ref: '#/components/schemas/HateoasLink'
         required:
         - _links
-    Sort:
-      type: object
-      properties:
-        options:
-          type: array
-          items:
-            $ref: '#/components/schemas/SortOption'
-        active:
-          allOf:
-          - $ref: '#/components/schemas/SortOption'
-          - type: object
-            properties:
-              _links:
-                type: object
-                properties:
-                  deactivate:
-                    $ref: '#/components/schemas/HateoasLink'
-                required:
-                - deactivate
-            required:
-            - _links
-        _links:
-          type: object
-          description: Standard set of links related to sorting.
-          properties:
-            reset:
-              $ref: '#/components/schemas/HateoasLink'
-      required:
-      - options
-      - active
-      - _links
+    StringOrArrayOfStrings:
+      oneOf:
+      - type: string
+      - type: array
+        items:
+          type: string
     Filters:
       type: object
       properties:
@@ -709,77 +890,6 @@ components:
               $ref: '#/components/schemas/HateoasLink'
       required:
       - options
-      - _links
-    SortOption:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        _links:
-          type: object
-          properties:
-            activate:
-              $ref: '#/components/schemas/HateoasLink'
-            deactivate:
-              $ref: '#/components/schemas/HateoasLink'
-          required:
-          - activate
-      required:
-      - id
-      - name
-      - _links
-    FilterValue:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-        _links:
-          type: object
-          properties:
-            activate:
-              $ref: '#/components/schemas/HateoasLink'
-            deactivate:
-              $ref: '#/components/schemas/HateoasLink'
-      required:
-      - id
-      - name
-      - _links
-    AutocompleteResponse:
-      type: object
-      properties:
-        items:
-          type:
-          - array
-          - 'null'
-          items:
-            type: object
-            properties:
-              title:
-                type: string
-                example: Photograph taken by Gertrude Bell showing Delhi, India
-              highlight:
-                type: string
-                example: Photograph taken by <mark>Gertrude Bell</mark> showing Delhi, India
-            required:
-            - title
-            - highlight
-        query:
-          $ref: '#/components/schemas/ReadonlyQuery'
-        _links:
-          allOf:
-          - type: object
-            properties:
-              search:
-                $ref: '#/components/schemas/HateoasLink'
-            required:
-            - search
-      required:
-      - items
-      - query
       - _links
     Pagination:
       type: object
@@ -818,15 +928,6 @@ components:
       - totalElements
       - number
       - _links
-    ReadonlyQuery:
-      type: object
-      properties:
-        value:
-          type:
-          - string
-          - 'null'
-      required:
-      - value
     HomeLinks:
       type: object
       description: Standard set of links related to the homepage.
@@ -835,135 +936,34 @@ components:
           $ref: '#/components/schemas/HateoasLink'
       required:
       - home
-    Facet:
+    Sort:
       type: object
       properties:
-        id:
-          type: string
-        name:
-          type: string
-        count:
-          type: number
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/SortOption'
+        active:
+          allOf:
+          - $ref: '#/components/schemas/SortOption'
+          - type: object
+            properties:
+              _links:
+                type: object
+                properties:
+                  deactivate:
+                    $ref: '#/components/schemas/HateoasLink'
+                required:
+                - deactivate
+            required:
+            - _links
         _links:
           type: object
+          description: Standard set of links related to sorting.
           properties:
-            activate:
-              $ref: '#/components/schemas/HateoasLink'
-            deactivate:
+            reset:
               $ref: '#/components/schemas/HateoasLink'
       required:
-      - id
-      - name
-      - count
-  parameters:
-    SearchQAdvanced:
-      in: query
-      name: q.advanced
-      schema:
-        type: string
-      description: Query string dedicated to advanced searches, written in restricted [Elasticsearch\'s query syntax](https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-query-string-query.html#query-string-syntax).
-    AutocompleteQ:
-      in: query
-      name: q
-      schema:
-        type: string
-      required: true
-      description: The search phrase that should be autocompleted.
-    SearchFilterScope:
-      in: query
-      name: scope
-      schema:
-        type: string
-        example: digital.showcase
-      description: Scopes query to return items assigned to the given system.
-    SearchFilterCollectionId:
-      in: query
-      name: filter.collection.id
-      schema:
-        $ref: '#/components/schemas/StringOrArrayOfStrings'
-      description: List of collection ids that the items should belong to.
-    SearchPageSize:
-      in: query
-      name: page.size
-      schema:
-        type: number
-      description: The number of items matching returned per page, between 1 and 100.
-    SearchFilterHasTEI:
-      in: query
-      name: filter.hasTEI
-      schema:
-        $ref: '#/components/schemas/StringOrArrayOfStrings'
-      description: Determines whether returned items should have a TEI file related or not.
-    SearchFilterDateFrom:
-      in: query
-      name: filter.date.from
-      schema:
-        type: number
-      description: The start of the date range query.
-    SearchFilterCollection:
-      in: query
-      name: filter.collection
-      schema:
-        $ref: '#/components/schemas/StringOrArrayOfStrings'
-      description: List of collection titles that the items should belong to.
-    SearchFilterSubject:
-      in: query
-      name: filter.subject
-      schema:
-        $ref: '#/components/schemas/StringOrArrayOfStrings'
-      description: List of subject terms that the items should belong to.
-    SearchQ:
-      in: query
-      name: q
-      schema:
-        type: string
-      description: The main search phrase.
-    SearchPageStart:
-      in: query
-      name: page.start
-      schema:
-        type: number
-      description: The pagination starting offset starting from 0.
-    SearchSort:
-      in: query
-      name: sort
-      schema:
-        type: string
-        enum:
-        - relevance
-        - title.asc
-        - title.desc
-        - date.asc
-        - date.desc
-        - createdAt.desc
-      description: Determines the sorting method.
-    SearchFilterThematicCategory:
-      in: query
-      name: filter.thematicCategory
-      schema:
-        $ref: '#/components/schemas/StringOrArrayOfStrings'
-      description: List of thematic category terms that the items should belong to.
-    AutocompletePageSize:
-      in: query
-      name: page.size
-      schema:
-        type: number
-      description: The maximum number of items returned, between 1 and 25 (by default it is 10).
-    SearchPage:
-      in: query
-      name: page
-      schema:
-        type: number
-      description: The pagination index, starting from 1 for the first page.
-    SearchFilterHasTranscript:
-      in: query
-      name: filter.hasTranscript
-      schema:
-        $ref: '#/components/schemas/StringOrArrayOfStrings'
-      description: Determines whether returned items should have a raw transcript file related or not.
-    SearchFilterDateTo:
-      in: query
-      name: filter.date.to
-      schema:
-        type: number
-      description: The end of the date range query.
+      - options
+      - active
+      - _links

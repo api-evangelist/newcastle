@@ -109,6 +109,12 @@ paths:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
 components:
   schemas:
+    HateoasParameters:
+      type: object
+      additionalProperties: true
+      description: Any relevant parameters that should be appended to the URL (for GET method) or passed as a payload for other HTTP methods.
+      example:
+        '?': '...'
     HateoasLink:
       type: object
       properties:
@@ -134,12 +140,6 @@ components:
           $ref: '#/components/schemas/HateoasLink'
       required:
       - home
-    HateoasParameters:
-      type: object
-      additionalProperties: true
-      description: Any relevant parameters that should be appended to the URL (for GET method) or passed as a payload for other HTTP methods.
-      example:
-        '?': '...'
     Version:
       type: string
       description: A representation of a version compatible with [Semantic Versioning 2.0.0](https://semver.org/).

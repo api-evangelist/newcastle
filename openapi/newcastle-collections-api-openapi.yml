@@ -166,6 +166,12 @@ paths:
           description: Indicates that the server encountered an unexpected exception preventing it from fulfilling the request.
 components:
   schemas:
+    HateoasParameters:
+      type: object
+      additionalProperties: true
+      description: Any relevant parameters that should be appended to the URL (for GET method) or passed as a payload for other HTTP methods.
+      example:
+        '?': '...'
     HateoasLink:
       type: object
       properties:
@@ -183,6 +189,14 @@ components:
       required:
       - href
       - type
+    HomeLinks:
+      type: object
+      description: Standard set of links related to the homepage.
+      properties:
+        home:
+          $ref: '#/components/schemas/HateoasLink'
+      required:
+      - home
     Pagination:
       type: object
       description: Defines the metadata for the pagination used for providing the data on the given endpoint.
@@ -220,17 +234,3 @@ components:
       - totalElements
       - number
       - _links
-    HomeLinks:
-      type: object
-      description: Standard set of links related to the homepage.
-      properties:
-        home:
-          $ref: '#/components/schemas/HateoasLink'
-      required:
-      - home
-    HateoasParameters:
-      type: object
-      additionalProperties: true
-      description: Any relevant parameters that should be appended to the URL (for GET method) or passed as a payload for other HTTP methods.
-      example:
-        '?': '...'
