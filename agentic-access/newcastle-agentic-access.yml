@@ -1,4 +1,4 @@
-generated: '2026-09-16'
+generated: '2026-09-24'
 method: generated
 source: openapi/newcastle-api-metadata-information-api-openapi.yml, openapi/newcastle-digitised-objects-api-openapi.yml,
   openapi/newcastle-entity-api-openapi.yml, openapi/newcastle-feed-api-openapi.yml, openapi/newcastle-summary-api-openapi.yml,
