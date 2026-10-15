@@ -1,0 +1,220 @@
+edges:
+- partner_name: eduGAIN
+  partner: null
+  type: register
+  channel: standard-directory
+  relationship: network-participant
+  direction: partner-built
+  evidence: https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+  category: research and education identity federation
+  contract_reference:
+    network: eduGAIN (GÉANT interfederation)
+    spec_file: null
+    roles:
+    - identity-provider
+    - service-provider
+    role: identity-and-service-provider
+    federations:
+    - UK-FEDERATION
+    matched_by: domain:ncl.ac.uk
+    entities:
+    - entity_id: https://gateway.ncl.ac.uk/idp/shibboleth
+      role: identity-provider
+      federation: UK-FEDERATION
+      display_name: Newcastle University
+      entity_categories:
+      - '11'
+      - '76'
+      sirtfi: true
+      coco: false
+    - entity_id: https://appsclone.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://appspay.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://appspaydev.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://audit01.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://clearing.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://crowdskills.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://dantooine-rdsne-nihr.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://eclsthesis.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://eventmovement.openlab.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://exampapers.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://examtimetables.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://groupshostdev.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://mobdata.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://mypropuat.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://ngagestage.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://notify.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://researchtools.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://roomfinder.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://sam.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://shibdemo.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://topsy.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://tux2.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://webapps.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://webdev.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://wikis.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    - entity_id: https://wwwstage.ncl.ac.uk/shibboleth/metadata
+      role: service-provider
+      federation: UK-FEDERATION
+      display_name: University of Newcastle upon Tyne
+      entity_categories: null
+      sirtfi: false
+      coco: true
+    detected_by: sweep-higher-ed.py
+    detected: '2026-10-15'
+  detected_by: sweep-higher-ed.py
+  first_seen: '2026-10-15'
+generated: '2026-10-15'
+method: searched
+checked:
+- https://technical.edugain.org/api.php?action=list_entities&type=idp&format=json
+- https://technical.edugain.org/api.php?action=list_entities&type=sp&format=json
