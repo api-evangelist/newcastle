@@ -143,6 +143,24 @@ paths:
                 $ref: '#/components/schemas/Forbidden'
 components:
   schemas:
+    Storage:
+      type: object
+      description: The storage mechanism used to hold the data internally.
+      properties:
+        unitId:
+          type: string
+          format: uuid
+          description: A unique identifier for the storage used for this data within the internal systems.
+        name:
+          type: string
+          description: A name for the storage, usually those used in programming (e.g. real, integer)
+        suffix:
+          type: string
+          description: The suffix used for data storage in the internal systems.
+      example:
+        storageId: 3
+        name: Real
+        suffix: real
     Forbidden:
       type: object
       description: The requested data could not be returned, because permissions do not permit.
@@ -176,6 +194,32 @@ components:
       example:
         unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
         name: amperes
+    TimeseriesEntry:
+      type: object
+      description: A historic entry associated with a timeseries and a time.
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Date and time associated with the historic value
+        duration:
+          type: number
+          description: The duration this value applies to, or if negative, the window of error in which the value change could have occurred.
+        value:
+          description: The value associated with the time in the timeseries, unless the timeseries does not contain values (i.e. event only).
+        error:
+          type: boolean
+          description: Indication that an error occurred, and data could not be supplied.
+        message:
+          type: string
+          description: Short description of why data could not be supplied.
+        description:
+          type: string
+          description: Verbose description of why an error occurred and data could not be supplied.
+      example:
+        time: '2018-02-12T10:30:40.125Z'
+        duration: -2.1
+        value: 3.5
     Timeseries:
       type: object
       properties:
@@ -222,24 +266,6 @@ components:
         links:
         - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2
           rel: self
-    Storage:
-      type: object
-      description: The storage mechanism used to hold the data internally.
-      properties:
-        unitId:
-          type: string
-          format: uuid
-          description: A unique identifier for the storage used for this data within the internal systems.
-        name:
-          type: string
-          description: A name for the storage, usually those used in programming (e.g. real, integer)
-        suffix:
-          type: string
-          description: The suffix used for data storage in the internal systems.
-      example:
-        storageId: 3
-        name: Real
-        suffix: real
     BadRequest:
       type: object
       description: An invalid ID or query parameter was used to request information, such as an ID not in the [UUID syntax](https://en.wikipedia.org/wiki/Universally_unique_identifier).
@@ -260,32 +286,6 @@ components:
         error: true
         message: Malformed UUID cannot be used.
         code: MalformedUUID
-    TimeseriesEntry:
-      type: object
-      description: A historic entry associated with a timeseries and a time.
-      properties:
-        time:
-          type: string
-          format: date-time
-          description: Date and time associated with the historic value
-        duration:
-          type: number
-          description: The duration this value applies to, or if negative, the window of error in which the value change could have occurred.
-        value:
-          description: The value associated with the time in the timeseries, unless the timeseries does not contain values (i.e. event only).
-        error:
-          type: boolean
-          description: Indication that an error occurred, and data could not be supplied.
-        message:
-          type: string
-          description: Short description of why data could not be supplied.
-        description:
-          type: string
-          description: Verbose description of why an error occurred and data could not be supplied.
-      example:
-        time: '2018-02-12T10:30:40.125Z'
-        duration: -2.1
-        value: 3.5
     Link:
       type: object
       description: A link provided for [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) purposes, to the item itself or an associated API method.

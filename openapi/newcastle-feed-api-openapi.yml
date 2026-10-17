@@ -57,51 +57,24 @@ paths:
                 $ref: '#/components/schemas/BadRequest'
 components:
   schemas:
-    Contact:
+    Storage:
       type: object
-      description: The contact for more information, or technical issues relating to the sensing. This may not always be available.
+      description: The storage mechanism used to hold the data internally.
       properties:
-        contactId:
+        unitId:
           type: string
           format: uuid
-          description: A unique identifier associated with the contact.
+          description: A unique identifier for the storage used for this data within the internal systems.
         name:
           type: string
-          description: An individual's name, or an indication of shared contact details
-        email:
+          description: A name for the storage, usually those used in programming (e.g. real, integer)
+        suffix:
           type: string
-          description: An email address to contact.
-        phone:
-          type: string
-          description: A telephone number to use, which may not always be available.
+          description: The suffix used for data storage in the internal systems.
       example:
-        contactId: 19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0
-        name: Urban Observatory
-        email: urbanobservatory@ncl.ac.uk
-        phone: 0191 208 8599
-    Licence:
-      type: object
-      description: ''
-      properties:
-        licenceId:
-          type: string
-          format: uuid
-          description: A unique identifier associated with the licence.
-        name:
-          type: string
-          description: The name for the licence, e.g. Open Government Licence v3.
-        url:
-          type: string
-          description: A URL for the licence, or where more information can be obtained, such as the procedure for approval to use the data.
-        description:
-          type: object
-          description: 'A data-based description of the licence, such as the constraints which may be in place, e.g. `open: false`.'
-      example:
-        licenceId: 1629fceb-799b-4840-8f5b-8b8612b374c9
-        name: 'Urban Observatory: Ethical approval required'
-        url: http://www.urbanobservatory.ac.uk/
-        description:
-          open: false
+        storageId: 3
+        name: Real
+        suffix: real
     Organisation:
       type: object
       description: An organisation which is providing the data to the Urban Observatory, or responsible for some element.
@@ -124,20 +97,6 @@ components:
         name: Urban Observatory
         url: http://www.urbanobservatory.ac.uk/
         privateSector: false
-    Unit:
-      type: object
-      description: The units associated with the values held in the timeseries.
-      properties:
-        unitId:
-          type: string
-          format: uuid
-          description: A unique identifier for the units associated with timeseries.
-        name:
-          type: string
-          description: A friendly description for the units used.
-      example:
-        unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
-        name: amperes
     Feed:
       type: object
       properties:
@@ -228,24 +187,91 @@ components:
         links:
         - href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/feed/eeaa50bb-fb5f-47be-a6ab-eb4c67debecb
           rel: self
-    Storage:
+    Contact:
       type: object
-      description: The storage mechanism used to hold the data internally.
+      description: The contact for more information, or technical issues relating to the sensing. This may not always be available.
+      properties:
+        contactId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with the contact.
+        name:
+          type: string
+          description: An individual's name, or an indication of shared contact details
+        email:
+          type: string
+          description: An email address to contact.
+        phone:
+          type: string
+          description: A telephone number to use, which may not always be available.
+      example:
+        contactId: 19c2aabb-33d0-47f1-a4f5-3fbfe3c7bcf0
+        name: Urban Observatory
+        email: urbanobservatory@ncl.ac.uk
+        phone: 0191 208 8599
+    Unit:
+      type: object
+      description: The units associated with the values held in the timeseries.
       properties:
         unitId:
           type: string
           format: uuid
-          description: A unique identifier for the storage used for this data within the internal systems.
+          description: A unique identifier for the units associated with timeseries.
         name:
           type: string
-          description: A name for the storage, usually those used in programming (e.g. real, integer)
-        suffix:
-          type: string
-          description: The suffix used for data storage in the internal systems.
+          description: A friendly description for the units used.
       example:
-        storageId: 3
-        name: Real
-        suffix: real
+        unitId: 19bc95ba-83f2-4dcd-b49e-5e5415c75771
+        name: amperes
+    TimeseriesEntry:
+      type: object
+      description: A historic entry associated with a timeseries and a time.
+      properties:
+        time:
+          type: string
+          format: date-time
+          description: Date and time associated with the historic value
+        duration:
+          type: number
+          description: The duration this value applies to, or if negative, the window of error in which the value change could have occurred.
+        value:
+          description: The value associated with the time in the timeseries, unless the timeseries does not contain values (i.e. event only).
+        error:
+          type: boolean
+          description: Indication that an error occurred, and data could not be supplied.
+        message:
+          type: string
+          description: Short description of why data could not be supplied.
+        description:
+          type: string
+          description: Verbose description of why an error occurred and data could not be supplied.
+      example:
+        time: '2018-02-12T10:30:40.125Z'
+        duration: -2.1
+        value: 3.5
+    Licence:
+      type: object
+      description: ''
+      properties:
+        licenceId:
+          type: string
+          format: uuid
+          description: A unique identifier associated with the licence.
+        name:
+          type: string
+          description: The name for the licence, e.g. Open Government Licence v3.
+        url:
+          type: string
+          description: A URL for the licence, or where more information can be obtained, such as the procedure for approval to use the data.
+        description:
+          type: object
+          description: 'A data-based description of the licence, such as the constraints which may be in place, e.g. `open: false`.'
+      example:
+        licenceId: 1629fceb-799b-4840-8f5b-8b8612b374c9
+        name: 'Urban Observatory: Ethical approval required'
+        url: http://www.urbanobservatory.ac.uk/
+        description:
+          open: false
     Timeseries:
       type: object
       properties:
@@ -312,32 +338,6 @@ components:
         error: true
         message: Malformed UUID cannot be used.
         code: MalformedUUID
-    TimeseriesEntry:
-      type: object
-      description: A historic entry associated with a timeseries and a time.
-      properties:
-        time:
-          type: string
-          format: date-time
-          description: Date and time associated with the historic value
-        duration:
-          type: number
-          description: The duration this value applies to, or if negative, the window of error in which the value change could have occurred.
-        value:
-          description: The value associated with the time in the timeseries, unless the timeseries does not contain values (i.e. event only).
-        error:
-          type: boolean
-          description: Indication that an error occurred, and data could not be supplied.
-        message:
-          type: string
-          description: Short description of why data could not be supplied.
-        description:
-          type: string
-          description: Verbose description of why an error occurred and data could not be supplied.
-      example:
-        time: '2018-02-12T10:30:40.125Z'
-        duration: -2.1
-        value: 3.5
     Link:
       type: object
       description: A link provided for [HATEOAS](https://en.wikipedia.org/wiki/HATEOAS) purposes, to the item itself or an associated API method.
