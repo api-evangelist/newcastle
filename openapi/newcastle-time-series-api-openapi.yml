@@ -309,3 +309,9 @@ components:
       example:
         rel: self
         href: https://api.usb.urbanobservatory.ac.uk/api/v2.0a/sensors/timeseries/371fbff8-f61d-4f66-99be-7d9de8ad51f2/historic
+x-provenance:
+  method: harvested
+  publisher: Newcastle University
+  source: https://api.usb.urbanobservatory.ac.uk/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
