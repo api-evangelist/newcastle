@@ -1,4 +1,4 @@
-# Newcastle University (newcastle)
+# Newcastle University
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,57 +64,190 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Newcastle University is a public research university in Newcastle upon Tyne, United Kingdom, ranked #129 in the QS World University Rankings 2025. This repository catalogs the university's real, public developer and API footprint as an APIs.json provider profile. Rather than a single central developer portal, Newcastle's footprint is distributed across research and open-data initiatives — most notably the Urban Observatory, the Digitised Objects Repository, and the data.ncl research data repository.
+Newcastle University is a public research university in Newcastle upon Tyne, United Kingdom, and a member of the Russell Group. Its programmable footprint is genuinely its own but it is small, decentralised and unadvertised: there is no central developer portal, no API changelog, no status page and no developer support channel anywhere on ncl.ac.uk. What the institution actually operates and runs itself, verified live on 2026-08-30, is four things — the Urban Observatory API for the Urban Sciences Building (the largest open urban-sensing platform in the UK, on a domain Newcastle registered and serves from its own nameservers), the Library's Digitised Objects Repository Search and Data API, which publishes its own OpenAPI at /info/open-api and serves 15,482 digitised objects from Special Collections, the ECPPEC eighteenth-century electoral GraphQL API with open introspection, and an OAI-PMH 2.0 endpoint over the eTheses repository. Alongside these it operates a Shibboleth SAML 2.0 identity provider registered in the UK Access Management Federation with 168 service providers under ncl.ac.uk, which is by volume the institution's largest machine-readable surface and is a login federation rather than a data API. Its research data repository, data.ncl, is a Figshare tenant: the data and the DOIs are Newcastle's, the API contract is Figshare's, and it is recorded here as a tenant relationship rather than credited to the university.
 
-- APIs.json: https://raw.githubusercontent.com/api-evangelist/newcastle/refs/heads/main/apis.yml
-- Run with Naftiko: https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=newcastle-api-evangelist&utm_content=repo
+**Areas:** University · Higher Education · Education · United Kingdom · Russell Group · Research Data · Open Data · Digital Library · Identity Federation · Smart Cities · Cultural Heritage
 
-## Type
+## Newcastle University on APIs.io
 
-- Index
-- Consumer
-- 3rd-Party
+Everything profiled for Newcastle University is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/newcastle/](https://apis.io/providers/newcastle/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (13)
 
-Education, Higher Education, University, United Kingdom, Open Data, Research Data, Smart Cities, Digital Library
+- [Digitised Objects Repository Search and Data API](https://apis.io/apis/newcastle/digitised-objects/) — A single point-of-truth interface for searching, browsing and displaying the digitised objects held in Newcastle University Library's Special Collections.…
+- [ECPPEC Electoral Data GraphQL API](https://apis.io/apis/newcastle/ecppec/) — A GraphQL API over the Eighteenth-Century Political Participation and Electoral Culture research dataset — historical British elections, constituencies,…
+- [Newcastle University eTheses OAI-PMH Endpoint](https://apis.io/apis/newcastle/etheses-oai/) — An OAI-PMH 2.0 metadata harvesting interface over Newcastle University's electronic theses repository, running on DSpace 6.3. Supports oai_dc, dim and the…
+- [data.ncl Research Data Repository (Figshare tenancy)](https://apis.io/apis/newcastle/data-ncl/) — Newcastle University's institutional research data repository, operated for the university by Figshare on a Newcastle-branded custom domain. Programmatic…
+- [Urban Observatory API (Urban Sciences Building) — Entity](https://apis.io/apis/newcastle/urban-observatory-entity/) — An entity ordinarily describes a spatial location, such as a room in a building or a pole in the street. In some circumstances an entity may be a mobile…
+- [Urban Observatory API (Urban Sciences Building) — Feed](https://apis.io/apis/newcastle/urban-observatory-feed/) — A feed is a representation of a measurement or parametrisation, usually a metric, for example the observed temperature.
+- [Urban Observatory API (Urban Sciences Building) — Summary](https://apis.io/apis/newcastle/urban-observatory-summary/) — A compact summary view over Urban Sciences Building entities and the feeds attached to them.
+- [Newcastle University API Metadata Information API](https://apis.io/apis/newcastle/newcastle-api-metadata-information-api/) — A set of endpoints for gathering information about the API itself. They can be used for validation, creating types or checking if the service is live.
+- [Newcastle University Collections API](https://apis.io/apis/newcastle/newcastle-collections-api/) — A set of endpoints describing the collections present in the repository.
+- [Newcastle University CONTEN Tdm API](https://apis.io/apis/newcastle/newcastle-contentdm-api/) — A set of endpoints used for describing digitised objects stored in the repository, as well as all the complementary resources created based on them.
+- [Newcastle University Items API](https://apis.io/apis/newcastle/newcastle-items-api/) — A set of endpoints describing the integrants of the given digitised object present in the repository.
+- [Newcastle University TEI API](https://apis.io/apis/newcastle/newcastle-tei-api/) — A set of endpoints providing metadata and content definitions of documents encoded using [Text Encoding Initiative](https://tei-c.org/) guidance.
+- [Newcastle University Time Series API](https://apis.io/apis/newcastle/newcastle-time-series-api/) — There may be more than one timeseries associated with a feed, provided for convenience. Ordinarily there will be a plain timeseries, representing raw data…
 
-## APIs
+### Published properties
 
-- **Newcastle Urban Observatory API** — REST API for urban-sensing data (entities, feeds, timeseries) in JSON/CSV. Docs: https://api.usb.urbanobservatory.ac.uk/ — OpenAPI: https://api.usb.urbanobservatory.ac.uk/openapi.json
-- **Digitised Objects Repository Search and Data API** — programmatic search and data access to digitised collections. Docs: https://api-dor.ncl.ac.uk/
-- **ECPPEC Electoral Data API** — historical British electoral datasets (pollbooks, election directory). Docs: https://ecppec.ncl.ac.uk/api/
-- **data.ncl Research Data Repository (Figshare)** — institutional research data repository with Figshare API access. Docs: https://www.ncl.ac.uk/library/academics-and-researchers/lrs/rdm/sharing/datancl/
-- **EPrints Institutional Repository (OAI-PMH)** — eprints.ncl.ac.uk and theses.ncl.ac.uk expose OAI-PMH metadata harvesting. Docs: https://eprints.ncl.ac.uk/
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## Plans
+#### Agentic access (1)
 
-- [plans/newcastle-plans-pricing.yml](plans/newcastle-plans-pricing.yml)
+Which operations an agent can call, which act, and which need a human in the loop.
 
-## Rate Limits
+- [Newcastle Agentic Access](https://apis.io/agentic-access/newcastle/newcastle-agentic-access/)
 
-- [rate-limits/newcastle-rate-limits.yml](rate-limits/newcastle-rate-limits.yml)
+#### JSON Schema (10)
 
-## FinOps
+The data models the API reads and writes.
 
-- [finops/newcastle-finops.yml](finops/newcastle-finops.yml)
+- [DigitisedObject](https://apis.io/schemas/newcastle/newcastle-digitised-object/)
+- [Collection](https://apis.io/schemas/newcastle/newcastle-dor-collection/)
+- [DorError](https://apis.io/schemas/newcastle/newcastle-dor-error/)
+- [DorPagination](https://apis.io/schemas/newcastle/newcastle-dor-pagination/)
+- [Entity](https://apis.io/schemas/newcastle/newcastle-entity/)
+- [EntitySummary](https://apis.io/schemas/newcastle/newcastle-entitysummary/)
+- [Feed](https://apis.io/schemas/newcastle/newcastle-feed/)
+- [HateoasLinks](https://apis.io/schemas/newcastle/newcastle-hateoas-links/)
+- [Timeseries](https://apis.io/schemas/newcastle/newcastle-timeseries/)
+- [TimeseriesEntry](https://apis.io/schemas/newcastle/newcastle-timeseriesentry/)
 
-## Timestamps
+#### JSON Structure (4)
 
-- Created: 2026-06-03
-- Modified: 2026-06-03
+Data models expressed in JSON Structure.
 
-## Common Properties
+- [Newcastle Entity Structure](https://apis.io/json-structure/newcastle/newcastle-entity-structure/)
+- [Newcastle Feed Structure](https://apis.io/json-structure/newcastle/newcastle-feed-structure/)
+- [Newcastle Timeseries Structure](https://apis.io/json-structure/newcastle/newcastle-timeseries-structure/)
+- [Newcastle Timeseriesentry Structure](https://apis.io/json-structure/newcastle/newcastle-timeseriesentry-structure/)
 
-- Website: https://www.ncl.ac.uk/
-- GitHub: https://github.com/newcastleuniversity (verified org, domain ncl.ac.uk)
-- LinkedIn: https://www.linkedin.com/school/newcastle-university
-- Twitter/X: https://x.com/UniofNewcastle
+#### JSON-LD (1)
 
-## Notes
+Linked-data contexts for the provider's vocabulary.
 
-All APIs and URLs were verified live during research on 2026-06-03 (see review.yml for HTTP statuses). Newcastle has no single unified developer portal; the cataloged APIs are real, separately operated services. The ECPPEC apex API host (api-ecppec.ncl.ac.uk) returned HTTP 400 and was therefore not cataloged as a baseURL — only the documented endpoint form is listed. No endpoints were fabricated.
+- [Newcastle Context](https://apis.io/jsonld/newcastle/newcastle-context/)
 
-## Maintainers
+#### Vocabulary (1)
 
-- Kin Lane — kin@apievangelist.com
+The provider's domain terms, defined.
+
+- [Newcastle Urban Observatory Vocabulary](https://apis.io/vocabularies/newcastle/newcastle-vocabulary/)
+
+#### Examples (5)
+
+Example requests and responses.
+
+- [Newcastle Digitised Objects Collections Example](https://apis.io/examples/newcastle/newcastle-digitised-objects-collections-example/)
+- [Newcastle Digitised Objects List Example](https://apis.io/examples/newcastle/newcastle-digitised-objects-list-example/)
+- [Newcastle Ecppec Graphql Example](https://apis.io/examples/newcastle/newcastle-ecppec-graphql-example/)
+- [Newcastle Entity List Example](https://apis.io/examples/newcastle/newcastle-entity-list-example/)
+- [Newcastle Timeseries Entry Example](https://apis.io/examples/newcastle/newcastle-timeseries-entry-example/)
+
+#### Collections (4)
+
+Postman and Open Collection request collections.
+
+- [Urban Observatory API: Urban Sciences Building Entity API](https://apis.io/collections/newcastle/open-newcastle-entity-api/)
+- [Urban Observatory API: Urban Sciences Building Entity Feed API](https://apis.io/collections/newcastle/open-newcastle-feed-api/)
+- [Urban Observatory API: Urban Sciences Building Entity Summary API](https://apis.io/collections/newcastle/open-newcastle-summary-api/)
+- [Urban Observatory API: Urban Sciences Building Entity Timeseries API](https://apis.io/collections/newcastle/open-newcastle-timeseries-api/)
+
+#### Governance rules (2)
+
+Spectral rulesets for the provider's contracts.
+
+- [Newcastle University — jsonschema rules](https://apis.io/rules/newcastle/newcastle-jsonschema-spectral-rules/)
+- [Newcastle University API Rules](https://apis.io/rules/newcastle/newcastle-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Newcastle Authentication](https://apis.io/security/newcastle/newcastle-authentication/)
+- [Newcastle Domain Security](https://apis.io/security/newcastle/newcastle-domain-security/)
+
+#### OAuth scopes (1)
+
+The permissions the API asks for.
+
+- [Newcastle Scopes](https://apis.io/scopes/newcastle/newcastle-scopes/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Newcastle Plans Pricing](https://apis.io/plans/newcastle/newcastle-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Newcastle Rate Limits](https://apis.io/rate-limits/newcastle/newcastle-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Newcastle Finops](https://apis.io/finops/newcastle/newcastle-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ncl.ac.uk/)
+- [Blog](https://belong.ncl.ac.uk/blog)
+- [GitHub](https://github.com/newcastleuniversity)
+
+## API Evangelist rating
+
+**Kin Score 30.4** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 62.5 |
+| Contract quality | 54.0 |
+| Contract governance | 9.8 |
+| Operational transparency | 7.9 |
+| Developer ergonomics | 31.0 |
+| Access clarity | 5.3 |
+
+**Agent readiness 33.2** — agent-ready
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | derived (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | — |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 26.5** — Education & Research
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/newcastle/](https://apis.io/providers/newcastle/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Newcastle University: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/newcastle/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
